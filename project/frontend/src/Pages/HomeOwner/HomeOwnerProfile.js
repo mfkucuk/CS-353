@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const HomeOwnerMainPage = () => {
+const HomeOwnerProfile= () => {
     const [userInfo, setUserInfo] = useState({});
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -98,4 +98,4 @@ const HomeOwnerMainPage = () => {
     );
 };
 
-export default HomeOwnerMainPage;
+export default HomeOwnerProfile;

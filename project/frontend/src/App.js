@@ -1,11 +1,11 @@
 import './App.css';
-import TravelerMainPage from './Pages/Traveler/TravelerMainPage';
-import HomeOwnerMainPage from './Pages/HomeOwner/HomeOwnerProfile';
-import AdminMainPage from './Pages/Admin/AdminMainPage';
+import HomeOwnerProfile from './Pages/HomeOwner/HomeOwnerProfile';
+import TravelerProfile from './Pages/Traveler/TravelerProfile';
+import AdminProfile from './Pages/Admin/AdminProfile';
 function App() {
   return (
     <div className="App">
-      <HomeOwnerMainPage></HomeOwnerMainPage>
+     <HomeOwnerProfile></HomeOwnerProfile>
     </div>
   );
 }
