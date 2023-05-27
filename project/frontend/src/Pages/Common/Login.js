@@ -20,12 +20,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#4b0082', minHeight: '100vh' }}>
-      <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '100px' }}>
-        <img src="bilkent_logo.png" alt="Logo" style={{ width: '600px', height: 'auto' }}/>
+    <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <img src="bilkent_logo.png" alt="Logo" style={{ width: '600px', height: 'auto' }} />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '50px' }}>
-        <div style={{ backgroundColor: '#FFBD59', padding: '20px', borderRadius: '5px' }}>
+        <div style={{ backgroundColor: '#FFBD59', padding: '30px', borderRadius: '20px' }}>
           <h2 style={{ textAlign: 'center', color: 'black' }}>Welcome</h2>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <input
@@ -33,20 +33,29 @@ const LoginPage = () => {
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ marginBottom: '10px', padding: '5px' }}
+              style={{ marginBottom: '10px', padding: '5px', borderRadius: '10px' }}
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={{ marginBottom: '10px', padding: '5px' }}
+              style={{ marginBottom: '10px', padding: '5px', borderRadius: '10px' }}
             />
             <label style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
               <input type="checkbox" style={{ marginRight: '5px' }} />
               Remember me
             </label>
-            <button onClick={handleLogin} style={{ marginBottom: '10px', padding: '5px' }}>
+            <button
+              onClick={handleLogin}
+              style={{
+                marginBottom: '10px',
+                padding: '5px',
+                borderRadius: '10px',
+                backgroundColor: 'blue',
+                color: 'white',
+              }}
+            >
               Login
             </button>
             <a href="#" style={{ textAlign: 'center', textDecoration: 'underline' }}>
