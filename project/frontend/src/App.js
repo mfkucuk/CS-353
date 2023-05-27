@@ -1,23 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-
+import TravelerMainPage from './Pages/Traveler/TravelerMainPage';
+import HomeOwnerMainPage from './Pages/HomeOwner/HomeOwnerProfile';
+import AdminMainPage from './Pages/Admin/AdminMainPage';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomeOwnerMainPage></HomeOwnerMainPage>
     </div>
   );
 }
