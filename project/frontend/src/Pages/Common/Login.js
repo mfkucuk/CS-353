@@ -26,7 +26,7 @@ const LoginPage = () => {
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '50px' }}>
         <div style={{ backgroundColor: '#FFBD59', padding: '30px', borderRadius: '20px' }}>
-          <h2 style={{ textAlign: 'center', color: 'black' }}>Welcome</h2>
+          <h2 style={{ textAlign: 'center', color: '#4b0082' }}>Welcome</h2>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <input
               type="email"
@@ -42,7 +42,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               style={{ marginBottom: '10px', padding: '5px', borderRadius: '10px' }}
             />
-            <label style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+            <label style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', color: '#4b0082' }}>
               <input type="checkbox" style={{ marginRight: '5px' }} />
               Remember me
             </label>
@@ -52,13 +52,13 @@ const LoginPage = () => {
                 marginBottom: '10px',
                 padding: '5px',
                 borderRadius: '10px',
-                backgroundColor: 'blue',
+                backgroundColor: '#4b0082',
                 color: 'white',
               }}
             >
               Login
             </button>
-            <a href="#" style={{ textAlign: 'center', textDecoration: 'underline' }}>
+            <a href="#" style={{ textAlign: 'center', textDecoration: 'underline', color: '#4b0082' }}>
               Forgot your password?
             </a>
           </div>
