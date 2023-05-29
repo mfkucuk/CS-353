@@ -7,11 +7,12 @@ import Login from './Pages/Common/Login';
 import Register from './Pages/Common/Register';
 import ResetPasswordEmail from './Pages/Common/ResetPasswordEmail';
 import ResetPassword from './Pages/Common/ResetPassword';
+import Messaging from './Pages/Common/Messaging';
 
 function App() {
   return (
     <div className="App">
-     <Register></Register>
+     <Messaging></Messaging>
     </div>
   );
 }
