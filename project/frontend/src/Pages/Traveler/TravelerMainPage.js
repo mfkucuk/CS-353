@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { Container, Row, Col, Button, Form, FormControl, InputGroup, Navbar, Nav, Image } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -72,3 +72,4 @@ const TravelerMainPage = () => {
 };
 
 export default TravelerMainPage;
+*/
