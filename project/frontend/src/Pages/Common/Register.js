@@ -9,8 +9,24 @@ const RegisterPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [tck, setTck] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleRegister = async () => {
+    if (!name || !email || !dob || !password || !phoneNumber || !tck || !confirmPassword) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/\d/.test(password) || !/[?.!@#$%^&*]/.test(password)) {
+      setError('Password must contain at least 8 characters with at least one capital letter, one number, and one special character.');
+      return;
+    }
+
     try {
       // Make a POST request to register the user
       const response = await axios.post('/api/register', {
@@ -48,7 +64,7 @@ const RegisterPage = () => {
         </div>
         <div style={{ paddingLeft: '20px' }}>
           <div>
-            <input type="text" placeholder="Date of Birth" value={dob} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setDob(e.target.value)} />
+            <input type="date" placeholder="Date of Birth" value={dob} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setDob(e.target.value)} />
           </div>
           <div>
             <input type="password" placeholder="Password" value={password} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setPassword(e.target.value)} />
@@ -66,6 +82,11 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      {error && (
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px', color: 'red' }}>
+          {error}
+        </div>
+      )}
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
         <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFBD59', borderRadius: '20px', width: '200px', height: '40px', fontSize: '16px' }} onClick={handleRegister}>Register</button>
       </div>

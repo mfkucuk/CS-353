@@ -11,7 +11,7 @@ import ResetPassword from './Pages/Common/ResetPassword';
 function App() {
   return (
     <div className="App">
-     <ResetPassword></ResetPassword>
+     <Register></Register>
     </div>
   );
 }
