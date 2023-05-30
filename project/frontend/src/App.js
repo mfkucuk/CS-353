@@ -12,7 +12,7 @@ import Messaging from './Pages/Common/Messaging';
 function App() {
   return (
     <div className="App">
-     <Messaging></Messaging>
+     <TravelerMainPage></TravelerMainPage>
     </div>
   );
 }

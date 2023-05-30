@@ -1,75 +1,85 @@
-/*import React from 'react';
-import { Container, Row, Col, Button, Form, FormControl, InputGroup, Navbar, Nav, Image } from 'react-bootstrap';
-import axios from 'axios';
+import React from 'react';
 
-const TravelerMainPage = () => {
+const App = () => {
   return (
-    <div style={{ backgroundColor: '#4b0082', color: '#FFBD59', minHeight: '100vh' }}>
-      <Navbar bg="transparent" variant="dark" expand="lg">
-        <Navbar.Brand>
-          <Image src="/bilkent_logo.png" alt="Logo" style={{margin:50, width: 250, height: 100 }} />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
-          <Nav className="ml-auto">
-            <Button variant="outline-light">Switch to Home Owner</Button>
-            <Nav.Link>Username</Nav.Link>
-            <Nav.Link>Balance</Nav.Link>
-            <Image src="user-image.png" alt="User" height={30} className="ml-3" />
-            <Nav.Link href="#"><i className="fa fa-bars"></i></Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Container className="py-4">
-        <Row className="mb-3">
-          <Col md={2}>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <Button variant="outline-light">Filter</Button>
-              </InputGroup.Prepend>
-              <FormControl placeholder="Search" />
-              <InputGroup.Append>
-                <Button variant="outline-light">Search</Button>
-              </InputGroup.Append>
-            </InputGroup>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={4}>
-            <Button variant="outline-light" className="d-flex flex-column align-items-center mb-3">
-              <Image src="image1.png" alt="Image 1" height={150} />
-              <div>Text Line 1</div>
-              <div>Text Line 2</div>
-              <div>Text Line 3</div>
-              <div>Text Line 4</div>
-              <div>Rating: 4.5</div>
-            </Button>
-          </Col>
-          <Col md={4}>
-            <Button variant="outline-light" className="d-flex flex-column align-items-center mb-3">
-              <Image src="image2.png" alt="Image 2" height={150} />
-              <div>Text Line 1</div>
-              <div>Text Line 2</div>
-              <div>Text Line 3</div>
-              <div>Text Line 4</div>
-              <div>Rating: 3.8</div>
-            </Button>
-          </Col>
-          <Col md={4}>
-            <Button variant="outline-light" className="d-flex flex-column align-items-center mb-3">
-              <Image src="image3.png" alt="Image 3" height={150} />
-              <div>Text Line 1</div>
-              <div>Text Line 2</div>
-              <div>Text Line 3</div>
-              <div>Text Line 4</div>
-              <div>Rating: 4.2</div>
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+    <div style={{ backgroundColor: '#4b0082', color: '#FFBD59' }}>
+      <header>
+        <div style={{ display: 'flex', alignItems: 'center', padding: '10px', paddingTop: '0px' }}>
+          <div>
+            <img src="bilkent_logo.png" alt="Logo" style={{ height: '100px', width: '250px', margin: '50px', marginTop: '0.5vh' }} />
+          </div>
+          <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '2vw' }}>
+            <button style={{ color: '#4B0082', marginRight: '1vw', backgroundColor: '#FFBD59', borderRadius: '5px', fontSize: '15px', paddingTop: '3px', paddingBottom: '3px', paddingLeft: '15px', paddingRight: '15px' }}>Switch to Home Owner</button>
+            <div>
+              <p>Username</p>
+              <p>Balance</p>
+            </div>
+            <img src="default_pp.png" alt="User" style={{ height: '50px', marginLeft: '0.7vw', marginRight: '0.7vw' }} />
+            <div>
+              <button style={{ marginLeft: '10px', backgroundColor: '#4B0082', border: 'transparent', padding: '0px' }}>
+                <img src="hamburger_menu_img.png" alt="Menu" style={{width: '170px'}} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div style={{ padding: '10px'}}>
+        <div style={{ display: 'flex', alignItems: 'center', width:'100%', justifyContent: 'center',}}>
+          <button style={{ marginRight: '10px', border: '2px solid #FFBD59', backgroundColor: '#FFBD59', borderRadius: '10px', paddingLeft: '15px', paddingRight: '15px', marginRight: '1vw'}}>
+            Filter
+          </button>
+          <input type="text" placeholder="Search" style={{ border: '15px solid #FFBD59', borderTop: '5px solid #FFBD59', borderBottom: '5px solid #FFBD59', borderRadius: '15px', paddingLeft: '30px', paddingRight: '30px'}} />
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {/* Container 1 */}
+          <div style={{ width: '30%', padding: '10px', backgroundColor: '#4B0082', alignContent: 'center'}}>
+            <button style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent', alignContent: 'center' }}>
+              <img src="image1.png" alt="Image 1" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
+              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
+                <p>Text 1</p>
+                <p>Text 2</p>
+                <p>Text 3</p>
+                <p>Text 4</p>
+                <p>Rating: 4.5</p>
+              </div>
+            </button>
+          </div>
+
+          {/* Container 2 */}
+          <div style={{ width: '30%', padding: '10px', alignContent: 'center' }}>
+            <button style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent'}}>
+              <img src="image2.png" alt="Image 2" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
+              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
+                <p>Text 1</p>
+                <p>Text 2</p>
+                <p>Text 3</p>
+                <p>Text 4</p>
+                <p>Rating: 4.2</p>
+              </div>
+            </button>
+          </div>
+
+          {/* Container 3 */}
+          <div style={{ width: '30%', padding: '10px', alignContent: 'center' }}>
+            <button style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', width: '30%', border: 'transparent' }}>
+              <img src="image3.png" alt="Image 3" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
+              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
+                <p>Text 1</p>
+                <p>Text 2</p>
+                <p>Text 3</p>
+                <p>Text 4</p>
+                <p>Rating: 4.8</p>
+              </div>
+            </button>
+          </div>
+
+          {/* Add more containers here */}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default TravelerMainPage;
-*/
+export default App;
