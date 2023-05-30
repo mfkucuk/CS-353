@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, }from 'react';
 
 const App = () => {
   return (
@@ -10,11 +10,11 @@ const App = () => {
           </div>
           <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '2vw' }}>
             <button style={{ color: '#4B0082', marginRight: '1vw', backgroundColor: '#FFBD59', borderRadius: '5px', fontSize: '15px', paddingTop: '3px', paddingBottom: '3px', paddingLeft: '15px', paddingRight: '15px' }}>Switch to Home Owner</button>
-            <div>
+            <div style={{fontSize: '15px', padding: '1vw'}}>
               <p>Username</p>
               <p>Balance</p>
             </div>
-            <img src="default_pp.png" alt="User" style={{ height: '50px', marginLeft: '0.7vw', marginRight: '0.7vw' }} />
+            <img src="default_pp.png" alt="User" style={{ height: '70px', marginLeft: '0.7vw', marginRight: '0.7vw' }} />
             <div>
               <button style={{ marginLeft: '10px', backgroundColor: '#4B0082', border: 'transparent', padding: '0px' }}>
                 <img src="hamburger_menu_img.png" alt="Menu" style={{width: '170px'}} />
@@ -35,14 +35,14 @@ const App = () => {
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {/* Container 1 */}
           <div style={{ width: '30%', padding: '10px', backgroundColor: '#4B0082', alignContent: 'center'}}>
-            <button style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent', alignContent: 'center' }}>
+            <button style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent', alignContent: 'center' }}>
               <img src="image1.png" alt="Image 1" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
-                <p>Text 1</p>
-                <p>Text 2</p>
-                <p>Text 3</p>
-                <p>Text 4</p>
-                <p>Rating: 4.5</p>
+              <div style={{display: 'grid', backgroundColor: '#4B0082', color: '#FFBD59', fontSize: "12px", gridTemplateRows: "auto auto auto auto" }}>
+                  <p>Text 1</p>
+                  <p>Text 2</p>
+                  <p>Text 3</p>
+                  <p>Text 4</p>
+                  <p>4.5</p>
               </div>
             </button>
           </div>
