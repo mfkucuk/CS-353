@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.data.convert.Jsr310Converters.DateToLocalDateConverter;
-import org.springframework.data.convert.Jsr310Converters.DateToLocalDateTimeConverter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,10 +36,35 @@ public class RentalDataAccess implements RentalDAO {
     }
 
     @Override
-    public Optional<Rental> getRentalById(UUID rentalId) {
-        final String sql = "";
+    public Optional<Rental> getRentalById(UUID id) {
+        final String sql = "SELECT * FROM Rental WHERE rental_id = ?";
 
-        return null;
+        Rental rental = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
+            LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
+            int restrictions = resultSet.getInt("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            int price = resultSet.getInt("price");
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
+            return new Rental(
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                price,
+                null,
+                homeownerId
+            );
+        }, new Object[] { id });
+        return Optional.ofNullable(rental);
     }
 
     @Override
@@ -54,10 +77,26 @@ public class RentalDataAccess implements RentalDAO {
             LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
             LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
             int restrictions = resultSet.getInt("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            int price = resultSet.getInt("price");
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
             return new Rental(
-
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                price,
+                null,
+                homeownerId
             );
         });
+        return allRentals;
     }
     
 }
