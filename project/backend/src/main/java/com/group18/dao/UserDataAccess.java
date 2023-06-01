@@ -29,9 +29,28 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
-    public Optional<User> getUserById(UUID id) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+    public Optional<User> getUserById(UUID id) {   
+        final String sql = "SELECT * FROM User WHERE userId = ?";
+
+        User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("userId"));
+            String fullName = resultSet.getString("fullName");
+            String email = resultSet.getString("email");
+            LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
+            String TCK = resultSet.getString("TCK");
+            String password = resultSet.getString("password");
+            String phoneNumber = resultSet.getString("phoneNumber");
+            return new User(
+                userId,
+                fullName,
+                email,
+                dob,
+                TCK,
+                password,
+                phoneNumber
+            );
+        }, new Object[] { id });
+        return Optional.ofNullable(user);
     }
 
     @Override
