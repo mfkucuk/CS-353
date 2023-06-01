@@ -27,6 +27,11 @@ public class UserService
         return userDAO.getUserById(id);
     }
 
+    public Optional<User> getUserByEmail(String email) 
+    {
+        return userDAO.getUserByEmail(email);
+    }
+
     public List<User> getAllUsers() 
     {
         return userDAO.getAllUsers();

@@ -54,6 +54,31 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
+    public Optional<User> getUserByEmail(String email) {   
+        final String sql = "SELECT * FROM User WHERE email = ?";
+
+        User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("userId"));
+            String fullName = resultSet.getString("fullName");
+            String userEmail = resultSet.getString("email");
+            LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
+            String TCK = resultSet.getString("TCK");
+            String password = resultSet.getString("password");
+            String phoneNumber = resultSet.getString("phoneNumber");
+            return new User(
+                userId,
+                fullName,
+                userEmail,
+                dob,
+                TCK,
+                password,
+                phoneNumber
+            );
+        }, new Object[] { email });
+        return Optional.ofNullable(user);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         final String sql = "SELECT * FROM User";
 

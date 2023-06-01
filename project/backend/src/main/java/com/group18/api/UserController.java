@@ -34,6 +34,12 @@ public class UserController
         return userService.getUserById(id).orElse(null);
     }
 
+    @GetMapping(path = "email={email}")
+    public User getUserByEmail(@PathVariable("email") String email) 
+    {
+        return userService.getUserByEmail(email).orElse(null);
+    }
+
     @GetMapping()
     public List<User> getAllUsers() 
     {

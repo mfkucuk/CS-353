@@ -16,5 +16,6 @@ public interface UserDAO
     }
 
     Optional<User> getUserById(UUID id);
+    Optional<User> getUserByEmail(String email);
     List<User> getAllUsers();
 }
