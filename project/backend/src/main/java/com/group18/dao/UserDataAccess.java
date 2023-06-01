@@ -30,16 +30,16 @@ public class UserDataAccess implements UserDAO {
 
     @Override
     public Optional<User> getUserById(UUID id) {   
-        final String sql = "SELECT * FROM User WHERE userId = ?";
+        final String sql = "SELECT * FROM User WHERE user_id = ?";
 
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
-            UUID userId = UUID.fromString(resultSet.getString("userId"));
-            String fullName = resultSet.getString("fullName");
+            UUID userId = UUID.fromString(resultSet.getString("user_id"));
+            String fullName = resultSet.getString("full_name");
             String email = resultSet.getString("email");
             LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
-            String phoneNumber = resultSet.getString("phoneNumber");
+            String phoneNumber = resultSet.getString("phone_number");
             return new User(
                 userId,
                 fullName,
@@ -58,13 +58,13 @@ public class UserDataAccess implements UserDAO {
         final String sql = "SELECT * FROM User WHERE email = ?";
 
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
-            UUID userId = UUID.fromString(resultSet.getString("userId"));
-            String fullName = resultSet.getString("fullName");
+            UUID userId = UUID.fromString(resultSet.getString("user_id"));
+            String fullName = resultSet.getString("full_name");
             String userEmail = resultSet.getString("email");
             LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
-            String phoneNumber = resultSet.getString("phoneNumber");
+            String phoneNumber = resultSet.getString("phone_number");
             return new User(
                 userId,
                 fullName,
@@ -83,13 +83,13 @@ public class UserDataAccess implements UserDAO {
         final String sql = "SELECT * FROM User";
 
         List<User> allUsers = jdbcTemplate.query(sql, (resultSet, i) -> {
-            UUID userId = UUID.fromString(resultSet.getString("userId"));
-            String fullName = resultSet.getString("fullName");
+            UUID userId = UUID.fromString(resultSet.getString("user_id"));
+            String fullName = resultSet.getString("full_name");
             String email = resultSet.getString("email");
             LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
-            String phoneNumber = resultSet.getString("phoneNumber");
+            String phoneNumber = resultSet.getString("phone_number");
             return new User(
                 userId,
                 fullName,
