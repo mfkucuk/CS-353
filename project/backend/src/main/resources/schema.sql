@@ -7,3 +7,7 @@ CREATE TABLE User (
     password varchar(15) NOT NULL,
     phone_number varchar(15) NOT NULL
 );
+
+CREATE TABLE Rental (
+    rental_id uuid PRIMARY
+);
