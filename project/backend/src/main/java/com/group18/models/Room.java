@@ -7,12 +7,10 @@ import lombok.Data;
 @Data
 public class Room {
     private UUID rentalId;
-    private String roomType;
     private int capacity;
 
-    public Room(UUID rentalId, String roomType, int capacity) {
+    public Room(UUID rentalId, int capacity) {
         this.rentalId = rentalId;
-        this.roomType = roomType;
         this.capacity = capacity;
     }
 }

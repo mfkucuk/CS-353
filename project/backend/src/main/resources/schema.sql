@@ -9,5 +9,15 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Rental (
-    rental_id uuid PRIMARY
+    rental_id uuid PRIMARY KEY,
+);
+
+CREATE TABLE Flat (
+    rental_id uuid PRIMARY KEY,
+    room_count int
+);
+
+CREATE TABLE Room (
+    rental_id uuid PRIMARY KEY,
+    capacity int
 );
