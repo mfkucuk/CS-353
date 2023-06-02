@@ -8,7 +8,6 @@ import Login from './Pages/Common/Login';
 import Register from './Pages/Common/Register';
 import ResetPasswordEmail from './Pages/Common/ResetPasswordEmail';
 import ResetPassword from './Pages/Common/ResetPassword';
-import Messaging from './Pages/Common/Messaging';
 import HomeOwnerRental from './Pages/HomeOwner/HomeOwnerRental';
 import TravelerRental from './Pages/Traveler/TravelerRental';
 
@@ -24,7 +23,6 @@ function App() {
         <Route path="/traveler-profile" element={<TravelerProfile />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
         <Route path="/traveler-main-page" element={<TravelerMainPage />} />
-        <Route path="/messaging" element={<Messaging />} />
         <Route path="/homeowner-rental" element={<HomeOwnerRental />} />
         <Route path="/traveler-rental" element={<TravelerRental />} />
       </Routes>
