@@ -21,3 +21,10 @@ CREATE TABLE Room (
     rental_id uuid PRIMARY KEY,
     capacity int
 );
+
+CREATE TABLE SystemReport (
+    title varchar(50),
+    content text,
+    admin_id uuid,
+    FOREIGN KEY admin_id REFERENCES User(user_id)
+);
