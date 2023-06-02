@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const RegisterPage = () => {
+const ResetPasswordEmail = () => {
   const [email, setEmail] = useState('');
 
   const handleChange = (e) => {
@@ -46,4 +46,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default ResetPasswordEmail;
