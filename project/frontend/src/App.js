@@ -12,6 +12,7 @@ import HomeOwnerRental from './Pages/HomeOwner/HomeOwnerRental';
 import TravelerRental from './Pages/Traveler/TravelerRental';
 import TravelerListing from './Pages/Traveler/TravelerListing';
 import AdminSystemReport from './Pages/Admin/AdminSystemReport';
+import HomeOwnerMainPage from './Pages/HomeOwner/HomeOwnerMainPage';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
         <Route path="/traveler-rental" element={<TravelerRental />} />
         <Route path="/traveler-listing" element={<TravelerListing />} />
         <Route path="/system-report" element={<AdminSystemReport />} />
+        <Route path="/homeowner-main-page" element={<HomeOwnerMainPage />} />
+
 
       </Routes>
     </Router>

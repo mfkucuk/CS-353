@@ -89,6 +89,7 @@ const contentStyle = {
     padding: '10px',
     border: '1px solid #FFBD59',
     borderRadius: '5px',
+    display: 'flex',
   };
 
   const commentInputContainerStyle = {
