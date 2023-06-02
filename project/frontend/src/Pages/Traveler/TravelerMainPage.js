@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai'; // import close icon
+import { Button } from 'react-bootstrap';
 
 const TravelerMainPage = () => {
     const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
@@ -125,6 +126,7 @@ const closeButtonStyle = {
     cursor: 'pointer',
     position: 'absolute',
     right: '20px',
+    color: '#4b0082'
 };
 
 const sideMenuButtonStyle = {
@@ -258,7 +260,8 @@ const rentalInfoStyle = {
       alignItems: 'center',
       marginTop: 'auto',
       marginBottom: '20px',
-      marginLeft: '100px'
+      marginLeft: '0px',
+      marginRight: '3vw',
   };
 
   const searchContainerStyle = {
@@ -288,12 +291,13 @@ const rentalInfoStyle = {
                         <AiOutlineClose style={closeButtonStyle} size={30} onClick={() => setIsSideMenuOpen(false)} />
                         <img src="/mor_logo.png" alt="Side Menu Logo" style={{...logoStyle, margin: '0 auto'}} />
                         <br></br><br></br><br></br>
+                        <button style={sideMenuButtonStyle}>Switch to Homeowner</button>
+                        <br></br>
                         <button style={sideMenuButtonStyle}>Profile</button>
                         <br></br>
                         <button style={sideMenuButtonStyle}>Rental List</button>
                         <br></br>
                         <button style={sideMenuButtonStyle}>Logout</button>
-
                     </div>
                 )}
         <div>
@@ -313,7 +317,6 @@ const rentalInfoStyle = {
                     </div>
                 </div>
                 <div style={userInfoStyle}>
-                    <button style={switchButtonStyle}>Switch to Homeowner</button>
                     <div style={userDetailStyle}>
                         <div>{`Ege Ayan`}</div>
                         <div>{`Balance: ${userInfo.balance}`}</div>
