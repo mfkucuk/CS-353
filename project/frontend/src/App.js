@@ -10,6 +10,7 @@ import ResetPasswordEmail from './Pages/Common/ResetPasswordEmail';
 import ResetPassword from './Pages/Common/ResetPassword';
 import HomeOwnerRental from './Pages/HomeOwner/HomeOwnerRental';
 import TravelerRental from './Pages/Traveler/TravelerRental';
+import TravelerListing from './Pages/Traveler/TravelerListing';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/traveler-main-page" element={<TravelerMainPage />} />
         <Route path="/homeowner-rental" element={<HomeOwnerRental />} />
         <Route path="/traveler-rental" element={<TravelerRental />} />
+        <Route path="/traveler-listing" element={<TravelerListing />} />
       </Routes>
     </Router>
   );
