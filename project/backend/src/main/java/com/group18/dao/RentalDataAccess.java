@@ -22,10 +22,11 @@ public class RentalDataAccess implements RentalDAO {
 
     @Override
     public int insertRental(UUID id, Rental rental) {
-        final String sql = "INSERT INTO Rental VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
+        final String sql = "INSERT INTO Rental VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
 
         return jdbcTemplate.update(sql, new Object[] { id, rental.getLocation(), rental.getAvailableStart(), rental.getAvailableEnd(),
-                rental.getRestrictions(), rental.getType(), rental.getRating(), rental.getFeatures(), rental.getPrice(), rental.getHomeownerId() });
+                rental.getRestrictions(), rental.getType(), rental.getRating(), rental.getFeatures(), rental.getPrice(), rental.getComments(), 
+                rental.getHomeownerId() });
     }
 
     @Override
@@ -48,6 +49,7 @@ public class RentalDataAccess implements RentalDAO {
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");
             String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
             int price = resultSet.getInt("price");
             UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
             return new Rental(
@@ -59,6 +61,7 @@ public class RentalDataAccess implements RentalDAO {
                 type,
                 rating,
                 features,
+                comments,
                 price,
                 null,
                 homeownerId
@@ -80,6 +83,7 @@ public class RentalDataAccess implements RentalDAO {
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");
             String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
             int price = resultSet.getInt("price");
             UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
             return new Rental(
@@ -91,6 +95,7 @@ public class RentalDataAccess implements RentalDAO {
                 type,
                 rating,
                 features,
+                comments,
                 price,
                 null,
                 homeownerId
