@@ -10,7 +10,7 @@ const TravelerProfile = () => {
     const [phone, setPhone] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false); // New state for managing modal
     const [paymentMethod, setPaymentMethod] = useState(''); // New state for managing selected payment method
-
+    const [amount, setAmount] = useState(0); 
     useEffect(() => {
         axios.get('/api/user')
             .then(response => setUserInfo(response.data))
@@ -33,6 +33,10 @@ const TravelerProfile = () => {
         axios.post('/api/user/addBalance')
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
+    };
+
+    const handleAmountChange = (event) => {
+        setAmount(event.target.value);
     };
 
     const handleOpenModal = () => {
@@ -167,12 +171,12 @@ const TravelerProfile = () => {
         Choose Payment Method:
         <select value={paymentMethod} onChange={handlePaymentMethodChange} style={selectStyle}>
             <option value="">--Please choose an option--</option>
-            <option value="gpay">GPAY</option>
+            <option value="gpay">G-PAY</option>
             <option value="creditCard">Credit Card</option>
         </select>
     </label>
 
-    <input type="number" placeholder="Enter the amount" style={inputStyle} />
+    <input type="number" placeholder="Enter the amount" onChange={handleAmountChange} style={inputStyle} />
 
 </div>
 {paymentMethod === 'creditCard' && (
