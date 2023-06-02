@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+<<<<<<< Updated upstream
 import { AiOutlineClose } from 'react-icons/ai'; // import close icon
+=======
+import { Button } from 'react-bootstrap';
+>>>>>>> Stashed changes
 
 const TravelerMainPage = () => {
     const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
