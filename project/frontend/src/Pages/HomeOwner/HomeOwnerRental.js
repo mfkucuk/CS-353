@@ -148,33 +148,41 @@ const HomeOwnerRental = () => {
                 </div>
             </div>
             <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={{
-                    overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-                    content: {
-                        backgroundColor: '#4b0082',
-                        color: 'white',
-                        width: '300px',
-                        height: '500px',
-                        margin: 'auto',
-                        padding: '20px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }
-                }}
-            >
-                <h2 style={{ color: '#FFBD59', marginBottom: '20px' }}>Add Features</h2>
-                {featureList.map((feature, index) => (
-                    <div key={index} style={{ marginBottom: '10px' }}>
-                        <label style={{ marginRight: '10px' }}>{feature.name}</label>
-                        <input type="checkbox" checked={feature.enabled} onChange={() => handleAddFeature(index)} />
-                    </div>
-                ))}
-                <button style={buttonStyle} onClick={closeModal}>Confirm</button>
-            </Modal>
+    isOpen={modalIsOpen}
+    onRequestClose={closeModal}
+    style={{
+        overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+        content: {
+            backgroundColor: '#4b0082',
+            color: 'white',
+            width: '300px',
+            height: '500px',
+            margin: 'auto',
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            boxSizing: 'border-box'
+        }
+    }}
+>
+    <h2 style={{ color: '#FFBD59', marginBottom: '20px', backgroundColor: '#4b0082', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}>Add Features</h2>
+    <div style={{ overflowY: 'auto', maxHeight: 'calc(100% - 100px)', width: '100%' }}>
+        {featureList.map((feature, index) => (
+            <div key={index} style={{ marginBottom: '10px', backgroundColor: '#FFBD59', width: '100%', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxSizing: 'border-box' }}>
+                <label style={{ marginRight: '10px', color: '#4b0082' }}>{feature.name}</label>
+                <input type="checkbox" checked={feature.enabled} onChange={() => handleAddFeature(index)} />
+            </div>
+        ))}
+    </div>
+    <button style={{ ...buttonStyle, alignSelf: 'center' }} onClick={closeModal}>Confirm</button>
+</Modal>
+
+
+
+
+
         </div>
     );
 };
