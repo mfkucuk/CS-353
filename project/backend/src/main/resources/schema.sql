@@ -13,20 +13,20 @@ CREATE TABLE Traveler (
     written_reviews text,
     balance float,
     FOREIGN KEY user_id REFERENCES User(user_id)
-)
+);
 
 CREATE TABLE Homeowner (
     user_id uuid,
     received_reviews text,
     reputation float,
     FOREIGN KEY user_id REFERENCES User(user_id)
-)
+);
 
 CREATE TABLE Admin (
     user_id uuid,
     past_reports text,
     FOREIGN KEY user_id REFERENCES User(user_id)
-)
+);
 
 CREATE TABLE Rental (
     rental_id uuid PRIMARY KEY,
