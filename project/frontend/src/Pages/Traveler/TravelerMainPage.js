@@ -1,85 +1,292 @@
-import {React, }from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const App = () => {
-  return (
-    <div style={{ backgroundColor: '#4b0082', color: '#FFBD59' }}>
-      <header>
-        <div style={{ display: 'flex', alignItems: 'center', padding: '10px', paddingTop: '0px' }}>
-          <div>
-            <img src="bilkent_logo.png" alt="Logo" style={{ height: '100px', width: '250px', margin: '50px', marginTop: '0.5vh' }} />
-          </div>
-          <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '2vw' }}>
-            <button style={{ color: '#4B0082', marginRight: '1vw', backgroundColor: '#FFBD59', borderRadius: '5px', fontSize: '15px', paddingTop: '3px', paddingBottom: '3px', paddingLeft: '15px', paddingRight: '15px' }}>Switch to Home Owner</button>
-            <div style={{fontSize: '15px', padding: '1vw'}}>
-              <p>Username</p>
-              <p>Balance</p>
-            </div>
-            <img src="default_pp.png" alt="User" style={{ height: '70px', marginLeft: '0.7vw', marginRight: '0.7vw' }} />
-            <div>
-              <button style={{ marginLeft: '10px', backgroundColor: '#4B0082', border: 'transparent', padding: '0px' }}>
-                <img src="hamburger_menu_img.png" alt="Menu" style={{width: '170px'}} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+const TravelerMainPage = () => {
+    const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
+    const [searchInput, setSearchInput] = useState('');
+    const [rentals, setRentals] = useState([]);
 
-      <div style={{ padding: '10px'}}>
-        <div style={{ display: 'flex', alignItems: 'center', width:'100%', justifyContent: 'center',}}>
-          <button style={{ marginRight: '10px', border: '2px solid #FFBD59', backgroundColor: '#FFBD59', borderRadius: '10px', paddingLeft: '15px', paddingRight: '15px', marginRight: '1vw'}}>
-            Filter
-          </button>
-          <input type="text" placeholder="Search" style={{ border: '15px solid #FFBD59', borderTop: '5px solid #FFBD59', borderBottom: '5px solid #FFBD59', borderRadius: '15px', paddingLeft: '30px', paddingRight: '30px'}} />
-        </div>
+    useEffect(() => {
+        axios.get('/api/user') // Replace this with your actual API call
+            .then(response => setUserInfo(response.data))
+            .catch(error => console.error(error));
+    }, []);
 
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {/* Container 1 */}
-          <div style={{ width: '30%', padding: '10px', backgroundColor: '#4B0082', alignContent: 'center'}}>
-            <button style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent', alignContent: 'center' }}>
-              <img src="image1.png" alt="Image 1" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-              <div style={{display: 'grid', backgroundColor: '#4B0082', color: '#FFBD59', fontSize: "12px", gridTemplateRows: "auto auto auto auto" }}>
-                  <p>Text 1</p>
-                  <p>Text 2</p>
-                  <p>Text 3</p>
-                  <p>Text 4</p>
-                  <p>4.5</p>
-              </div>
-            </button>
-          </div>
+    useEffect(() => {
+      // Mocked API response
+      const rentalsResponse = [
+          {
+              image: '/example_rental.jpg',
+              location: 'Ankara, Turkey',
+              availableDates: '10/05/2023 - 20/05/2023',
+              price: '$50/night',
+              ratings: 4.5
+          },
+          {
+              image: '/example_rental.jpg',
+              location: 'Istanbul, Turkey',
+              availableDates: '15/06/2023 - 30/06/2023',
+              price: '$80/night',
+              ratings: 4.0
+          },
+          {
+              image: '/example_rental.jpg',
+              location: 'Izmir, Turkey',
+              availableDates: '01/07/2023 - 10/07/2023',
+              price: '$60/night',
+              ratings: 4.3
+          },
+          {
+            image: '/example_rental.jpg',
+            location: 'Ankara, Turkey',
+            availableDates: '10/05/2023 - 20/05/2023',
+            price: '$50/night',
+            ratings: 4.5
+        },
+        {
+            image: '/example_rental.jpg',
+            location: 'Istanbul, Turkey',
+            availableDates: '15/06/2023 - 30/06/2023',
+            price: '$80/night',
+            ratings: 4.0
+        },
+        {
+            image: '/example_rental.jpg',
+            location: 'Izmir, Turkey',
+            availableDates: '01/07/2023 - 10/07/2023',
+            price: '$60/night',
+            ratings: 4.3
+        },
+        {
+          image: '/example_rental.jpg',
+          location: 'Ankara, Turkey',
+          availableDates: '10/05/2023 - 20/05/2023',
+          price: '$50/night',
+          ratings: 4.5
+      },
+      {
+          image: '/example_rental.jpg',
+          location: 'Istanbul, Turkey',
+          availableDates: '15/06/2023 - 30/06/2023',
+          price: '$80/night',
+          ratings: 4.0
+      },
+      {
+          image: '/example_rental.jpg',
+          location: 'Izmir, Turkey',
+          availableDates: '01/07/2023 - 10/07/2023',
+          price: '$60/night',
+          ratings: 4.3
+      },
+      {
+        image: 'example_rental.jpg',
+        location: 'Ankara, Turkey',
+        availableDates: '10/05/2023 - 20/05/2023',
+        price: '$50/night',
+        ratings: 4.5
+    },
+    {
+        image: '/example_rental.jpg',
+        location: 'Istanbul, Turkey',
+        availableDates: '15/06/2023 - 30/06/2023',
+        price: '$80/night',
+        ratings: 4.0
+    },
+    {
+        image: '/example_rental.jpg',
+        location: 'Izmir, Turkey',
+        availableDates: '01/07/2023 - 10/07/2023',
+        price: '$60/night',
+        ratings: 4.3
+    },
+          // ...more rentals...
+      ];
 
-          {/* Container 2 */}
-          <div style={{ width: '30%', padding: '10px', alignContent: 'center' }}>
-            <button style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', border: 'transparent'}}>
-              <img src="image2.png" alt="Image 2" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
-                <p>Text 1</p>
-                <p>Text 2</p>
-                <p>Text 3</p>
-                <p>Text 4</p>
-                <p>Rating: 4.2</p>
-              </div>
-            </button>
-          </div>
+      setRentals(rentalsResponse);
+  }, []);
 
-          {/* Container 3 */}
-          <div style={{ width: '30%', padding: '10px', alignContent: 'center' }}>
-            <button style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#4B0082', width: '30%', border: 'transparent' }}>
-              <img src="image3.png" alt="Image 3" style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-              <div style={{ backgroundColor: '#4B0082', color: '#FFBD59'}}>
-                <p>Text 1</p>
-                <p>Text 2</p>
-                <p>Text 3</p>
-                <p>Text 4</p>
-                <p>Rating: 4.8</p>
-              </div>
-            </button>
-          </div>
-
-          {/* Add more containers here */}
-        </div>
-      </div>
-    </div>
-  );
+  const rentalsGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '20px',
+    padding: '20px',
+    marginTop: '200px', // offset for the top bar
 };
 
-export default App;
+const rentalCardStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: '#4b0082', // purple background
+    padding: '20px',
+    borderRadius: '10px',
+};
+
+const rentalImageStyle = {
+    width: '350px',
+    height: '200px',
+    marginBottom: '20px',
+    objectFit: 'cover',
+    borderRadius: '10px',
+};
+
+const rentalInfoStyle = {
+  color: '#FFBD59', // yellow text color
+};
+
+    const topBarStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '250px',
+        backgroundColor: '#4b0082',
+        color: 'white',
+        padding: '0 20px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 100
+    };
+
+    const logoStyle = {
+        margin: '20px',
+        width: '250px',
+        height: '100px'
+    };
+
+    const filterStyle = {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginBottom: '20px'
+    };
+
+    const buttonStyle = {
+        backgroundColor: '#FFBD59',
+        color: 'black',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '30px',
+        cursor: 'pointer',
+        height: '40px',
+        marginLeft: '30px'
+    };
+
+    const switchButtonStyle = {
+        backgroundColor: '#FFBD59',
+        color: 'black',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '30px',
+        cursor: 'pointer',
+        height: '40px',
+        marginRight: '30px'
+
+
+    };
+
+    const searchInputStyle = {
+        width: '280px',
+        height: '40px',
+        border: 'none',
+        padding: '0 10px',
+        marginRight: '10px',
+        borderRadius: '30px',
+    };
+
+    const userInfoStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        height: '100%'
+    };
+
+    const userDetailStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        marginRight: '10px',
+        textAlign: 'left',
+        color: '#FFBD59',
+    };
+
+    const profilePicStyle = {
+        width: '100px',
+        height: '100px',
+       
+        borderRadius: '50%', // Added for smooth edges
+        marginLeft: '30px' // Added some extra margin
+    };
+
+    const filterSearchContainerStyle = {
+      display: 'flex',
+      justifyContent: 'center', // Add this
+      alignItems: 'center',
+      marginTop: 'auto',
+      marginBottom: '20px',
+      marginLeft: '100px'
+  };
+
+  const searchContainerStyle = {
+      display: 'flex',
+      backgroundColor: 'white',
+      borderRadius: '30px',
+      marginLeft: '20px'
+
+  };
+
+    const menuButtonStyle = {
+        width: '40px',
+        height: '50px',
+        marginLeft: '20px',
+        marginRight: '50px',
+        cursor: 'pointer'
+    };
+    const wrapperStyle = {
+      backgroundColor: '#4b0082', // Set the background color here
+      minHeight: '100vh', // Ensures the color covers the entire height of the view
+      color: 'white'
+  };
+    return (  
+      <div style={wrapperStyle}>
+        <div>
+            <div style={topBarStyle}>
+                <img src="/bilkent_logo.png" alt="Logo" style={logoStyle} />
+                <div style={filterSearchContainerStyle}>
+                    <button style={buttonStyle}>Filter</button>
+                    <div style={searchContainerStyle}>
+                        <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchInput} 
+                            onChange={e => setSearchInput(e.target.value)} 
+                            style={searchInputStyle}
+                        />
+                        <button style={buttonStyle}>Search</button>
+                    </div>
+                </div>
+                <div style={userInfoStyle}>
+                    <button style={switchButtonStyle}>Switch to Homeowner</button>
+                    <div style={userDetailStyle}>
+                        <div>{`Ege Ayan`}</div>
+                        <div>{`Balance: ${userInfo.balance}`}</div>
+                    </div>
+                    <img src="/default_pp.png" alt="Profile" style={profilePicStyle} />
+                    <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} />
+                </div>
+            </div>
+            <div style={rentalsGridStyle}>
+                {rentals.map((rental, index) => (
+                    <div key={index} style={rentalCardStyle}>
+                        <img src={rental.image} alt="Rental" style={rentalImageStyle} />
+                        <div style={rentalInfoStyle}>{rental.location}</div>
+                        <div style={rentalInfoStyle}>{rental.availableDates}</div>
+                        <div style={rentalInfoStyle}>{rental.price}</div>
+                        <div style={rentalInfoStyle}>{`Ratings: ${rental.ratings}`}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+        </div>
+    );
+};
+
+export default TravelerMainPage;
