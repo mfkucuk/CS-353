@@ -15,6 +15,7 @@ public class Rental {
     private String type;
     private int rating;
     private String[] features;
+    private String[] comments;
     private float price;
     private UUID travelerId;
     private UUID homeownerId;
@@ -28,6 +29,7 @@ public class Rental {
         String type,
         int rating,
         String[] features,
+        String[] comments,
         float price,
         UUID travelerId,
         UUID homeownerId
@@ -40,6 +42,7 @@ public class Rental {
         this.type = type;
         this.rating = rating;
         this.features = features;
+        this.comments = comments;
         this.price = price;
         this.travelerId = travelerId;
         this.homeownerId = homeownerId;

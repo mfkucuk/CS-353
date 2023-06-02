@@ -29,6 +29,27 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
+    public int changePasswordById(UUID id, String newPassword) {
+        final String sql = "UPDATE User SET password = ? WHERE user_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { newPassword, id });
+    }
+
+    @Override
+    public int changeEmailById(UUID id, String newEmail) {
+        final String sql = "UPDATE User SET email = ? WHERE user_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { newEmail, id });
+    }
+
+    @Override
+    public int changePhoneNumberById(UUID id, String newPhoneNumber) {
+        final String sql = "UPDATE User SET email = ? WHERE user_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { newPhoneNumber, id });
+    }
+    
+    @Override
     public Optional<User> getUserById(UUID id) {   
         final String sql = "SELECT * FROM User WHERE user_id = ?";
 
@@ -52,7 +73,7 @@ public class UserDataAccess implements UserDAO {
         }, new Object[] { id });
         return Optional.ofNullable(user);
     }
-
+    
     @Override
     public Optional<User> getUserByEmail(String email) {   
         final String sql = "SELECT * FROM User WHERE email = ?";
@@ -102,5 +123,6 @@ public class UserDataAccess implements UserDAO {
         });
         return allUsers;
     }
+
     
 }

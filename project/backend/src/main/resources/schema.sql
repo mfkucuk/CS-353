@@ -37,6 +37,7 @@ CREATE TABLE Rental (
     type varchar(10),
     rating int,
     features text[],
+    comments text[],
     price float,
     traveler_id uuid,
     homeowner_id uuid,

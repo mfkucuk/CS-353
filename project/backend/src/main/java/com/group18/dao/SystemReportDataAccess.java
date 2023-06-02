@@ -3,15 +3,26 @@ package com.group18.dao;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.group18.models.SystemReport;
 
+import lombok.RequiredArgsConstructor;
+
+@Repository("SystemReport") @Transactional
+@RequiredArgsConstructor
 public class SystemReportDataAccess implements SystemReportDAO
 {
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insertSystemReport(UUID id, SystemReport systemReport) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertSystemReport'");
+    public int insertSystemReport(UUID id, SystemReport systemReport) 
+    {
+        final String sql = "INSERT INTO SystemReport VALUES(?, ?, ?)";
+
+        return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), systemReport.getContent(), systemReport.getAdminId() });
     }
 
     @Override

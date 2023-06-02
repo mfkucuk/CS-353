@@ -15,6 +15,10 @@ public interface UserDAO
         return insertUser(id, user);
     }
 
+    int changePasswordById(UUID id, String newPassword);
+    int changeEmailById(UUID id, String newEmail);
+    int changePhoneNumberById(UUID id, String newPhoneNumber);
+
     Optional<User> getUserById(UUID id);
     Optional<User> getUserByEmail(String email);
     List<User> getAllUsers();
