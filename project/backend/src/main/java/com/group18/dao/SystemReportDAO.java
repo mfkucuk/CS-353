@@ -3,6 +3,7 @@ package com.group18.dao;
 import java.util.List;
 import java.util.UUID;
 
+import com.group18.misc.LocationCount;
 import com.group18.models.SystemReport;
 
 public interface SystemReportDAO 
@@ -16,7 +17,7 @@ public interface SystemReportDAO
 
     List<SystemReport> getAllSystemReports();
 
-    int getLocationCount();
+    List<LocationCount> getLocationCount();
     int getMostReputableHomeowners();
     int getHighestRatedRentals();
     int getMostExpensiveRentals();
