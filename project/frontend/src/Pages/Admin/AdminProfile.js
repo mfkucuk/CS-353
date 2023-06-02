@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal'; 
 
+Modal.setAppElement('#root');
 const AdminProfile = () => {
     const [userInfo, setUserInfo] = useState({});
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [modalIsOpen, setModalIsOpen] = useState(false); // For modal
+    const [title, setTitle] = useState(''); // For modal title
+    const [selectedOption, setSelectedOption] = useState(''); // For selected report option
+    const handleOpenModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
 
     useEffect(() => {
         axios.get('/api/user')
@@ -27,6 +39,15 @@ const AdminProfile = () => {
     const handleAddBalance = () => {
         axios.post('/api/user/addBalance')
             .then(response => setUserInfo(response.data))
+            .catch(error => console.error(error));
+    };
+    const handleCreateReport = () => {
+        // API call to create report
+        axios.post('/api/user/report', { title, option: selectedOption })
+            .then(response => {
+                setModalIsOpen(false); // Close the modal after creating the report
+                // handle the response
+            })
             .catch(error => console.error(error));
     };
 
@@ -87,9 +108,49 @@ const AdminProfile = () => {
                     </div>
                     <button style={buttonStyle}>Change Password</button>
                     <p></p>
-                    <button style={buttonStyle}>Create System Report</button>
+                    <button style={buttonStyle} onClick = {handleOpenModal}>Create System Report</button>
                 </div>
             </div>
+            
+
+        <Modal 
+            isOpen={modalIsOpen}
+            onRequestClose={handleCloseModal}
+            style={{ 
+                content: { 
+                    top: '50%', 
+                    left: '50%', 
+                    right: 'auto', 
+                    bottom: 'auto', 
+                    marginRight: '-50%', 
+                    transform: 'translate(-50%, -50%)',
+                    backgroundColor: '#ffff00', // yellow background
+                    padding: '20px',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }
+            }}
+        >
+            <h2 style={{ color: '#800080' }}>Create System Report</h2> {/* purple title */}
+            <input 
+                type="text" 
+                value={title} 
+                onChange={e => setTitle(e.target.value)} 
+                placeholder="Title" 
+                style={{ width: '100%', padding: '10px', marginBottom: '20px', borderRadius: '5px' }} 
+            />
+            <div style={{ marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
+                <input type="radio" id="option1" name="reportOption" value="option1" onChange={e => setSelectedOption(e.target.value)} />
+                <label htmlFor="option1">Top 10 rentals with highest rate</label>
+            </div>
+            <div style={{ marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
+                <input type="radio" id="option2" name="reportOption" value="option2" onChange={e => setSelectedOption(e.target.value)} />
+                <label htmlFor="option2">Top 5 popular homeowners</label>
+            </div>
+            <button style={{...buttonStyle, backgroundColor: '#800080', color: '#ffff00', alignSelf: 'center' }} onClick={handleCreateReport}>Create</button>
+        </Modal>
         </div>
     );
 };

@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { AiOutlineClose } from 'react-icons/ai'; // import close icon
 
 const TravelerMainPage = () => {
     const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
     const [searchInput, setSearchInput] = useState('');
     const [rentals, setRentals] = useState([]);
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
     useEffect(() => {
         axios.get('/api/user') // Replace this with your actual API call
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     }, []);
+
+    const handleLogoClick = () => setIsSideMenuOpen(!isSideMenuOpen);
 
     useEffect(() => {
       // Mocked API response
@@ -105,6 +109,38 @@ const TravelerMainPage = () => {
       setRentals(rentalsResponse);
   }, []);
 
+  const sideMenuStyle = {
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    height: '100vh',
+    width: '250px',
+    backgroundColor: '#FFBD59',
+    padding: '20px',
+    display: isSideMenuOpen ? 'block' : 'none',
+    zIndex: 1000,
+};
+
+const closeButtonStyle = {
+    cursor: 'pointer',
+    position: 'absolute',
+    right: '20px',
+};
+
+const sideMenuButtonStyle = {
+    backgroundColor: '#4b0082',
+    color: 'white',
+    padding: '10px 20px',
+    border: 'none',
+    borderRadius: '30px',
+    cursor: 'pointer',
+    height: '40px',
+    width: '100%',
+    marginBottom: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+};
   const rentalsGridStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -247,6 +283,19 @@ const rentalInfoStyle = {
   };
     return (  
       <div style={wrapperStyle}>
+        {isSideMenuOpen && (
+                    <div style={sideMenuStyle}>
+                        <AiOutlineClose style={closeButtonStyle} size={30} onClick={() => setIsSideMenuOpen(false)} />
+                        <img src="/mor_logo.png" alt="Side Menu Logo" style={{...logoStyle, margin: '0 auto'}} />
+                        <br></br><br></br><br></br>
+                        <button style={sideMenuButtonStyle}>Profile</button>
+                        <br></br>
+                        <button style={sideMenuButtonStyle}>Rental List</button>
+                        <br></br>
+                        <button style={sideMenuButtonStyle}>Logout</button>
+
+                    </div>
+                )}
         <div>
             <div style={topBarStyle}>
                 <img src="/bilkent_logo.png" alt="Logo" style={logoStyle} />
@@ -270,8 +319,9 @@ const rentalInfoStyle = {
                         <div>{`Balance: ${userInfo.balance}`}</div>
                     </div>
                     <img src="/default_pp.png" alt="Profile" style={profilePicStyle} />
-                    <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} />
+                    <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} onClick={() => setIsSideMenuOpen(true)}/>
                 </div>
+                
             </div>
             <div style={rentalsGridStyle}>
                 {rentals.map((rental, index) => (
@@ -285,6 +335,31 @@ const rentalInfoStyle = {
                 ))}
             </div>
         </div>
+        {
+      isSideMenuOpen && (
+        <div style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          height: '100vh',
+          width: '200px',
+          backgroundColor: '#FFBD59',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'transform 0.3s ease-in-out',
+          transform: isSideMenuOpen ? 'translateX(0)' : 'translateX(100%)'
+        }}>
+          <img src="/bilkent_logo.png" alt="Logo" style={{ width: '100px', height: '100px', marginBottom: '20px' }} />
+          <button style={buttonStyle}>Button 1</button>
+          <button style={buttonStyle}>Button 2</button>
+          <button style={buttonStyle}>Button 3</button>
+          <button style={buttonStyle}>Button 4</button>
+          <button style={buttonStyle}>Button 5</button>
+        </div>
+      )
+    }
         </div>
     );
 };
