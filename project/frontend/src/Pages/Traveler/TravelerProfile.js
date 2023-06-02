@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal'; // Import Modal
 
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root')
 const TravelerProfile = () => {
     const [userInfo, setUserInfo] = useState({});
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [modalIsOpen, setModalIsOpen] = useState(false); // New state for managing modal
+    const [paymentMethod, setPaymentMethod] = useState(''); // New state for managing selected payment method
 
     useEffect(() => {
         axios.get('/api/user')
@@ -30,6 +35,51 @@ const TravelerProfile = () => {
             .catch(error => console.error(error));
     };
 
+    const handleOpenModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handlePaymentMethodChange = (event) => {
+        setPaymentMethod(event.target.value);
+    };
+
+    const handleConfirm = () => {
+        // Here you can do something with the selected payment method
+        // For example, make an API request
+
+        // Close the modal after confirming
+        handleCloseModal();
+    };
+
+    const labelStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        marginTop: '10px',
+    };
+    const modalStyle = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#4b0082',
+            color: 'white',
+            borderRadius: '10px',
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }
+    }
     const buttonStyle = {
         backgroundColor: '#FFBD59',
         color: 'black',
@@ -49,8 +99,20 @@ const TravelerProfile = () => {
         borderRadius: '5px',
         padding: '0 10px',
         fontSize: '16px',
-        width: '70%'
+        width: '70%',
+        border: '1px solid #ccc',
+    borderRadius: '5px',
+    padding: '10px',
     }
+
+    
+    const selectStyle = {
+        ...inputStyle, // This will apply the same styles to the select as the input
+        appearance: 'none', // This will remove default browser styling
+        background: '#fff',
+        cursor: 'pointer',
+    };
+    
 
     const pStyle = {
         fontSize: '18px',
@@ -71,7 +133,7 @@ const TravelerProfile = () => {
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <p style={pStyle}>Balance: {userInfo.balance}</p>
-                        <img src="/add_icon.png" alt="Add Balance" style={{cursor: 'pointer', width: 30, height:30 , marginLeft: '10px'}} onClick={handleAddBalance} />
+                        <img src="/add_icon.png" alt="Add Balance" style={{cursor: 'pointer', width: 30, height:30 , marginLeft: '10px'}} onClick={handleOpenModal} />
                     </div>
                     <p style={pStyle}>Name: {userInfo.name}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
@@ -93,6 +155,36 @@ const TravelerProfile = () => {
                     <button style={buttonStyle}>Written Reviews</button>
                 </div>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={handleCloseModal}
+                style={modalStyle}
+                contentLabel="Add Balance"
+            >
+                <h2 style={{color: '#FFBD59'}}>Add Balance</h2>
+                <div style={labelStyle}>
+    <label>
+        Choose Payment Method:
+        <select value={paymentMethod} onChange={handlePaymentMethodChange} style={selectStyle}>
+            <option value="">--Please choose an option--</option>
+            <option value="gpay">GPAY</option>
+            <option value="creditCard">Credit Card</option>
+        </select>
+    </label>
+
+    <input type="number" placeholder="Enter the amount" style={inputStyle} />
+
+</div>
+{paymentMethod === 'creditCard' && (
+    
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <input type="text" placeholder="Credit Card Number" style={inputStyle} />
+        <input type="text" placeholder="CVC" style={inputStyle} />
+        <input type="text" placeholder="Expiration Date" style={inputStyle} />
+    </div>
+)}
+                <button style={buttonStyle} onClick={handleConfirm}>Confirm</button>
+            </Modal>
         </div>
     );
 };
