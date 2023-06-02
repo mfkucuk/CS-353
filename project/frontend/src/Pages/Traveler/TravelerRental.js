@@ -90,6 +90,7 @@ const contentStyle = {
     border: '1px solid #FFBD59',
     borderRadius: '5px',
     display: 'flex',
+    width: 'fit-content', // Set width to fit the content
   };
 
   const commentInputContainerStyle = {
@@ -134,6 +135,8 @@ const contentStyle = {
     // Add the following CSS property for the scrollbar pseudo-element styles
     scrollbarWidth: 'thin',
     scrollbarColor: '#4B0082 #FFBD59',
+    display: 'flex', // Add display flex
+    flexDirection: 'column', // Arrange comments in a column
   };
 
 const TravelerRental = () => {
