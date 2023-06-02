@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.misc.LocationCount;
 import com.group18.models.SystemReport;
 
 import lombok.RequiredArgsConstructor;
@@ -26,15 +27,37 @@ public class SystemReportDataAccess implements SystemReportDAO
     }
 
     @Override
-    public List<SystemReport> getAllSystemReports() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllSystemReports'");
+    public List<SystemReport> getAllSystemReports() 
+    {
+        final String sql = "SELECT * FROM SystemReport";
+
+        List<SystemReport> allSystemReports = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String title = resultSet.getString("title");
+            String content = resultSet.getString("content");
+            UUID id = UUID.fromString(resultSet.getString("admin_id"));
+            return new SystemReport(
+                title,
+                content,
+                id
+            );
+        });
+        return allSystemReports;
     }
 
     @Override
-    public int getLocationCount() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLocationCount'");
+    public List<LocationCount> getLocationCount() 
+    {
+        final String sql = "SELECT location, COUNT(*) as count FROM rental GROUP BY location";
+
+        List<LocationCount> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String location = resultSet.getString("location");
+            int count = resultSet.getInt("count");
+            return new LocationCount(
+                location,
+                count
+            );
+        });
+        return objects;
     }
 
     @Override
