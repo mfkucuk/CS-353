@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
+Modal.setAppElement('#root')
 const HomeOwnerRental = () => {
     const [rentalType, setRentalType] = useState('Room');
     const [location, setLocation] = useState('');
@@ -8,8 +10,39 @@ const HomeOwnerRental = () => {
     const [endDate, setEndDate] = useState('');
     const [restrictions, setRestrictions] = useState('');
     const [features, setFeatures] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
+     const [featureList, setFeatureList] = useState([
+        { name: 'Wi-Fi', enabled: false },
+        { name: 'Large Room', enabled: false },
+        { name: 'Swimming Pool', enabled: false },
+        { name: 'Close to Sea', enabled: false },
+        { name: 'Air Conditioner', enabled: false },
+        { name: 'Fridge', enabled: false },
+        { name: 'Near to Restaurants', enabled: false },
+        { name: 'Near Tourist Attractions', enabled: false },
+        { name: 'Near public transport', enabled: false },
+    ]);
+
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
+    const handleAddFeature = (index) => {
+        setFeatureList(featureList.map((feature, i) => i === index ? { ...feature, enabled: !feature.enabled } : feature));
+    }
+
+
 
     const handleConfirmRental = async () => {
+        const selectedFeatures = featureList
+            .filter(feature => feature.enabled)
+            .map(feature => feature.name);
+    
         try {
             const response = await axios.post('https://your-api-url.com/endpoint', {
                 rentalType,
@@ -18,7 +51,7 @@ const HomeOwnerRental = () => {
                 startDate,
                 endDate,
                 restrictions,
-                features
+                features: selectedFeatures  // use selectedFeatures here
             });
             
             console.log(response.data);
@@ -57,9 +90,6 @@ const HomeOwnerRental = () => {
         marginRight: '10px'
     }
 
-    const handleAddFeature = () => {
-        // ... code to add a feature
-    }
 
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
@@ -110,13 +140,41 @@ const HomeOwnerRental = () => {
                             ))}
                         </ul>
                     </div>
-                    <button style={buttonStyle} onClick={handleAddFeature}>Add Features</button>
+                    <button style={buttonStyle} onClick={openModal}>Add Features</button>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
                     <button style={buttonStyle} onClick={handleConfirmRental}>Confirm Rental</button>
                     <img src="/example_rental.jpg" alt="Rental" style={{ width: '60%', height: 'auto', marginTop: '20px', marginLeft: '20px' }} />
                 </div>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={{
+                    overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+                    content: {
+                        backgroundColor: '#4b0082',
+                        color: 'white',
+                        width: '300px',
+                        height: '500px',
+                        margin: 'auto',
+                        padding: '20px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }
+                }}
+            >
+                <h2 style={{ color: '#FFBD59', marginBottom: '20px' }}>Add Features</h2>
+                {featureList.map((feature, index) => (
+                    <div key={index} style={{ marginBottom: '10px' }}>
+                        <label style={{ marginRight: '10px' }}>{feature.name}</label>
+                        <input type="checkbox" checked={feature.enabled} onChange={() => handleAddFeature(index)} />
+                    </div>
+                ))}
+                <button style={buttonStyle} onClick={closeModal}>Confirm</button>
+            </Modal>
         </div>
     );
 };
