@@ -11,7 +11,7 @@ public class Rental {
     private String location;
     private LocalDateTime availableStart;
     private LocalDateTime availableEnd;
-    private int restrictions;
+    private String restrictions;
     private String type;
     private int rating;
     private String[] features;
@@ -24,7 +24,7 @@ public class Rental {
         String location,
         LocalDateTime availableStart,
         LocalDateTime availableEnd,
-        int restrictions,
+        String restrictions,
         String type,
         int rating,
         String[] features,

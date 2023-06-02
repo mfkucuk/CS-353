@@ -44,7 +44,7 @@ public class RentalDataAccess implements RentalDAO {
             String location = resultSet.getString("location");
             LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
             LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
-            int restrictions = resultSet.getInt("restrictions");
+            String restrictions = resultSet.getString("restrictions");
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");
             String[] features = (String[]) resultSet.getArray("features").getArray();
@@ -76,7 +76,7 @@ public class RentalDataAccess implements RentalDAO {
             String location = resultSet.getString("location");
             LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
             LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
-            int restrictions = resultSet.getInt("restrictions");
+            String restrictions = resultSet.getString("restrictions");
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");
             String[] features = (String[]) resultSet.getArray("features").getArray();

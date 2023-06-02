@@ -30,6 +30,18 @@ CREATE TABLE Admin (
 
 CREATE TABLE Rental (
     rental_id uuid PRIMARY KEY,
+    location text,
+    available_start datetime,
+    available_end datetime,
+    restrictions text,
+    type varchar(10),
+    rating int,
+    features text[],
+    price float,
+    traveler_id uuid,
+    homeowner_id uuid,
+    FOREIGN KEY traveler_id REFERENCES Traveler(user_id)
+    FOREIGN KEY homeowner_id REFERENCES Homeowner(user_id)
 );
 
 CREATE TABLE Flat (
@@ -47,6 +59,19 @@ CREATE TABLE SystemReport (
     content text,
     admin_id uuid,
     FOREIGN KEY admin_id REFERENCES User(user_id)
+);
+
+CREATE TABLE QAndA (
+    ask_date datetime,
+    answer_date datetime,
+    question text,
+    answer text,
+    ask_id uuid,
+    answer_id uuid,
+    rental_id uuid,
+    FOREIGN KEY ask_id REFERENCES Traveler(user_id)
+    FOREIGN KEY answer_id REFERENCES Homeowner(user_id)
+    FOREIGN KEY rental_id REFERENCES Rental(rental_id)
 );
 
 CREATE VIEW HomeownerView AS
@@ -68,3 +93,8 @@ CREATE VIEW FlatView AS
 SELECT *
 FROM Rental R, Flat F
 WHERE R.rental_id = F.rental_id
+
+CREATE VIEW RoomView AS
+SELECT *
+FROM Rental R, Room Ro
+WHERE R.rental_id = Ro.rental_id
