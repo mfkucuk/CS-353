@@ -155,8 +155,6 @@ const TravelerProfile = () => {
                         <button style={buttonStyle} onClick={handleChangePhone}>Change Phone Number</button>
                     </div>
                     <button style={buttonStyle}>Change Password</button>
-                    <p></p>
-                    <button style={buttonStyle}>Written Reviews</button>
                 </div>
             </div>
             <Modal
