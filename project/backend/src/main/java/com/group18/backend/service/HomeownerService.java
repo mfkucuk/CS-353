@@ -13,8 +13,5 @@ public class HomeownerService
 {
     private final HomeownerDAO homeownerDAO;
 
-    public int insertHomeowner(Homeowner homeowner) 
-    {
-        return homeownerDAO.insertHomeowner(homeowner);
-    }
+    
 }

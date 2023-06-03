@@ -8,6 +8,7 @@ import com.group18.backend.models.User;
 
 public interface UserDAO 
 {
+
     int insertUser(UUID id, User user);
     default int insertUser(User user) 
     {

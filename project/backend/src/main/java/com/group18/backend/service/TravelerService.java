@@ -13,8 +13,5 @@ public class TravelerService
 {
     private final TravelerDAO travelerDAO;
 
-    public int insertTraveler(Traveler traveler) 
-    {
-        return travelerDAO.insertTraveler(traveler);
-    }
+    
 }

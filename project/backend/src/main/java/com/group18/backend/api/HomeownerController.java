@@ -19,11 +19,6 @@ public class HomeownerController
 {
     private final HomeownerService homeownerService;
 
-    @PostMapping
-    public int insertHomeowner(@RequestBody Homeowner homeowner) 
-    {
-        return homeownerService.insertHomeowner(homeowner);
-    }
-
+    
 }
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group18.backend.models.User;
+import com.group18.backend.service.HomeownerService;
+import com.group18.backend.service.TravelerService;
 import com.group18.backend.service.UserService;
 
 import lombok.RequiredArgsConstructor;

@@ -19,9 +19,4 @@ public class TravelerController
 {
     private final TravelerService travelerService;
 
-    @PostMapping
-    public int insertTraveler(@RequestBody Traveler traveler) 
-    {
-        return travelerService.insertTraveler(traveler);
-    }
 }

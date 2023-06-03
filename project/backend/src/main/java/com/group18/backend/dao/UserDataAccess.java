@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.backend.models.Homeowner;
+import com.group18.backend.models.Traveler;
 import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
@@ -18,13 +20,20 @@ import lombok.RequiredArgsConstructor;
 public class UserDataAccess implements UserDAO {
 
     private final JdbcTemplate jdbcTemplate;
+    private final TravelerDataAccess travelerDataAccess;
+    private final HomeownerDataAccess homeownerDataAccess;
 
     @Override
     public int insertUser(UUID id, User user) {
         final String sql = "INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-        return jdbcTemplate.update(sql, new Object[] { id, user.getFullName(), user.getEmail(), user.getDob(), user.getTCK(),
-                user.getPassword(), user.getPhoneNumber() });   
+        int res = jdbcTemplate.update(sql, new Object[] { id, user.getFullName(), user.getEmail(), user.getDob(), user.getTCK(),
+            user.getPassword(), user.getPhoneNumber() });   
+
+        travelerDataAccess.insertTraveler(id, new Traveler(null, "", 0f));
+        homeownerDataAccess.insertHomeowner(id, new Homeowner(null, "", 0f));
+
+        return res;
     }
 
     @Override
