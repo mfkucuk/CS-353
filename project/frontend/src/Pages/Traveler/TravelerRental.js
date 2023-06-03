@@ -328,6 +328,11 @@ const TravelerRental = () => {
       return updatedAnswers;
     });
   };
+
+  const handleRentButton = () => {
+    axios.put(`http://localhost:8080/api/rental/id=${index}/traveler=${window.localStorage.getItem('user')}`)
+      .then();
+  }
   
   return (
       <div style={{ backgroundColor: '#4b0082', height: '100vh', overflowY: 'auto' }}>
@@ -368,7 +373,7 @@ const TravelerRental = () => {
               </div>
             </div>
           </div>
-          <button style={buttonStyle}>Rent</button>
+          <button style={buttonStyle} onClick={handleRentButton}>Rent</button>
           <div style={switchContainerStyle}>
             <span style={switchLabelStyle}>Comments</span>
             <label className="switch" style={switchButtonStyle}>
