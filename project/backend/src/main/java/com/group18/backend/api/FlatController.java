@@ -8,6 +8,7 @@ import com.group18.backend.service.FlatService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/flat")
 @RequiredArgsConstructor
 public class FlatController {
