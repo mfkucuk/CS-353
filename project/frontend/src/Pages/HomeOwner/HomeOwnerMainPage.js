@@ -308,8 +308,6 @@ const handleAddRentalClick =() => {
                         <br></br>
                         <button onClick = {handleAddRentalClick}style={sideMenuButtonStyle}>Add Rental</button>
                         <br></br>
-                        <button style={sideMenuButtonStyle}>Rental List</button>
-                        <br></br>
                         <button style={sideMenuButtonStyle}>Logout</button>
 
                     </div>
