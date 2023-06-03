@@ -140,7 +140,6 @@ const TravelerProfile = () => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                 <img src={"/default_pp.png"} alt="Profile" style={{ width: 100, height: 100, borderRadius: '50%' }} />
-                <button style={buttonStyle}>Change Profile Picture</button>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>

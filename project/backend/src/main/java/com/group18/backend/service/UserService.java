@@ -43,8 +43,13 @@ public class UserService
         return userDAO.updateEmailById(id, email);
     }
 
-    public Optional<TravelerView> updatePhoneById(UUID id, String phone)
+    public Optional<TravelerView> updatePhoneById(UUID id, String password)
     {
-        return userDAO.updatePhoneById(id, phone);
+        return userDAO.updatePhoneById(id, password);
+    }
+
+    public Optional<TravelerView> updatePasswordById(UUID id, String phone)
+    {
+        return userDAO.updatePasswordById(id, phone);
     }
 }

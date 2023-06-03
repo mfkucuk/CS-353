@@ -158,5 +158,15 @@ public class UserDataAccess implements UserDAO {
 
         return travelerDataAccess.getTravelerById(id);
     }
+
+    @Override
+    public Optional<TravelerView> updatePasswordById(UUID id, String password)
+    {
+        final String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { password, id });
+
+        return travelerDataAccess.getTravelerById(id);
+    }
     
 }

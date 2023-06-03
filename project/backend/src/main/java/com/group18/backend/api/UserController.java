@@ -64,4 +64,10 @@ public class UserController
     {
         return userService.updatePhoneById(id, phone).orElse(null);
     }
+
+    @PutMapping(path = "/id={id}/password={password}")
+    public TravelerView updatePasswordById(@PathVariable("id") UUID id, @PathVariable("password") String password) 
+    {
+        return userService.updatePasswordById(id, password).orElse(null);
+    }
 }

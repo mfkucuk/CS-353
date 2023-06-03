@@ -27,4 +27,5 @@ public interface UserDAO
 
     Optional<TravelerView> updateEmailById(UUID id, String email);
     Optional<TravelerView> updatePhoneById(UUID id, String phone);
+    Optional<TravelerView> updatePasswordById(UUID id, String password);
 }

@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ResetPassword = () => {
+  const [userInfo, setUserInfo] = useState({});
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [reenterPassword, setReenterPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user'))
+        .then(response => setUserInfo(response.data))
+        .catch(error => console.error(error));
+  }, []);
 
-  const userPassword = 'currentPassword';
+  const userPassword = userInfo.password;
 
   const handleOldPasswordChange = (event) => {
     setOldPassword(event.target.value);
@@ -53,8 +59,9 @@ const ResetPassword = () => {
     }
 
     // Perform the POST request to update the password
-    axios.post('/api/reset-password', { password })
-      .then(() => {
+    axios.put('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user') + "/password=" + encodeURIComponent(password) )
+      .then((response) => {
+        setUserInfo(response.data)
         setSuccess(true);
         setError('');
       })
