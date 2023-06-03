@@ -13,5 +13,8 @@ public class TravelerService
 {
     private final TravelerDAO travelerDAO;
 
-    
+    public Optional<TravelerView> getUserById(UUID id) 
+    {
+        return userDAO.getUserById(id);
+    }
 }

@@ -11,7 +11,7 @@ const TravelerMainPage = () => {
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get('/api/user') // Replace this with your actual API call
+        axios.get('http://localhost:8080/api/user') // Replace this with your actual API call
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     }, []);
