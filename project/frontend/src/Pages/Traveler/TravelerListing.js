@@ -66,9 +66,6 @@ const TravelerListing = () => {
             {currentAccommodations.map((accommodation) => (
               <li key={accommodation.id}>
                 {accommodation.name}
-                <button onClick={() => handleReviewClick(accommodation.id)}>
-                  Review
-                </button>
               </li>
             ))}
           </ul>
