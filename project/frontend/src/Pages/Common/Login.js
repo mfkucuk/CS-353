@@ -19,7 +19,7 @@ const LoginPage = () => {
         // Handle successful login
         if (response.data.successful) {
           console.log('Login successful!');
-          localStorage.setItem('user', JSON.stringify(response.data.userId)); // Store user data in local storage
+          window.localStorage.setItem("user", response.data.userId);
           navigate('/traveler-main-page'); // Navigate to TravelerMainPage
         }
         else {

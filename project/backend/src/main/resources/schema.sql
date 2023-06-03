@@ -88,7 +88,7 @@ JOIN Traveler T ON U.user_id = T.user_id
 JOIN Homeowner H ON U.user_id = H.user_id;
 
 CREATE VIEW TravelerView AS
-SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, T.written_reviews
+SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, T.written_reviews, T.balance
 FROM Users U
 JOIN Traveler T ON U.user_id = T.user_id;
 
