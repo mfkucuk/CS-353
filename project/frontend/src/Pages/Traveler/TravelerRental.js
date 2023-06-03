@@ -227,10 +227,8 @@ const answerInputContainerStyle = {
 
 const TravelerRental = () => {
   const [rentalData, setRentalData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   const [showComments, setShowComments] = useState(true);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState('');
   const [answers, setAnswers] = useState([]);
@@ -296,17 +294,6 @@ const TravelerRental = () => {
   };
   const handleSwitchComments = () => {
     setShowComments((prevState) => !prevState);
-  };
-
-  const handleCommentChange = (event) => {
-    setNewComment(event.target.value);
-  };
-
-  const handleAddComment = () => {
-    // Add the new comment to the comments array
-    setComments((prevComments) => [...prevComments, newComment]);
-    // Clear the text field
-    setNewComment('');
   };
   
   const handleAnswer = (index) => {
@@ -388,33 +375,19 @@ const TravelerRental = () => {
             <span style={switchLabelStyle}>Questions</span>
         </div>
         {showComments ? (
-            <div style={commentSectionStyle}>
-            <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
-            <div style={commentSectionScrollStyle}>
-            <div style={{commentSectionScrollInnerStyle}}>
-                {comments.map((comment, index) => (
-                <div key={index} style={commentStyle}>
-                {comment}
+              <div style={commentSectionStyle}>
+                <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
+                <div style={commentSectionScrollStyle}>
+                  <div style={commentSectionScrollInnerStyle}>
+                    {comments.map((comment, index) => (
+                      <div key={index} style={commentStyle}>
+                        {comment}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-            ))}
-            </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={commentInputContainerStyle}>
-                <input
-                type="text"
-                value={newComment}
-                onChange={handleCommentChange}
-                style={commentInputStyle}
-                placeholder="Add a comment"
-                />
-                <button style={commentButtonStyle} onClick={handleAddComment}>
-                Comment
-                </button>
-            </div>
-            </div>
-        </div>
-        ) : (
+              </div>
+            ) : (
             <div style={questionSectionStyle}>
         <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Questions</h2>
         <div style={commentSectionScrollStyle}>
