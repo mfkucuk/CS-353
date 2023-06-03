@@ -8,6 +8,7 @@ import com.group18.backend.service.RoomService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/room")
 @RequiredArgsConstructor
 public class RoomController {

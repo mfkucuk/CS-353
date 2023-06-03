@@ -3,6 +3,7 @@ package com.group18.backend.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.group18.backend.service.RentalService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/rental")
 @RequiredArgsConstructor
 public class RentalController {
