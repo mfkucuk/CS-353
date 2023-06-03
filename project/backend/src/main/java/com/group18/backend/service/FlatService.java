@@ -1,5 +1,7 @@
 package com.group18.backend.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.FlatDAO;
@@ -13,8 +15,8 @@ public class FlatService
 {
     private final FlatDAO flatDAO;
 
-    public int insertFlat(Flat flat) 
+    public int insertFlat(UUID id, Flat flat) 
     {
-        return flatDAO.insertFlat(flat);
+        return flatDAO.insertFlat(id, flat);
     }
 }

@@ -8,8 +8,8 @@ import com.group18.backend.models.Rental;
 
 public interface RentalDAO 
 {
-    int insertRental(UUID id, Rental rental);
-    default int insertRental(Rental rental) 
+    UUID insertRental(UUID id, Rental rental);
+    default UUID insertRental(Rental rental) 
     {
         UUID id = UUID.randomUUID();
         return insertRental(id, rental);

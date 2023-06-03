@@ -146,14 +146,14 @@ const HomeOwnerRental = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>
                     <div style={switchContainerStyle}>
-                        <span style={switchLabelStyle}>Comments</span>
+                        <span style={switchLabelStyle}>Room</span>
                         <label className="switch" style={switchButtonStyle}>
-                        <input type="checkbox" checked={rentalType === 'Room'} onChange={e => setRentalType(e.target.checked ? 'Room' : 'Other')} />
+                        <input type="checkbox" checked={rentalType === 'Room'} onChange={e => setRentalType(e.target.checked ? 'Room' : 'Flat')} />
                         <span className="slider" style={switchSliderStyle}>
                             <span className="slider-before" style={switchSliderBeforeStyle}></span>
                         </span>
                         </label>
-                        <span style={switchLabelStyle}>Questions</span>
+                        <span style={switchLabelStyle}>Flat</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
                         <label style={labelStyle}>Location:</label>
