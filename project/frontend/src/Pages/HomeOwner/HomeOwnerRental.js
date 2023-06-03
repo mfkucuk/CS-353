@@ -90,6 +90,52 @@ const HomeOwnerRental = () => {
         marginRight: '10px'
     }
 
+    const switchContainerStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '50px',
+        textAlign: 'center',
+      };
+    
+      const switchButtonStyle = {
+        position: 'relative',
+        display: 'inline-block',
+        width: '60px',
+        height: '34px',
+      };
+    
+      const switchSliderStyle = {
+        position: 'absolute',
+        cursor: 'pointer',
+        top: '0',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        backgroundColor: '#FFBD59',
+        transition: '0.4s',
+        borderRadius: '34px',
+      };
+
+      const switchLabelStyle = {
+        marginLeft: '20px',
+        marginRight: '20px',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: '#FFBD59',
+      };
+
+      const switchSliderBeforeStyle = {
+        content: "''",
+        position: 'absolute',
+        height: '26px',
+        width: '26px',
+        left: '4px',
+        bottom: '4px',
+        backgroundColor: '#4B0082',
+        transition: '0.4s',
+        borderRadius: '50%',
+        transform: rentalType == 'Room' ? 'translateX(0)' : 'translateX(26px)',
+      };
 
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
@@ -99,21 +145,10 @@ const HomeOwnerRental = () => {
             <h1 style={{color: '#FFBD59'}}>Add New Rental</h1>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>
-                    {/* <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
-                        <label style={labelStyle}>Rental Type:</label>
-                        <label>
-                            <input type="radio" value="Room" checked={rentalType === 'Room'} onChange={e => setRentalType(e.target.value)} />
-                            Room
-                        </label>
-                        <label>
-                            <input type="radio" value="Flat" checked={rentalType === 'Flat'} onChange={e => setRentalType(e.target.value)} />
-                            Flat
-                        </label>
-                    </div> */}
                     <div style={switchContainerStyle}>
                         <span style={switchLabelStyle}>Comments</span>
                         <label className="switch" style={switchButtonStyle}>
-                        <input type="checkbox" checked={showComments} onChange={handleSwitchComments} />
+                        <input type="checkbox" checked={rentalType === 'Room'} onChange={e => setRentalType(e.target.checked ? 'Room' : 'Other')} />
                         <span className="slider" style={switchSliderStyle}>
                             <span className="slider-before" style={switchSliderBeforeStyle}></span>
                         </span>
