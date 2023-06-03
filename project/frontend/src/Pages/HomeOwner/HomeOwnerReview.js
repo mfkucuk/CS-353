@@ -354,8 +354,8 @@ const HomeOwnerReview = () => {
             <img src="/bilkent_logo.png" alt="Logo" style={{ marginLeft: 50, marginTop: 20, width: 250, height: 100 }} />
           </div>
         </div>
-        <h1 style={{ color: '#FFBD59' }}>Rental in {rentalData.location}</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 40 }}>
+        <h1 style={{ color: '#FFBD59', marginTop: '250px'}}>Rental in {rentalData.location}</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
             <div>
             <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
             </div>
