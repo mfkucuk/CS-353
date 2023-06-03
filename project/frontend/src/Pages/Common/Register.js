@@ -38,7 +38,7 @@ const RegisterPage = () => {
         // phoneNumber,
           "fullName": name,
           "email": email,
-          "dob": "1985-12-31T18:30:00",
+          "dob": dob,
           "TCK": tck,
           "password": password,
           "phoneNumber": phoneNumber

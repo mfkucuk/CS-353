@@ -2,6 +2,7 @@ package com.group18.backend.models;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,9 +15,9 @@ public class Homeowner
     private Float reputation;
 
     public Homeowner(
-        UUID userId,
-        String receivedReviews,
-        Float reputation
+        @JsonProperty("userId")UUID userId,
+        @JsonProperty("received_reviews")String receivedReviews,
+        @JsonProperty("reputation")Float reputation
     )
     {
         this.userId = userId;

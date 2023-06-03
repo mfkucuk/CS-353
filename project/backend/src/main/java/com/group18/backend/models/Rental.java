@@ -3,6 +3,8 @@ package com.group18.backend.models;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
@@ -21,18 +23,18 @@ public class Rental {
     private UUID homeownerId;
 
     public Rental(
-        UUID rentalId,
-        String location,
-        LocalDateTime availableStart,
-        LocalDateTime availableEnd,
-        String restrictions,
-        String type,
-        int rating,
-        String[] features,
-        String[] comments,
-        float price,
-        UUID travelerId,
-        UUID homeownerId
+        @JsonProperty("rentalId")UUID rentalId,
+        @JsonProperty("location")String location,
+        @JsonProperty("availableStart")LocalDateTime availableStart,
+        @JsonProperty("availableEnd")LocalDateTime availableEnd,
+        @JsonProperty("restrictions")String restrictions,
+        @JsonProperty("type")String type,
+        @JsonProperty("rating")int rating,
+        @JsonProperty("features")String[] features,
+        @JsonProperty("comments")String[] comments,
+        @JsonProperty("price")float price,
+        @JsonProperty("travelerId")UUID travelerId,
+        @JsonProperty("homownerId")UUID homeownerId
     ) {
         this.rentalId = rentalId;
         this.location = location;
