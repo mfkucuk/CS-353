@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const ListingPage = () => {
+const TravelerListing = () => {
   const [currentAccommodations, setCurrentAccommodations] = useState([]);
   const [previousAccommodations, setPreviousAccommodations] = useState([]);
 
@@ -46,6 +46,12 @@ const ListingPage = () => {
     width: "400px",
   };
 
+  const handleReviewClick = (accommodationId) => {
+    // Handle review button click for a specific accommodation
+    console.log("Review clicked for accommodation with ID:", accommodationId);
+    // You can replace the console.log statement with your desired logic for handling the review button click.
+  };
+
   return (
     <div style={{ backgroundColor: "#4b0082", height: "100vh" }}>
       <div style={{ display: "flex" }}>
@@ -58,7 +64,9 @@ const ListingPage = () => {
           <h2 style={{ color: "#4b0082" }}>Current Accommodations</h2>
           <ul>
             {currentAccommodations.map((accommodation) => (
-              <li key={accommodation.id}>{accommodation.name}</li>
+              <li key={accommodation.id}>
+                {accommodation.name}
+              </li>
             ))}
           </ul>
         </div>
@@ -66,7 +74,12 @@ const ListingPage = () => {
           <h2 style={{ color: "#4b0082" }}>Previous Accommodations</h2>
           <ul>
             {previousAccommodations.map((accommodation) => (
-              <li key={accommodation.id}>{accommodation.name}</li>
+              <li key={accommodation.id}>
+                {accommodation.name}
+                <button onClick={() => handleReviewClick(accommodation.id)}>
+                  Review
+                </button>
+              </li>
             ))}
           </ul>
         </div>
@@ -75,4 +88,4 @@ const ListingPage = () => {
   );
 };
 
-export default ListingPage;
+export default TravelerListing;
