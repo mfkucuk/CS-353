@@ -29,14 +29,13 @@ const RegisterPage = () => {
 
     try {
       // Make a POST request to register the user
-      const response = await axios.post('/api/register', {
+      const response = await axios.post('/api/user', {
         name,
         email,
         dob,
         password,
         phoneNumber,
         tck,
-        confirmPassword,
       });
 
       console.log(response.data); // Handle the response data as needed

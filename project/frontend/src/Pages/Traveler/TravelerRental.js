@@ -324,116 +324,115 @@ const TravelerRental = () => {
   };
   
   return (
-    <div>
-        <div style={{width: '100%', height: '170px', backgroundColor: '#4b0082' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0 }}>
-                <img src="/bilkent_logo.png" alt="Logo" style={{ margin: 50, width: 250, height: 100 }} />
-            </div>
+      <div style={{ backgroundColor: '#4b0082', height: '100vh', overflowY: 'auto' }}>
+        <div style={{ width: '100%', height: '120px', backgroundColor: '#4b0082', position: 'absolute', top: 0 }}>
+          <div style={{ position: 'absolute', top: 0, left: 0 }}>
+            <img src="/bilkent_logo.png" alt="Logo" style={{ marginLeft: 50, marginTop: 20, width: 250, height: 100 }} />
+          </div>
         </div>
         <div
-        style={{
-            backgroundColor: '#4b0082',
-            height: '100vh',
+          style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
-            overflowY: 'auto',
-        }}
+            padding: '40px',
+          }}
         >
-        
-        <h1 style={{ color: '#FFBD59' }}>Rental in {rentalData.location}</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
+          <h1 style={{ color: '#FFBD59' }}>Rental in {rentalData.location}</h1>
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
             <div>
-            <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
+              <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
             </div>
             <div>
-            <p style={contentStyle}>Location: {rentalData.location}</p>
-            <p style={contentStyle}>Room Count: {rentalData.roomCount}</p>
-            <p style={contentStyle}>Rating: {rentalData.rating}/5</p>
-            <p style={contentStyle}>
+              <p style={contentStyle}>Location: {rentalData.location}</p>
+              <p style={contentStyle}>Room Count: {rentalData.roomCount}</p>
+              <p style={contentStyle}>Rating: {rentalData.rating}/5</p>
+              <p style={contentStyle}>
                 Available dates: {rentalData.startDate} to {rentalData.endDate}
-            </p>
-            <p style={contentStyle}>Features: {rentalData.features}</p>
-            <p style={contentStyle}>Restrictions: {rentalData.restrictions}</p>
-            <p style={contentStyle}>Rental Type: {rentalData.rentalType}</p>
-            <p style={contentStyle}>Price: {rentalData.price}</p>
-            <div style={homeownerStyle}>
+              </p>
+              <p style={contentStyle}>Features: {rentalData.features}</p>
+              <p style={contentStyle}>Restrictions: {rentalData.restrictions}</p>
+              <p style={contentStyle}>Rental Type: {rentalData.rentalType}</p>
+              <p style={contentStyle}>Price: {rentalData.price}</p>
+              <div style={homeownerStyle}>
                 <img src="/default_pp.png" alt="Homeowner" style={homeownerImageStyle} />
                 <p style={contentStyle}>{rentalData.homeownerName}</p>
+              </div>
             </div>
-            </div>
-        </div>
-        <button style={buttonStyle}>Rent</button>
-        <div style={switchContainerStyle}>
+          </div>
+          <button style={buttonStyle}>Rent</button>
+          <div style={switchContainerStyle}>
             <span style={switchLabelStyle}>Comments</span>
             <label className="switch" style={switchButtonStyle}>
-            <input type="checkbox" checked={showComments} onChange={handleSwitchComments} />
-            <span className="slider" style={switchSliderStyle}>
+              <input type="checkbox" checked={showComments} onChange={handleSwitchComments} />
+              <span className="slider" style={switchSliderStyle}>
                 <span className="slider-before" style={switchSliderBeforeStyle}></span>
-            </span>
+              </span>
             </label>
             <span style={switchLabelStyle}>Questions</span>
-        </div>
-        {showComments ? (
-              <div style={commentSectionStyle}>
-                <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
-                <div style={commentSectionScrollStyle}>
-                  <div style={commentSectionScrollInnerStyle}>
-                    {comments.map((comment, index) => (
-                      <div key={index} style={commentStyle}>
-                        <div style={homeownerStyle}>
+          </div>
+          {showComments ? (
+            <div style={commentSectionStyle}>
+              <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
+              <div style={commentSectionScrollStyle}>
+                <div style={commentSectionScrollInnerStyle}>
+                  {comments.map((comment, index) => (
+                    <div key={index} style={commentStyle}>
+                      <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                         <p style={contentStyle}>{username}</p>
-                        </div>
-                        {comment}
                       </div>
-                    ))}
-                  </div>
+                      {comment}
+                    </div>
+                  ))}
                 </div>
               </div>
-            ) : (
+            </div>
+          ) : (
             <div style={questionSectionStyle}>
-        <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Questions</h2>
-        <div style={commentSectionScrollStyle}>
-            <div style={commentSectionScrollInnerStyle}>
-            {questions.map((question, index) => (
-                <div key={index} style={questionStyle}>
-                  <div style={homeownerStyle}>
-                  <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                  <p style={contentStyle}>{username}</p>
+              <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Questions</h2>
+              <div style={commentSectionScrollStyle}>
+                <div style={commentSectionScrollInnerStyle}>
+                  {questions.map((question, index) => (
+                    <div key={index} style={questionStyle}>
+                      <div style={homeownerStyle}>
+                        <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
+                        <p style={contentStyle}>{username}</p>
+                      </div>
+                      {question}
+                      {answers[index] && (
+                        <div style={answerStyle}>
+                          <div style={homeownerStyle}>
+                            <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
+                            <p style={contentStyle}>{username}</p>
+                          </div>
+                          {answers[index]}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-                {question}
-                {answers[index] && <div style={answerStyle}>
-                  <div style={homeownerStyle}>
-                    <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                    <p style={contentStyle}>{username}</p>
-                  </div>
-                  {answers[index]}</div>}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={questionInputContainerStyle}>
+                  <input
+                    type="text"
+                    value={newQuestion}
+                    onChange={handleQuestionChange}
+                    style={questionInputStyle}
+                    placeholder="Ask a question"
+                  />
+                  <button style={questionButtonStyle} onClick={handleAddQuestion}>
+                    Ask
+                  </button>
                 </div>
-            ))}
+              </div>
             </div>
+          )}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={questionInputContainerStyle}>
-            <input
-                type="text"
-                value={newQuestion}
-                onChange={handleQuestionChange}
-                style={questionInputStyle}
-                placeholder="Ask a question"
-            />
-            <button style={questionButtonStyle} onClick={handleAddQuestion}>
-                Ask
-            </button>
-            </div>
-        </div>
-        </div>
-        )}
-        </div>
-    </div>
+      </div>
   );
 };
-
 export default TravelerRental;
