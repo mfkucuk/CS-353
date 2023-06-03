@@ -57,5 +57,39 @@ public class TravelerDataAccess implements TravelerDAO{
         return Optional.ofNullable(travelerView);
     }
 
+    @Override
+    public Optional<TravelerView> updateBalanceById(UUID id, Float balance) {
+        final String sql1 = "UPDATE traveler SET balance = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql1, new Object[] { balance, id });
+
+        final String sql2 = "SELECT * FROM TravelerView WHERE user_id = ?";
+
+        TravelerView travelerView = jdbcTemplate.queryForObject(sql2, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("user_id"));
+            String fullName = resultSet.getString("full_name");
+            String e_mail = resultSet.getString("e_mail");
+            LocalDate dob = resultSet.getDate("dob").toLocalDate();
+            String TCK = resultSet.getString("TCK");
+            String password = resultSet.getString("password");
+            String phoneNumber = resultSet.getString("phone_number");
+            String writtenReviews = resultSet.getString("written_reviews");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
+            return new TravelerView(
+                userId,
+                fullName,
+                e_mail,
+                dob,
+                TCK,
+                password,
+                phoneNumber,
+                isAdmin,
+                writtenReviews,
+                balance
+            );
+        }, new Object[] { id });
+        return Optional.ofNullable(travelerView);
+    }
+
     
 }

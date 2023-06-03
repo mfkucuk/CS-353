@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.UserDAO;
+import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,15 @@ public class UserService
     public List<User> getAllUsers() 
     {
         return userDAO.getAllUsers();
+    }
+
+    public Optional<TravelerView> updateEmailById(UUID id, String email)
+    {
+        return userDAO.updateEmailById(id, email);
+    }
+
+    public Optional<TravelerView> updatePhoneById(UUID id, String phone)
+    {
+        return userDAO.updatePhoneById(id, phone);
     }
 }
