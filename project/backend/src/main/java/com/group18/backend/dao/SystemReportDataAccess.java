@@ -34,11 +34,32 @@ public class SystemReportDataAccess implements SystemReportDAO
 
         String content = "";
 
+        content += "1-) Rental count per location\n";
         for (LocationCount locationCount : locationCounts) {
-            content += locationCount.getLocation() + ": " + locationCount.getCount() + " rentals";
+            content += locationCount.getLocation() + ": " + locationCount.getCount() + " rentals\n";
         }
 
-        return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), systemReport.getContent(), systemReport.getAdminId() });
+        content += "2-) Top 10 most reputable homeowners\n";
+        for (HomeownerReputation homeownerReputation : homeownerReputations) {
+            content += homeownerReputation.getFullName() + ": " + homeownerReputation.getReputation() + " reputation\n";
+        }
+
+        content += "3-) Top 10 rental ratings\n";
+        for (RentalRating rentalRating : rentalRatings) {
+            content += rentalRating.getRentalId() + ": " + rentalRating.getRating() + ", Location: " + rentalRating.getLocation();
+        } 
+
+        content += "4-) Top 10 most expensive rentals\n";
+        for (RentalPrice rentalPrice : mostRentalPrices) {
+            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation();
+        }
+
+        content += "5-) Top 10 least expensive rentals\n";
+        for (RentalPrice rentalPrice : leastRentalPrices) {
+            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation();
+        }
+
+        return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), content, systemReport.getAdminId() });
     }
 
     @Override

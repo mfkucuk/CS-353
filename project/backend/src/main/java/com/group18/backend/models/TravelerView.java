@@ -23,11 +23,12 @@ public class TravelerView extends User {
         @JsonProperty("TCK") String TCK,
         @JsonProperty("password") String password,
         @JsonProperty("phoneNumber") String phoneNumber,
+        @JsonProperty("isAdmin") boolean isAdmin,
         @JsonProperty("writtenReviews")String writtenReviews,
         @JsonProperty("balance")Float balance
     )
     {
-        super(userId, fullName, email, dob, TCK, password, phoneNumber);
+        super(userId, fullName, email, dob, TCK, password, phoneNumber, isAdmin);
         this.writtenReviews = writtenReviews;
         this.balance = balance;
     }

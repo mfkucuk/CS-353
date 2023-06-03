@@ -16,6 +16,7 @@ public class User
     private String TCK;
     private String password;
     private String phoneNumber;
+    private boolean isAdmin;
 
 
     public User(
@@ -25,7 +26,8 @@ public class User
         @JsonProperty("dob") LocalDate dob,
         @JsonProperty("TCK") String TCK,
         @JsonProperty("password") String password,
-        @JsonProperty("phoneNumber") String phoneNumber
+        @JsonProperty("phoneNumber") String phoneNumber,
+        @JsonProperty("isAdmin") boolean isAdmin
     ) 
     {
         this.userId = userId;
@@ -35,5 +37,6 @@ public class User
         this.TCK = TCK;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.isAdmin = isAdmin;
     }
 }
