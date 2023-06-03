@@ -5,14 +5,20 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const TravelerMainPage = () => {
-    const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
+    const [userName, setUserName] = useState('');
+    const [userBalance, setUserBalance] = useState(0);
     const [searchInput, setSearchInput] = useState('');
     const [rentals, setRentals] = useState([]);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get('http://localhost:8080/api/user') // Replace this with your actual API call
-            .then(response => setUserInfo(response.data))
+        console.log(window.localStorage.getItem('user'));
+        axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) // Replace this with your actual API call
+            .then(response => {
+                                setUserName(response.data.fullName);
+                                setUserBalance(response.data.balance);
+                                console.log(userName);
+                            })
             .catch(error => console.error(error));
     }, []);
 
@@ -328,8 +334,8 @@ const handleRentalListClick =() => {
                 </div>
                 <div style={userInfoStyle}>
                     <div style={userDetailStyle}>
-                        <div>{`Ege Ayan`}</div>
-                        <div>{`Balance: ${userInfo.balance}`}</div>
+                        <div>{userName}</div>
+                        <div>{`Balance: ${userBalance}`}</div>
                     </div>
                     <img src="/default_pp.png" alt="Profile" style={profilePicStyle} />
                     <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} onClick={() => setIsSideMenuOpen(true)}/>
