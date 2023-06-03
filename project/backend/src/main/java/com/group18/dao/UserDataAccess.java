@@ -22,7 +22,7 @@ public class UserDataAccess implements UserDAO {
 
     @Override
     public int insertUser(UUID id, User user) {
-        final String sql = "INSERT INTO User VALUES(?, ?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Users VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         return jdbcTemplate.update(sql, new Object[] { id, user.getFullName(), user.getEmail(), user.getDob(), user.getTCK(),
                 user.getPassword(), user.getPhoneNumber() });   
@@ -30,28 +30,28 @@ public class UserDataAccess implements UserDAO {
 
     @Override
     public int changePasswordById(UUID id, String newPassword) {
-        final String sql = "UPDATE User SET password = ? WHERE user_id = ?";
+        final String sql = "UPDATE Users SET password = ? WHERE user_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { newPassword, id });
     }
 
     @Override
     public int changeEmailById(UUID id, String newEmail) {
-        final String sql = "UPDATE User SET email = ? WHERE user_id = ?";
+        final String sql = "UPDATE Users SET email = ? WHERE user_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { newEmail, id });
     }
 
     @Override
     public int changePhoneNumberById(UUID id, String newPhoneNumber) {
-        final String sql = "UPDATE User SET email = ? WHERE user_id = ?";
+        final String sql = "UPDATE Users SET email = ? WHERE user_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { newPhoneNumber, id });
     }
     
     @Override
     public Optional<User> getUserById(UUID id) {   
-        final String sql = "SELECT * FROM User WHERE user_id = ?";
+        final String sql = "SELECT * FROM Users WHERE user_id = ?";
 
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
@@ -76,7 +76,7 @@ public class UserDataAccess implements UserDAO {
     
     @Override
     public Optional<User> getUserByEmail(String email) {   
-        final String sql = "SELECT * FROM User WHERE email = ?";
+        final String sql = "SELECT * FROM Users WHERE email = ?";
 
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
@@ -101,7 +101,7 @@ public class UserDataAccess implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        final String sql = "SELECT * FROM User";
+        final String sql = "SELECT * FROM Users";
 
         List<User> allUsers = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
