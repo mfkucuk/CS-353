@@ -40,6 +40,7 @@ public class TravelerDataAccess implements TravelerDAO{
             String phoneNumber = resultSet.getString("phone_number");
             String writtenReviews = resultSet.getString("written_reviews");
             Float balance = resultSet.getFloat("balance");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
             return new TravelerView(
                 userId,
                 fullName,
@@ -48,6 +49,7 @@ public class TravelerDataAccess implements TravelerDAO{
                 TCK,
                 password,
                 phoneNumber,
+                isAdmin,
                 writtenReviews,
                 balance
             );

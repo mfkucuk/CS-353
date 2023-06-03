@@ -69,6 +69,7 @@ public class UserDataAccess implements UserDAO {
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
             return new User(
                 userId,
                 fullName,
@@ -76,7 +77,8 @@ public class UserDataAccess implements UserDAO {
                 dob,
                 TCK,
                 password,
-                phoneNumber
+                phoneNumber,
+                isAdmin
             );
         }, new Object[] { id });
         return Optional.ofNullable(user);
@@ -94,6 +96,7 @@ public class UserDataAccess implements UserDAO {
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
             return new User(
                 userId,
                 fullName,
@@ -101,7 +104,8 @@ public class UserDataAccess implements UserDAO {
                 dob,
                 TCK,
                 password,
-                phoneNumber
+                phoneNumber,
+                isAdmin
             );
         }, new Object[] { e_mail });
         return Optional.ofNullable(user);
@@ -119,6 +123,7 @@ public class UserDataAccess implements UserDAO {
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
             return new User(
                 userId,
                 fullName,
@@ -126,7 +131,8 @@ public class UserDataAccess implements UserDAO {
                 dob,
                 TCK,
                 password,
-                phoneNumber
+                phoneNumber,
+                isAdmin
             );
         });
         return allUsers;

@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class TravelerView extends User {
     
     private String writtenReviews;
-    private Float balance;
+    private float balance;
 
     public TravelerView(
         @JsonProperty("userId") UUID userId,
@@ -24,8 +24,8 @@ public class TravelerView extends User {
         @JsonProperty("password") String password,
         @JsonProperty("phoneNumber") String phoneNumber,
         @JsonProperty("isAdmin") boolean isAdmin,
-        @JsonProperty("writtenReviews")String writtenReviews,
-        @JsonProperty("balance")Float balance
+        @JsonProperty("writtenReviews") String writtenReviews,
+        @JsonProperty("balance") float balance
     )
     {
         super(userId, fullName, email, dob, TCK, password, phoneNumber, isAdmin);

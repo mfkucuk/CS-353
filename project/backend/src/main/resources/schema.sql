@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS Users (
     TCK text,
     password text NOT NULL,
     phone_number text NOT NULL
+    is_admin boolean
 );
 
 CREATE TABLE IF NOT EXISTS Traveler (
