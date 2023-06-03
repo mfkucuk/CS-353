@@ -7,7 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.backend.misc.HomeownerReputation;
 import com.group18.backend.misc.LocationCount;
+import com.group18.backend.misc.RentalPrice;
+import com.group18.backend.misc.RentalRating;
 import com.group18.backend.models.SystemReport;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,18 @@ public class SystemReportDataAccess implements SystemReportDAO
     public int insertSystemReport(UUID id, SystemReport systemReport) 
     {
         final String sql = "INSERT INTO SystemReport VALUES(?, ?, ?)";
+
+        List<LocationCount> locationCounts = getLocationCount();
+        List<HomeownerReputation> homeownerReputations = getMostReputableHomeowners();
+        List<RentalRating> rentalRatings = getHighestRatedRentals();
+        List<RentalPrice> mostRentalPrices = getMostExpensiveRentals();
+        List<RentalPrice> leastRentalPrices = getLeastExpensiveRentals();
+
+        String content = "";
+
+        for (LocationCount locationCount : locationCounts) {
+            
+        }
 
         return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), systemReport.getContent(), systemReport.getAdminId() });
     }
@@ -61,28 +76,69 @@ public class SystemReportDataAccess implements SystemReportDAO
     }
 
     @Override
-    public int getMostReputableHomeowners() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMostReputableHomeowners'");
+    public List<HomeownerReputation> getMostReputableHomeowners() {
+        final String sql = "SELECT full_name, reputation FROM HomeownerView ORDER BY reputation DESC LIMIT 10";
+
+        List<HomeownerReputation> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String fullName = resultSet.getString("full_name");
+            float reputation = resultSet.getFloat("reputation");
+            return new HomeownerReputation(
+                fullName,
+                reputation
+            );
+        });
+        return objects;
     }
 
     @Override
-    public int getHighestRatedRentals() {
-        final String sql = "SELECT location, COUNT(*) as count FROM rental GROUP BY location";
+    public List<RentalRating> getHighestRatedRentals() {
+        final String sql = "SELECT rental_id, location, rating FROM rental ORDER BY rating DESC LIMIT 10";
 
-        return 0;
+        List<RentalRating> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            int rating = resultSet.getInt("rating");
+            return new RentalRating(
+                id,
+                location,
+                rating
+            );
+        });
+        return objects;
     }
 
     @Override
-    public int getMostExpensiveRentals() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMostExpensiveRentals'");
+    public List<RentalPrice> getMostExpensiveRentals() {
+        final String sql = "SELECT rentalId, location, price FROM rental ORDER BY price DESC LIMIT 10";
+
+        List<RentalPrice> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            float price = resultSet.getFloat("price");
+            return new RentalPrice(
+                id,
+                location,
+                price
+            );
+        });
+        return objects;
     }
 
     @Override
-    public int getLeastExpensiveRentals() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLeastExpensiveRentals'");
+    public List<RentalPrice> getLeastExpensiveRentals() {
+        final String sql = "SELECT rentalId, location, price FROM rental ORDER BY price ASC LIMIT 10";
+
+        List<RentalPrice> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            float price = resultSet.getFloat("price");
+            return new RentalPrice(
+                id,
+                location,
+                price
+            );
+        });
+        return objects;
     }
     
 }
