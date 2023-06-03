@@ -162,8 +162,6 @@ const HomeOwnerProfile= () => {
                         <button style={buttonStyle} onClick={handleChangePhone}>Change Phone Number</button>
                     </div>
                     <button style={buttonStyle}>Change Password</button>
-                    <button style={buttonStyle}>Written Reviews</button>
-                    <button style={buttonStyle}>Received Reviews</button>
                 </div>
             </div>
             <Modal

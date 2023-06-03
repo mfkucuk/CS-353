@@ -373,7 +373,6 @@ const TravelerRental = () => {
             <div style={homeownerStyle}>
                 <img src="/default_pp.png" alt="Homeowner" style={homeownerImageStyle} />
                 <p style={contentStyle}>{rentalData.homeownerName}</p>
-                <button style={buttonStyle}>Ask Question</button>
             </div>
             </div>
         </div>
