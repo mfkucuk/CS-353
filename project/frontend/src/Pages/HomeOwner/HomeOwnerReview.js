@@ -404,20 +404,7 @@ const HomeOwnerReview = () => {
                 ))}
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={commentInputContainerStyle}>
-                <input
-                  type="text"
-                  value={newComment}
-                  onChange={handleCommentChange}
-                  style={commentInputStyle}
-                  placeholder="Write a comment..."
-                />
-                <button style={commentButtonStyle} onClick={handleAddComment}>
-                  Add Comment
-                </button>
-              </div>
-            </div>
+          
           </div>
         ) : (
           <div style={questionSectionStyle}>
@@ -462,18 +449,6 @@ const HomeOwnerReview = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            <div style={questionInputContainerStyle}>
-              <input
-                type="text"
-                value={newQuestion}
-                onChange={handleQuestionChange}
-                style={questionInputStyle}
-                placeholder="Ask a question..."
-              />
-              <button style={questionButtonStyle} onClick={handleAddQuestion}>
-                Add Question
-              </button>
             </div>
           </div>
         )}
