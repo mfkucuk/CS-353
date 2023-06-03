@@ -6,6 +6,7 @@ const HomeOwnerRental = () => {
     const [rentalType, setRentalType] = useState('Room');
     const [location, setLocation] = useState('');
     const [roomCount, setRoomCount] = useState(1);
+    const [capacity, setCapacity] = useState(1);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [restrictions, setRestrictions] = useState('');
@@ -162,7 +163,7 @@ const HomeOwnerRental = () => {
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
                         <label style={labelStyle}>Room Count:</label>
                         {rentalType === 'Room' ? (
-                            <input type="number" value={1} disabled style={inputStyle} />
+                            <input type="number" value={capacity} onChange={e => setCapacity(e.target.value)} style={inputStyle} />
                         ) : (
                             <input type="number" value={roomCount} onChange={e => setRoomCount(e.target.value)} placeholder="Room Count" min="1" style={inputStyle} />
                         )}
