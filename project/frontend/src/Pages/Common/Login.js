@@ -9,25 +9,30 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Perform login logic
-    navigate('/traveler-main-page');
-    /*
     axios
-      .post('/login', { email, password })
+      .post('http://localhost:8080/api/login', 
+      {   
+        "email": email, 
+        "password": password
+      })
       .then((response) => {
         // Handle successful login
-        console.log('Login successful!');
-        localStorage.setItem('user', JSON.stringify(response.data)); // Store user data in local storage
-        navigate('/traveler-main-page'); // Navigate to TravelerMainPage
+        if (response.data.successful) {
+          console.log('Login successful!');
+          localStorage.setItem('user', JSON.stringify(response.data.userId)); // Store user data in local storage
+          navigate('/traveler-main-page'); // Navigate to TravelerMainPage
+        }
+        else {
+          console.log('Login failed!');
+        }
       })
       .catch((error) => {
         // Handle login error
         console.error('Login failed:', error);
       });
-  };*/
+  };
 
   // Rest of your component remains unchanged...
-};
-
   return (
     <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>

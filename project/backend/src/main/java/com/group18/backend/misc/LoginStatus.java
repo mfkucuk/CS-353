@@ -9,15 +9,15 @@ import lombok.Data;
 @Data
 public class LoginStatus
 {
-    private boolean successfull;
+    private boolean successful;
     private UUID userId;
 
     public LoginStatus(
-        @JsonProperty("successfull") boolean successfull,
+        @JsonProperty("successful") boolean successful,
         @JsonProperty("userId") UUID userId
     )
     {
-        this.successfull = successfull;
+        this.successful = successful;
         this.userId = userId;
     }
 }
