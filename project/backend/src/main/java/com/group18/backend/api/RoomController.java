@@ -1,5 +1,7 @@
 package com.group18.backend.api;
 
+import java.util.UUID;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.group18.backend.models.Room;
@@ -14,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 public class RoomController {
     private final RoomService roomService;
 
-    @PostMapping
-    public int insertRoom(@RequestBody Room room) {
-        return roomService.insertRoom(room);
+    @PostMapping("id={id}")
+    public int insertRoom(@PathVariable("id") UUID id, @RequestBody Room room) {
+        return roomService.insertRoom(id, room);
     }
 }

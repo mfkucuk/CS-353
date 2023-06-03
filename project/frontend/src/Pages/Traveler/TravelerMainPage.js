@@ -25,96 +25,10 @@ const TravelerMainPage = () => {
     const handleLogoClick = () => setIsSideMenuOpen(!isSideMenuOpen);
 
     useEffect(() => {
-      // Mocked API response
-      const rentalsResponse = [
-          {
-              image: '/example_rental.jpg',
-              location: 'Ankara, Turkey',
-              availableDates: '10/05/2023 - 20/05/2023',
-              price: '$50/night',
-              ratings: 4.5
-          },
-          {
-              image: '/example_rental.jpg',
-              location: 'Istanbul, Turkey',
-              availableDates: '15/06/2023 - 30/06/2023',
-              price: '$80/night',
-              ratings: 4.0
-          },
-          {
-              image: '/example_rental.jpg',
-              location: 'Izmir, Turkey',
-              availableDates: '01/07/2023 - 10/07/2023',
-              price: '$60/night',
-              ratings: 4.3
-          },
-          {
-            image: '/example_rental.jpg',
-            location: 'Ankara, Turkey',
-            availableDates: '10/05/2023 - 20/05/2023',
-            price: '$50/night',
-            ratings: 4.5
-        },
-        {
-            image: '/example_rental.jpg',
-            location: 'Istanbul, Turkey',
-            availableDates: '15/06/2023 - 30/06/2023',
-            price: '$80/night',
-            ratings: 4.0
-        },
-        {
-            image: '/example_rental.jpg',
-            location: 'Izmir, Turkey',
-            availableDates: '01/07/2023 - 10/07/2023',
-            price: '$60/night',
-            ratings: 4.3
-        },
-        {
-          image: '/example_rental.jpg',
-          location: 'Ankara, Turkey',
-          availableDates: '10/05/2023 - 20/05/2023',
-          price: '$50/night',
-          ratings: 4.5
-      },
-      {
-          image: '/example_rental.jpg',
-          location: 'Istanbul, Turkey',
-          availableDates: '15/06/2023 - 30/06/2023',
-          price: '$80/night',
-          ratings: 4.0
-      },
-      {
-          image: '/example_rental.jpg',
-          location: 'Izmir, Turkey',
-          availableDates: '01/07/2023 - 10/07/2023',
-          price: '$60/night',
-          ratings: 4.3
-      },
-      {
-        image: 'example_rental.jpg',
-        location: 'Ankara, Turkey',
-        availableDates: '10/05/2023 - 20/05/2023',
-        price: '$50/night',
-        ratings: 4.5
-    },
-    {
-        image: '/example_rental.jpg',
-        location: 'Istanbul, Turkey',
-        availableDates: '15/06/2023 - 30/06/2023',
-        price: '$80/night',
-        ratings: 4.0
-    },
-    {
-        image: '/example_rental.jpg',
-        location: 'Izmir, Turkey',
-        availableDates: '01/07/2023 - 10/07/2023',
-        price: '$60/night',
-        ratings: 4.3
-    },
-          // ...more rentals...
-      ];
-
-      setRentals(rentalsResponse);
+      
+        axios.get("http://localhost:8080/api/rental")
+            .then(res => setRentals(res.data))
+            .catch();
   }, []);
 
   const sideMenuStyle = {
@@ -346,11 +260,11 @@ const handleRentalListClick =() => {
                 {rentals.map((rental, index) => (
                     <Link to="/traveler-rental">
                     <div key={index} style={rentalCardStyle}>
-                        <img src={rental.image} alt="Rental" style={rentalImageStyle} />
+                        <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
-                        <div style={rentalInfoStyle}>{rental.availableDates}</div>
+                        <div style={rentalInfoStyle}>{rental.availableStart}-{rental.availableEnd}</div>
                         <div style={rentalInfoStyle}>{rental.price}</div>
-                        <div style={rentalInfoStyle}>{`Ratings: ${rental.ratings}`}</div>
+                        <div style={rentalInfoStyle}>{`Ratings: ${rental.rating}`}</div>
                     </div>
                     </Link>
                 ))}

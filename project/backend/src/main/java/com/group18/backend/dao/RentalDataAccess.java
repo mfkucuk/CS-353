@@ -1,6 +1,6 @@
 package com.group18.backend.dao;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group18.backend.misc.DataToLocalDateTime;
 import com.group18.backend.models.Rental;
 
 import lombok.RequiredArgsConstructor;
@@ -44,8 +43,8 @@ public class RentalDataAccess implements RentalDAO {
         Rental rental = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
             String location = resultSet.getString("location");
-            LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
-            LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
             String restrictions = resultSet.getString("restrictions");
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");
@@ -78,8 +77,8 @@ public class RentalDataAccess implements RentalDAO {
         List<Rental> allRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
             String location = resultSet.getString("location");
-            LocalDateTime availableStart = DataToLocalDateTime.Convert(resultSet.getDate("available_start"));
-            LocalDateTime availableEnd = DataToLocalDateTime.Convert(resultSet.getDate("available_end"));
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
             String restrictions = resultSet.getString("restrictions");
             String type = resultSet.getString("type");
             int rating = resultSet.getInt("rating");

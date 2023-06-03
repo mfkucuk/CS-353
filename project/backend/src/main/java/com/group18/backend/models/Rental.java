@@ -1,6 +1,6 @@
 package com.group18.backend.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,8 +11,8 @@ import lombok.Data;
 public class Rental {
     private UUID rentalId;
     private String location;
-    private LocalDateTime availableStart;
-    private LocalDateTime availableEnd;
+    private LocalDate availableStart;
+    private LocalDate availableEnd;
     private String restrictions;
     private String type;
     private int rating;
@@ -25,8 +25,8 @@ public class Rental {
     public Rental(
         @JsonProperty("rentalId")UUID rentalId,
         @JsonProperty("location")String location,
-        @JsonProperty("availableStart")LocalDateTime availableStart,
-        @JsonProperty("availableEnd")LocalDateTime availableEnd,
+        @JsonProperty("availableStart")LocalDate availableStart,
+        @JsonProperty("availableEnd")LocalDate availableEnd,
         @JsonProperty("restrictions")String restrictions,
         @JsonProperty("type")String type,
         @JsonProperty("rating")int rating,

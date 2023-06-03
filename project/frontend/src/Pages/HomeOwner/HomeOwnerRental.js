@@ -11,6 +11,7 @@ const HomeOwnerRental = () => {
     const [endDate, setEndDate] = useState('');
     const [restrictions, setRestrictions] = useState('');
     const [features, setFeatures] = useState([]);
+    const [rentalId, setRentalId] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
      const [featureList, setFeatureList] = useState([
         { name: 'Wi-Fi', enabled: false },
@@ -45,17 +46,38 @@ const HomeOwnerRental = () => {
             .map(feature => feature.name);
     
         try {
-            const response = await axios.post('https://your-api-url.com/endpoint', {
-                rentalType,
-                location,
-                roomCount,
-                startDate,
-                endDate,
-                restrictions,
-                features: selectedFeatures  // use selectedFeatures here
-            });
+            axios
+            .post('http://localhost:8080/api/rental', {
+                "location": location,
+                "availableStart": startDate,
+                "availableEnd": endDate,
+                "restrictions": restrictions,
+                "type": rentalType,
+                "rating": null,
+                "features": featureList,
+                "comments": null,
+                "price": 1000.0,
+                "travelerId": null,
+                "homeownerId": window.localStorage.getItem('user')
+            })
+            .then(res => setRentalId(res.data));
             
-            console.log(response.data);
+            if (rentalType == 'Room') {
+                axios
+                .post('http://localhost:8080/api/room', {
+                    "rentalId": rentalId,
+                    "capacity": capacity
+                })
+                .then();
+            }
+            else {
+                axios
+                .post('http://localhost:8080/api/flat', {
+                    "rentalId": rentalId,
+                    "roomCount": roomCount
+                })
+                .then();
+            }
         } catch (error) {
             console.error(error);
         }
@@ -161,11 +183,11 @@ const HomeOwnerRental = () => {
                         <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" style={inputStyle} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
-                        <label style={labelStyle}>Room Count:</label>
+                        <label style={labelStyle}>{rentalType === 'Room' ? 'Capacity:' : 'Room Count:'}</label>
                         {rentalType === 'Room' ? (
-                            <input type="number" value={capacity} onChange={e => setCapacity(e.target.value)} style={inputStyle} />
+                            <input type="number" value={capacity} onChange={e => setCapacity(e.target.value)} placeholder="Capacity" min="1" style={inputStyle} />
                         ) : (
-                            <input type="number" value={roomCount} onChange={e => setRoomCount(e.target.value)} placeholder="Room Count" min="1" style={inputStyle} />
+                            <input type="number" value={roomCount} onChange={e => setRoomCount(e.target.value)} placeholder="Room Count" min="1"  style={inputStyle} />
                         )}
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>

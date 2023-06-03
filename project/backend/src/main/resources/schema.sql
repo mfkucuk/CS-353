@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS Users (
     dob date,
     TCK text,
     password text NOT NULL,
-    phone_number text NOT NULL
+    phone_number text NOT NULL,
     is_admin boolean
 );
 
@@ -83,18 +83,18 @@ DROP VIEW IF EXISTS FlatView;
 DROP VIEW IF EXISTS RoomView;
 
 CREATE VIEW HomeownerView AS
-SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, T.written_reviews, H.received_reviews, H.reputation
+SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, U.is_admin, T.written_reviews, H.received_reviews, H.reputation
 FROM Users U
 JOIN Traveler T ON U.user_id = T.user_id
 JOIN Homeowner H ON U.user_id = H.user_id;
 
 CREATE VIEW TravelerView AS
-SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, T.written_reviews, T.balance
+SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, U.is_admin, T.written_reviews, T.balance
 FROM Users U
 JOIN Traveler T ON U.user_id = T.user_id;
 
 CREATE VIEW AdminView AS 
-SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, A.past_reports
+SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, U.is_admin, A.past_reports
 FROM Users U
 JOIN Admin A ON U.user_id = A.user_id;
 

@@ -1,6 +1,6 @@
 package com.group18.backend.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import lombok.Data;
@@ -15,8 +15,8 @@ public class FlatView extends Rental {
     public FlatView(
         UUID rentalId, 
         String location, 
-        LocalDateTime availableStart, 
-        LocalDateTime availableEnd,
+        LocalDate availableStart, 
+        LocalDate availableEnd,
         String restrictions, 
         String type, 
         int rating, 

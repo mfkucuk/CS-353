@@ -1,5 +1,7 @@
 package com.group18.backend.api;
 
+import java.util.UUID;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.group18.backend.models.Flat;
@@ -14,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 public class FlatController {
     private final FlatService flatService;
 
-    @PostMapping
-    public int insertFlat(@RequestBody Flat flat) {
-        return flatService.insertFlat(flat);
+    @PostMapping("id={id}")
+    public int insertFlat(@PathVariable("id") UUID id, @RequestBody Flat flat) {
+        return flatService.insertFlat(id, flat);
     }
 }
