@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ResetPassword = () => {
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [reenterPassword, setReenterPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+
+  const userPassword = 'currentPassword';
+
+  const handleOldPasswordChange = (event) => {
+    setOldPassword(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -36,6 +43,10 @@ const ResetPassword = () => {
       return;
     }
 
+    if (oldPassword !== userPassword){
+      setError('Old password is wrong.')
+    }
+
     if (password !== reenterPassword) {
       setError('Passwords do not match.');
       return;
@@ -57,6 +68,13 @@ const ResetPassword = () => {
     <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
       <div style={{ textAlign: 'center', color: '#FFFFFF' }}>
       <img src="bilkent_logo.png" alt="Logo" style={{ width: '600px', height: 'auto' }} />
+        <input
+          style={{ marginRight: '1rem', width: '300px', height: '40px', borderRadius: '20px' }}
+          type="password"
+          placeholder="Old Password"
+          value={oldPassword}
+          onChange={handleOldPasswordChange}
+        />
         <h2 style={{ color: '#FFBD59' }}>Enter your new password</h2>
         <input
           style={{ marginRight: '1rem', width: '300px', height: '40px', borderRadius: '20px' }}
