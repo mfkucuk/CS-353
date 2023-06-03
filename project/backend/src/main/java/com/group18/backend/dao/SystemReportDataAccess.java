@@ -35,7 +35,7 @@ public class SystemReportDataAccess implements SystemReportDAO
         String content = "";
 
         for (LocationCount locationCount : locationCounts) {
-            
+            content += locationCount.getLocation() + ": " + locationCount.getCount() + " rentals";
         }
 
         return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), systemReport.getContent(), systemReport.getAdminId() });
