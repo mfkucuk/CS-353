@@ -1,5 +1,6 @@
 package com.group18.backend.dao;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,4 +24,12 @@ public class TravelerDataAccess implements TravelerDAO{
         return jdbcTemplate.update(sql, new Object[] { id, traveler.getWrittenReviews(), traveler.getBalance() });
     }
 
+    @Override
+    public Optional<Traveler> getTravelerById(UUID id) {
+        final String sql = "SELECT * FROM TravelerView WHERE user_id = ?";
+
+        TravelerView traveler = jdbcTemplate.queryForObject(sql, (resultSet))
+    }
+
+    
 }
