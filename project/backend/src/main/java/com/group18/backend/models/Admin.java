@@ -2,6 +2,8 @@ package com.group18.backend.models;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,8 +15,8 @@ public class Admin
     private String pastReports;
 
     public Admin(
-        UUID userId,
-        String pastReports
+        @JsonProperty("userId") UUID userId,
+        @JsonProperty("pastReports") String pastReports
     )
     {
         this.userId = userId;

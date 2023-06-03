@@ -1,6 +1,6 @@
 package com.group18.backend.dao;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group18.backend.misc.DataToLocalDateTime;
 import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
@@ -57,7 +56,7 @@ public class UserDataAccess implements UserDAO {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
             String fullName = resultSet.getString("full_name");
             String e_mail = resultSet.getString("e_mail");
-            LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
+            LocalDate dob = resultSet.getDate("dob").toLocalDate();
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
@@ -82,7 +81,7 @@ public class UserDataAccess implements UserDAO {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
             String fullName = resultSet.getString("full_name");
             String userEmail = resultSet.getString("e_mail");
-            LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
+            LocalDate dob = resultSet.getDate("dob").toLocalDate();
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
@@ -107,7 +106,7 @@ public class UserDataAccess implements UserDAO {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
             String fullName = resultSet.getString("full_name");
             String e_mail = resultSet.getString("e_mail");
-            LocalDateTime dob = DataToLocalDateTime.Convert(resultSet.getDate("dob"));
+            LocalDate dob = resultSet.getDate("dob").toLocalDate();
             String TCK = resultSet.getString("TCK");
             String password = resultSet.getString("password");
             String phoneNumber = resultSet.getString("phone_number");
