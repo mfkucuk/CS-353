@@ -234,6 +234,8 @@ const TravelerRental = () => {
   const [answers, setAnswers] = useState([]);
   const [answerInputs, setAnswerInputs] = useState([]);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [profileImage, setProfileImage] = useState('/default_pp.png');
+  const [username, setUsername] = useState('John Doe');
 
 
   // ...
