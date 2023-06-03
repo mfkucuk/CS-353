@@ -11,6 +11,7 @@ import com.group18.backend.service.TravelerService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/traveler")
 @RequiredArgsConstructor
 public class TravelerController 

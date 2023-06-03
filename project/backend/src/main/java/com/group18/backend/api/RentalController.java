@@ -17,6 +17,7 @@ import com.group18.backend.service.RentalService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/rental")
 @RequiredArgsConstructor
 public class RentalController {
