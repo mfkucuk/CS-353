@@ -1,11 +1,11 @@
 CREATE TABLE User (
     user_id uuid PRIMARY KEY,
-    full_name varchar(50) NOT NULL,
-    e_mail varchar(50) NOT NULL,
-    dob datetime,
-    TCK varchar(11),
-    password varchar(15) NOT NULL,
-    phone_number varchar(15) NOT NULL
+    full_name text NOT NULL,
+    e_mail text NOT NULL,
+    dob date,
+    TCK text,
+    password text NOT NULL,
+    phone_number text NOT NULL
 );
 
 CREATE TABLE Traveler (
@@ -31,10 +31,10 @@ CREATE TABLE Admin (
 CREATE TABLE Rental (
     rental_id uuid PRIMARY KEY,
     location text,
-    available_start datetime,
-    available_end datetime,
+    available_start date,
+    available_end date,
     restrictions text,
-    type varchar(10),
+    type text(10),
     rating int,
     features text[],
     comments text[],
@@ -58,15 +58,15 @@ CREATE TABLE Room (
 );
 
 CREATE TABLE SystemReport (
-    title varchar(50),
+    title text,
     content text,
     admin_id uuid,
     FOREIGN KEY (admin_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE QAndA (
-    ask_date datetime,
-    answer_date datetime,
+    ask_date date,
+    answer_date date,
     question text,
     answer text,
     ask_id uuid,
