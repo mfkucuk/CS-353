@@ -435,20 +435,6 @@ const HomeOwnerReview = () => {
             ))}
             </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={questionInputContainerStyle}>
-            <input
-                type="text"
-                value={newQuestion}
-                onChange={handleQuestionChange}
-                style={questionInputStyle}
-                placeholder="Ask a question"
-            />
-            <button style={questionButtonStyle} onClick={handleAddQuestion}>
-                Ask
-            </button>
-            </div>
-        </div>
         </div>
         )}
         </div>

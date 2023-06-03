@@ -422,25 +422,6 @@ const TravelerRental = () => {
             {questions.map((question, index) => (
                 <div key={index} style={questionStyle}>
                 {question}
-                {selectedQuestionIndex === index && (
-                    <div style={answerInputContainerStyle}>
-                    <input
-                        type="text"
-                        value={answerInputs[index]}
-                        onChange={(event) => handleAnswerInputChange(index, event)}
-                        style={questionInputStyle}
-                        placeholder="Your answer"
-                    />
-                    <button style={questionButtonStyle} onClick={() => handleAnswer(index)}>
-                        Reply
-                    </button>
-                    </div>
-                )}
-                {!selectedQuestionIndex && !answers[index] && (
-                    <button style={buttonStyle} onClick={() => handleOpenAnswerWindow(index)}>
-                    Answer
-                    </button>
-                )}
                 {answers[index] && <div style={answerStyle}>{answers[index]}</div>}
                 </div>
             ))}
