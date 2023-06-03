@@ -325,9 +325,9 @@ const TravelerRental = () => {
   
   return (
       <div style={{ backgroundColor: '#4b0082', height: '100vh', overflowY: 'auto' }}>
-        <div style={{ width: '100%', height: '170px', backgroundColor: '#4b0082' }}>
+        <div style={{ width: '100%', height: '120px', backgroundColor: '#4b0082', position: 'absolute', top: 0 }}>
           <div style={{ position: 'absolute', top: 0, left: 0 }}>
-            <img src="/bilkent_logo.png" alt="Logo" style={{ margin: 50, width: 250, height: 100 }} />
+            <img src="/bilkent_logo.png" alt="Logo" style={{ marginLeft: 50, marginTop: 20, width: 250, height: 100 }} />
           </div>
         </div>
         <div
