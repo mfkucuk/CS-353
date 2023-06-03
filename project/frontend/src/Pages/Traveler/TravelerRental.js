@@ -340,7 +340,7 @@ const TravelerRental = () => {
             padding: '40px',
           }}
         >
-          <h1 style={{ color: '#FFBD59' }}>Rental in {rentalData.location}</h1>
+          <h1 style={{ color: '#FFBD59', marginTop: '100px' }}>Rental in {rentalData.location}</h1>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
             <div>
               <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
