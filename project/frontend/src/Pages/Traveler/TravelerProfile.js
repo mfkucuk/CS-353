@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal'; // Import Modal
-
+import { useNavigate } from 'react-router-dom';
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root')
 const TravelerProfile = () => {
@@ -11,6 +11,7 @@ const TravelerProfile = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false); // New state for managing modal
     const [paymentMethod, setPaymentMethod] = useState(''); // New state for managing selected payment method
     const [amount, setAmount] = useState(0); 
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get('/api/user')
             .then(response => setUserInfo(response.data))
@@ -123,6 +124,10 @@ const TravelerProfile = () => {
         fontFamily: '"Arial", sans-serif'
     }
 
+    const handlePasswordClick = () => {
+        navigate('/reset-password');
+    };
+
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
@@ -154,7 +159,7 @@ const TravelerProfile = () => {
                         <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} style={inputStyle} />
                         <button style={buttonStyle} onClick={handleChangePhone}>Change Phone Number</button>
                     </div>
-                    <button style={buttonStyle}>Change Password</button>
+                    <button onClick = {handlePasswordClick} style={buttonStyle}>Change Password</button>
                 </div>
             </div>
             <Modal
