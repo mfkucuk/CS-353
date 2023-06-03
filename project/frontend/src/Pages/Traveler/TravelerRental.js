@@ -234,6 +234,8 @@ const TravelerRental = () => {
   const [answers, setAnswers] = useState([]);
   const [answerInputs, setAnswerInputs] = useState([]);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [profileImage, setProfileImage] = useState('/default_pp.png');
+  const [username, setUsername] = useState('John Doe');
 
 
   // ...
@@ -381,6 +383,10 @@ const TravelerRental = () => {
                   <div style={commentSectionScrollInnerStyle}>
                     {comments.map((comment, index) => (
                       <div key={index} style={commentStyle}>
+                        <div style={homeownerStyle}>
+                        <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
+                        <p style={contentStyle}>{username}</p>
+                        </div>
                         {comment}
                       </div>
                     ))}
@@ -394,27 +400,17 @@ const TravelerRental = () => {
             <div style={commentSectionScrollInnerStyle}>
             {questions.map((question, index) => (
                 <div key={index} style={questionStyle}>
+                  <div style={homeownerStyle}>
+                  <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
+                  <p style={contentStyle}>{username}</p>
+                </div>
                 {question}
-                {selectedQuestionIndex === index && (
-                    <div style={answerInputContainerStyle}>
-                    <input
-                        type="text"
-                        value={answerInputs[index]}
-                        onChange={(event) => handleAnswerInputChange(index, event)}
-                        style={questionInputStyle}
-                        placeholder="Your answer"
-                    />
-                    <button style={questionButtonStyle} onClick={() => handleAnswer(index)}>
-                        Reply
-                    </button>
-                    </div>
-                )}
-                {!selectedQuestionIndex && !answers[index] && (
-                    <button style={buttonStyle} onClick={() => handleOpenAnswerWindow(index)}>
-                    Answer
-                    </button>
-                )}
-                {answers[index] && <div style={answerStyle}>{answers[index]}</div>}
+                {answers[index] && <div style={answerStyle}>
+                  <div style={homeownerStyle}>
+                    <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
+                    <p style={contentStyle}>{username}</p>
+                  </div>
+                  {answers[index]}</div>}
                 </div>
             ))}
             </div>
