@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ResetPassword = () => {
+  const [userInfo, setUserInfo] = useState({});
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [reenterPassword, setReenterPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user'))
+        .then(response => setUserInfo(response.data))
+        .catch(error => console.error(error));
+  }, []);
+
+  const userPassword = userInfo.password;
+
+  const handleOldPasswordChange = (event) => {
+    setOldPassword(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -36,14 +49,19 @@ const ResetPassword = () => {
       return;
     }
 
+    if (oldPassword !== userPassword){
+      setError('Old password is wrong.')
+    }
+
     if (password !== reenterPassword) {
       setError('Passwords do not match.');
       return;
     }
 
     // Perform the POST request to update the password
-    axios.post('/api/reset-password', { password })
-      .then(() => {
+    axios.put('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user') + "/password=" + encodeURIComponent(password) )
+      .then((response) => {
+        setUserInfo(response.data)
         setSuccess(true);
         setError('');
       })
@@ -57,6 +75,15 @@ const ResetPassword = () => {
     <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
       <div style={{ textAlign: 'center', color: '#FFFFFF' }}>
       <img src="bilkent_logo.png" alt="Logo" style={{ width: '600px', height: 'auto' }} />
+        
+        <h2 style={{ color: '#FFBD59' }}>Enter your old password</h2>
+        <input
+          style={{ marginRight: '1rem', width: '300px', height: '40px', borderRadius: '20px' }}
+          type="password"
+          placeholder="Old Password"
+          value={oldPassword}
+          onChange={handleOldPasswordChange}
+        />
         <h2 style={{ color: '#FFBD59' }}>Enter your new password</h2>
         <input
           style={{ marginRight: '1rem', width: '300px', height: '40px', borderRadius: '20px' }}

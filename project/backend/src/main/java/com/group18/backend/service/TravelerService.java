@@ -20,4 +20,10 @@ public class TravelerService
     {
         return travelerDAO.getTravelerById(id);
     }
+
+    public Optional<TravelerView> updateBalanceById(UUID id, Float balance) 
+    {
+        return travelerDAO.updateBalanceById(id, balance);
+    }
+
 }

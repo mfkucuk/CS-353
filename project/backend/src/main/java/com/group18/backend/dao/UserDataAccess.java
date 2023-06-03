@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.group18.backend.models.Homeowner;
 import com.group18.backend.models.Traveler;
+import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
@@ -138,5 +139,34 @@ public class UserDataAccess implements UserDAO {
         return allUsers;
     }
 
+    @Override
+    public Optional<TravelerView> updateEmailById(UUID id, String email)
+    {
+        final String sql = "UPDATE users SET e_mail = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { email, id });
+
+        return travelerDataAccess.getTravelerById(id);
+    }
+
+    @Override
+    public Optional<TravelerView> updatePhoneById(UUID id, String phone)
+    {
+        final String sql = "UPDATE users SET phone_number = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { phone, id });
+
+        return travelerDataAccess.getTravelerById(id);
+    }
+
+    @Override
+    public Optional<TravelerView> updatePasswordById(UUID id, String password)
+    {
+        final String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { password, id });
+
+        return travelerDataAccess.getTravelerById(id);
+    }
     
 }
