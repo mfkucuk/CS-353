@@ -258,7 +258,7 @@ const handleRentalListClick =() => {
             </div>
             <div style={rentalsGridStyle}>
                 {rentals.map((rental, index) => (
-                    <Link to="/traveler-rental">
+                    <Link to={`/traveler-rental?index=${rental.rentalId}`}>
                     <div key={index} style={rentalCardStyle}>
                         <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>

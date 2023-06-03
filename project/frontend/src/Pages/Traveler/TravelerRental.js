@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import "./TravelerRental.css";
-
 
 const contentStyle = {
     fontSize: '18px',
@@ -238,26 +238,32 @@ const TravelerRental = () => {
   const [username, setUsername] = useState('John Doe');
 
 
-  // ...
+  const location = useLocation();
+  const index = new URLSearchParams(location.search).get('index');
 
  
-  /*useEffect(() => {
-      const fetchRentalData = async () => {
-          try {
-              const response = await axios.get('https://your-api-url.com/endpoint');
-              setRentalData(response.data);
-              setIsLoading(false);
-          } catch (error) {
-              console.error(error);
-          }
-      }
-
-      fetchRentalData();
-  }, []); 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/api/rental/id=${index}`);
+        setRentalData(res.data);
   
-  if (isLoading) {
-      return <div>Loading...</div>
-  }*/
+        if (res.data.type === 'Room') {
+          const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${index}`);
+          setRentalData(res1.data);
+        } else {
+          const res2 = await axios.get(`http://localhost:8080/api/flat/get/id=${index}`);
+          setRentalData(res2.data);
+        }
+      } catch (error) {
+        // Handle error here
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
 
   const switchSliderBeforeStyle = {
     content: "''",
@@ -350,7 +356,7 @@ const TravelerRental = () => {
               <p style={contentStyle}>Room Count: {rentalData.roomCount}</p>
               <p style={contentStyle}>Rating: {rentalData.rating}/5</p>
               <p style={contentStyle}>
-                Available dates: {rentalData.startDate} to {rentalData.endDate}
+                Available dates: {rentalData.availableStart} to {rentalData.availableEnd}
               </p>
               <p style={contentStyle}>Features: {rentalData.features}</p>
               <p style={contentStyle}>Restrictions: {rentalData.restrictions}</p>

@@ -51,6 +51,11 @@ public class RentalDataAccess implements RentalDAO {
             String[] features = (String[]) resultSet.getArray("features").getArray();
             String[] comments = (String[]) resultSet.getArray("comments").getArray();
             int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
             UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
             return new Rental(
                 rentalId,
@@ -63,7 +68,7 @@ public class RentalDataAccess implements RentalDAO {
                 features,
                 comments,
                 price,
-                null,
+                travelerId,
                 homeownerId
             );
         }, new Object[] { id });
@@ -85,6 +90,11 @@ public class RentalDataAccess implements RentalDAO {
             String[] features = (String[]) resultSet.getArray("features").getArray();
             String[] comments = (String[]) resultSet.getArray("comments").getArray();
             int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
             UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
             return new Rental(
                 rentalId,
@@ -97,7 +107,7 @@ public class RentalDataAccess implements RentalDAO {
                 features,
                 comments,
                 price,
-                null,
+                travelerId,
                 homeownerId
             );
         });
