@@ -77,8 +77,7 @@ const ResetPassword = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>Password reset successful!</p>}
         <button  style={{ backgroundColor: '#FFBD59', color: '#4B0082', border: 'none', padding: '0.5rem 1rem', borderRadius: '20px', marginTop: '10px', marginBottom: '10px'}} onClick={handleResetPassword}>Reset Password</button>
-        <br />
-        <a href="/login" style={{color: '#FFFFFF', textDecoration: 'none' }}>Login</a> | <a href="/register" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Register</a>
+        <br/>
       </div>
     </div>
   );
