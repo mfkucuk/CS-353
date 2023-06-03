@@ -24,7 +24,7 @@ public class RentalDataAccess implements RentalDAO {
         final String sql = "INSERT INTO Rental VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
 
         jdbcTemplate.update(sql, new Object[] { id, rental.getLocation(), rental.getAvailableStart(), rental.getAvailableEnd(),
-                rental.getRestrictions(), rental.getType(), rental.getRating(), rental.getFeatures(), rental.getPrice(), rental.getComments(), 
+                rental.getRestrictions(), rental.getType(), rental.getRating(), rental.getFeatures(), rental.getComments(), rental.getPrice(), 
                 rental.getHomeownerId() });
         return id;
     }

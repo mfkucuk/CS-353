@@ -46,42 +46,42 @@ const HomeOwnerRental = () => {
             .map(feature => feature.name);
     
         try {
-            axios
-            .post('http://localhost:8080/api/rental', {
+            console.log(window.localStorage.getItem('user'));
+            const response = await axios.post('http://localhost:8080/api/rental', {
                 "location": location,
                 "availableStart": startDate,
                 "availableEnd": endDate,
                 "restrictions": restrictions,
                 "type": rentalType,
-                "rating": null,
-                "features": featureList,
-                "comments": null,
+                "rating": 0,
+                "features": selectedFeatures,
+                "comments": [],
                 "price": 1000.0,
-                "travelerId": null,
+                "travelerId": "",
                 "homeownerId": window.localStorage.getItem('user')
-            })
-            .then(res => setRentalId(res.data));
-            
-            if (rentalType == 'Room') {
-                axios
-                .post('http://localhost:8080/api/room', {
-                    "rentalId": rentalId,
+            });
+    
+            const newRentalId = response.data;
+            setRentalId(newRentalId);
+    
+            console.log(newRentalId);
+    
+            if (rentalType === 'Room') {
+                await axios.post(`http://localhost:8080/api/room/id=${newRentalId}`, {
+                    "rentalId": null,
                     "capacity": capacity
-                })
-                .then();
-            }
-            else {
-                axios
-                .post('http://localhost:8080/api/flat', {
-                    "rentalId": rentalId,
+                });
+            } else {
+                await axios.post(`http://localhost:8080/api/flat/id=${newRentalId}`, {
+                    "rentalId": null,
                     "roomCount": roomCount
-                })
-                .then();
+                });
             }
         } catch (error) {
             console.error(error);
         }
-    }
+    };
+    
 
 
 
