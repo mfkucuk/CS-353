@@ -3,6 +3,7 @@ package com.group18.backend.models;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -16,13 +17,21 @@ public class User
     private String password;
     private String phoneNumber;
 
+
     public User(
+        @JsonProperty("userId")
         UUID userId,
+        @JsonProperty("fullName")
         String fullName,
+        @JsonProperty("email")
         String email,
+        @JsonProperty("dob")
         LocalDateTime dob,
+        @JsonProperty("TCK")
         String TCK,
+        @JsonProperty("password")
         String password,
+        @JsonProperty("phoneNumber")
         String phoneNumber
     ) 
     {
