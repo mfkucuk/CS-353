@@ -29,7 +29,7 @@ const RegisterPage = () => {
 
     try {
       // Make a POST request to register the user
-      const response = await axios.post('/api/user', {
+      const response = await axios.post('http://localhost:8080/api/user', {
         name,
         email,
         dob,
