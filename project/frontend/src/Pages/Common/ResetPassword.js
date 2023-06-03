@@ -68,6 +68,8 @@ const ResetPassword = () => {
     <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
       <div style={{ textAlign: 'center', color: '#FFFFFF' }}>
       <img src="bilkent_logo.png" alt="Logo" style={{ width: '600px', height: 'auto' }} />
+        
+        <h2 style={{ color: '#FFBD59' }}>Enter your old password</h2>
         <input
           style={{ marginRight: '1rem', width: '300px', height: '40px', borderRadius: '20px' }}
           type="password"
