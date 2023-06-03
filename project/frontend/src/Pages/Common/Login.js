@@ -67,8 +67,8 @@ const LoginPage = () => {
             >
               Login
             </button>
-            <a href="#" style={{ textAlign: 'center', textDecoration: 'underline', color: '#4b0082' }}>
-              Forgot your password?
+            <a href="/register" style={{ textAlign: 'center', textDecoration: 'underline', color: '#4b0082' }}>
+              No Account? Register!
             </a>
           </div>
         </div>

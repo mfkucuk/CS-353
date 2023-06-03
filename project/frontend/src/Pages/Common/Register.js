@@ -91,7 +91,7 @@ const RegisterPage = () => {
         <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFBD59', borderRadius: '20px', width: '200px', height: '40px', fontSize: '16px' }} onClick={handleRegister}>Register</button>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px', color: 'white' }}>
-        Already have an account? <a href="/Login" style={{ color: 'white', paddingLeft: '5px' }}>Login</a>
+        Already have an account? <a href="/" style={{ color: 'white', paddingLeft: '5px' }}>Login</a>
       </div>
     </div>
   );

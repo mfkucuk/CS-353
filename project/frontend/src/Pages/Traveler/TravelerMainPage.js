@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai'; // import close icon
 import { Button } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const TravelerMainPage = () => {
     const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
     const [searchInput, setSearchInput] = useState('');
     const [rentals, setRentals] = useState([]);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get('/api/user') // Replace this with your actual API call
             .then(response => setUserInfo(response.data))
@@ -284,6 +285,15 @@ const rentalInfoStyle = {
       minHeight: '100vh', // Ensures the color covers the entire height of the view
       color: 'white'
   };
+  const handleSwitchClick = () => {
+    navigate('/homeowner-main-page');
+};
+  const handleProfileClick = () => {
+        navigate('/traveler-profile');
+    };
+const handleRentalListClick =() => {
+        navigate('/traveler-listing');
+    };
     return (  
       <div style={wrapperStyle}>
         {isSideMenuOpen && (
@@ -291,11 +301,11 @@ const rentalInfoStyle = {
                         <AiOutlineClose style={closeButtonStyle} size={30} onClick={() => setIsSideMenuOpen(false)} />
                         <img src="/mor_logo.png" alt="Side Menu Logo" style={{...logoStyle, margin: '0 auto'}} />
                         <br></br><br></br><br></br>
-                        <button style={sideMenuButtonStyle}>Switch to Homeowner</button>
+                        <button onClick={handleSwitchClick} style={sideMenuButtonStyle}>Switch to Homeowner</button>
                         <br></br>
-                        <button style={sideMenuButtonStyle}>Profile</button>
+                        <button onClick={handleProfileClick} style={sideMenuButtonStyle}>Profile</button>
                         <br></br>
-                        <button style={sideMenuButtonStyle}>Rental List</button>
+                        <button onClick= {handleRentalListClick}style={sideMenuButtonStyle}>Rental List</button>
                         <br></br>
                         <button style={sideMenuButtonStyle}>Logout</button>
                     </div>
@@ -328,6 +338,7 @@ const rentalInfoStyle = {
             </div>
             <div style={rentalsGridStyle}>
                 {rentals.map((rental, index) => (
+                    <Link to="/traveler-rental">
                     <div key={index} style={rentalCardStyle}>
                         <img src={rental.image} alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
@@ -335,34 +346,11 @@ const rentalInfoStyle = {
                         <div style={rentalInfoStyle}>{rental.price}</div>
                         <div style={rentalInfoStyle}>{`Ratings: ${rental.ratings}`}</div>
                     </div>
+                    </Link>
                 ))}
             </div>
         </div>
-        {
-      isSideMenuOpen && (
-        <div style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          height: '100vh',
-          width: '200px',
-          backgroundColor: '#FFBD59',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'transform 0.3s ease-in-out',
-          transform: isSideMenuOpen ? 'translateX(0)' : 'translateX(100%)'
-        }}>
-          <img src="/bilkent_logo.png" alt="Logo" style={{ width: '100px', height: '100px', marginBottom: '20px' }} />
-          <button style={buttonStyle}>Button 1</button>
-          <button style={buttonStyle}>Button 2</button>
-          <button style={buttonStyle}>Button 3</button>
-          <button style={buttonStyle}>Button 4</button>
-          <button style={buttonStyle}>Button 5</button>
-        </div>
-      )
-    }
+        
         </div>
     );
 };
