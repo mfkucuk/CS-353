@@ -355,7 +355,7 @@ const HomeOwnerReview = () => {
           </div>
         </div>
         <h1 style={{ color: '#FFBD59' }}>Rental in {rentalData.location}</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 40 }}>
             <div>
             <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
             </div>
