@@ -17,7 +17,7 @@ public class RentalService
 {
     private final RentalDAO rentalDAO;
     
-    public int insertRental(Rental rental) 
+    public UUID insertRental(Rental rental) 
     {
         return rentalDAO.insertRental(rental);
     }

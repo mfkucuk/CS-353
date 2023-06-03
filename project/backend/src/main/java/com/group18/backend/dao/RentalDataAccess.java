@@ -21,12 +21,13 @@ public class RentalDataAccess implements RentalDAO {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insertRental(UUID id, Rental rental) {
+    public UUID insertRental(UUID id, Rental rental) {
         final String sql = "INSERT INTO Rental VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
 
-        return jdbcTemplate.update(sql, new Object[] { id, rental.getLocation(), rental.getAvailableStart(), rental.getAvailableEnd(),
+        jdbcTemplate.update(sql, new Object[] { id, rental.getLocation(), rental.getAvailableStart(), rental.getAvailableEnd(),
                 rental.getRestrictions(), rental.getType(), rental.getRating(), rental.getFeatures(), rental.getPrice(), rental.getComments(), 
                 rental.getHomeownerId() });
+        return id;
     }
 
     @Override

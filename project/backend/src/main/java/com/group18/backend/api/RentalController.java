@@ -25,7 +25,7 @@ public class RentalController {
     private final RentalService rentalService;
 
     @PostMapping
-    public int insertRental(@RequestBody Rental rental) {
+    public UUID insertRental(@RequestBody Rental rental) {
         return rentalService.insertRental(rental);
     }
 
