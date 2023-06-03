@@ -342,7 +342,7 @@ const handleAddRentalClick =() => {
             </div>
             <div style={rentalsGridStyle}>
                 {rentals.map((rental, index) => (
-                    <Link to="/traveler-rental">
+                    <Link to="/homeowner-review">
                     <div key={index} style={rentalCardStyle}>
                         <img src={rental.image} alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
