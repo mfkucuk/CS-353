@@ -25,10 +25,10 @@ public class UserDataAccess implements UserDAO {
 
     @Override
     public int insertUser(UUID id, User user) {
-        final String sql = "INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
         int res = jdbcTemplate.update(sql, new Object[] { id, user.getFullName(), user.getEmail(), user.getDob(), user.getTCK(),
-            user.getPassword(), user.getPhoneNumber() });   
+            user.getPassword(), user.getPhoneNumber(), false });   
 
         travelerDataAccess.insertTraveler(id, new Traveler(null, "", 0f));
         homeownerDataAccess.insertHomeowner(id, new Homeowner(null, "", 0f));

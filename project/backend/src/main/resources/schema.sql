@@ -99,11 +99,11 @@ FROM Users U
 JOIN Admin A ON U.user_id = A.user_id;
 
 CREATE VIEW FlatView AS
-SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, F.room_count
+SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, R.traveler_id, R.homeowner_id, F.room_count
 FROM Rental R
 JOIN Flat F ON R.rental_id = F.rental_id;
 
 CREATE VIEW RoomView AS
-SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, Ro.capacity
+SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, R.traveler_id, R.homeowner_id, Ro.capacity
 FROM Rental R
 JOIN Room Ro ON R.rental_id = Ro.rental_id;

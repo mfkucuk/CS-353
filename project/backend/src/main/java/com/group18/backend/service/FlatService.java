@@ -1,11 +1,13 @@
 package com.group18.backend.service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.FlatDAO;
 import com.group18.backend.models.Flat;
+import com.group18.backend.models.FlatView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,5 +20,10 @@ public class FlatService
     public int insertFlat(UUID id, Flat flat) 
     {
         return flatDAO.insertFlat(id, flat);
+    }
+
+    public Optional<FlatView> getFlatById(UUID id) 
+    {
+        return flatDAO.getFlatById(id);
     }
 }
