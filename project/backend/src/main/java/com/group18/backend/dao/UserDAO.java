@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
 
@@ -25,7 +26,10 @@ public interface UserDAO
     Optional<User> getUserByEmail(String email);
     List<User> getAllUsers();
 
-    Optional<TravelerView> updateEmailById(UUID id, String email);
-    Optional<TravelerView> updatePhoneById(UUID id, String phone);
-    Optional<TravelerView> updatePasswordById(UUID id, String password);
+    Optional<TravelerView> updateEmailByIdT(UUID id, String email);
+    Optional<TravelerView> updatePhoneByIdT(UUID id, String phone);
+    Optional<TravelerView> updatePasswordByIdT(UUID id, String password);
+    Optional<HomeownerView> updateEmailByIdH(UUID id, String email);
+    Optional<HomeownerView> updatePhoneByIdH(UUID id, String phone);
+    Optional<HomeownerView> updatePasswordByIdH(UUID id, String password);
 }

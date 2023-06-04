@@ -59,7 +59,7 @@ const ResetPassword = () => {
     }
 
     // Perform the POST request to update the password
-    axios.put('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user') + "/password=" + encodeURIComponent(password) )
+    axios.put('http://localhost:8080/api/user/t/id=' + window.localStorage.getItem('user') + "/password=" + encodeURIComponent(password) )
       .then((response) => {
         setUserInfo(response.data)
         setSuccess(true);

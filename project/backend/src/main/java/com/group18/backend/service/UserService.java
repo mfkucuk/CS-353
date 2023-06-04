@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.UserDAO;
+import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
 
@@ -38,18 +39,33 @@ public class UserService
         return userDAO.getAllUsers();
     }
 
-    public Optional<TravelerView> updateEmailById(UUID id, String email)
+    public Optional<TravelerView> updateEmailByIdT(UUID id, String email)
     {
-        return userDAO.updateEmailById(id, email);
+        return userDAO.updateEmailByIdT(id, email);
     }
 
-    public Optional<TravelerView> updatePhoneById(UUID id, String password)
+    public Optional<TravelerView> updatePhoneByIdT(UUID id, String password)
     {
-        return userDAO.updatePhoneById(id, password);
+        return userDAO.updatePhoneByIdT(id, password);
     }
 
-    public Optional<TravelerView> updatePasswordById(UUID id, String phone)
+    public Optional<TravelerView> updatePasswordByIdT(UUID id, String phone)
     {
-        return userDAO.updatePasswordById(id, phone);
+        return userDAO.updatePasswordByIdT(id, phone);
+    }
+
+    public Optional<HomeownerView> updateEmailByIdH(UUID id, String email)
+    {
+        return userDAO.updateEmailByIdH(id, email);
+    }
+
+    public Optional<HomeownerView> updatePhoneByIdH(UUID id, String password)
+    {
+        return userDAO.updatePhoneByIdH(id, password);
+    }
+
+    public Optional<HomeownerView> updatePasswordByIdH(UUID id, String phone)
+    {
+        return userDAO.updatePasswordByIdH(id, phone);
     }
 }

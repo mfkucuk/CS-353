@@ -15,27 +15,29 @@ const HomeOwnerProfile= () => {
     const [amount, setAmount] = useState(0); // New state for managing amount to add
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get('/api/user')
+        axios.get('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user'))
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     }, []);
 
     const handleChangeEmail = () => {
-        axios.post('/api/user/email', { email })
+        axios.put('http://localhost:8080/api/user/h/id=' + window.localStorage.getItem('user') + "/email=" + email)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     };
 
     const handleChangePhone = () => {
-        axios.post('/api/user/phone', { phone })
+        axios.put('http://localhost:8080/api/user/h/id=' + window.localStorage.getItem('user') + '/phone=' + phone)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     };
 
     const handleAddBalance = () => {
-        axios.post('/api/user/addBalance')
+        let x = userInfo.balance + parseFloat(amount);
+        axios.put('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user') + "/balance=" + x)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
+        handleCloseModal();
     };
 
     const handleAmountChange = (event) => {
@@ -149,11 +151,11 @@ const HomeOwnerProfile= () => {
                         <img src="/add_icon.png" alt="Add Balance" style={{cursor: 'pointer', width: 30, height:30 , marginLeft: '10px'}} onClick={handleOpenModal} />
                     </div>
                     <p style={pStyle}>Reputation: {userInfo.reputation}</p>
-                    <p style={pStyle}>Name: {userInfo.name}</p>
+                    <p style={pStyle}>Name: {userInfo.fullName}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
                     <p style={pStyle}>TCK: {userInfo.tck}</p>
                     <p style={pStyle}>Date of Birth: {userInfo.dob}</p>
-                    <p style={pStyle}>Phone No: {userInfo.phone}</p>
+                    <p style={pStyle}>Phone No: {userInfo.phoneNumber}</p>
                 </div>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
@@ -195,7 +197,7 @@ const HomeOwnerProfile= () => {
         <input type="text" placeholder="Expiration Date" style={inputStyle} />
     </div>
 )}
-                <button style={buttonStyle} onClick={handleConfirm}>Confirm</button>
+                <button style={buttonStyle} onClick={handleAddBalance}>Confirm</button>
             </Modal>
         </div>
     );
