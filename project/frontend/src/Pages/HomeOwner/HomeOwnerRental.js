@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
+
 Modal.setAppElement('#root')
 const HomeOwnerRental = () => {
     const [rentalType, setRentalType] = useState('Room');
@@ -27,6 +29,8 @@ const HomeOwnerRental = () => {
     ]);
     const [selectedRentalId, setSelectedRentalId] = useState('');
 
+    const navigate = useNavigate();
+
 
     const openModal = () => {
         setIsOpen(true);
@@ -42,8 +46,8 @@ const HomeOwnerRental = () => {
 
     const handleDeleteRental = async () => {
         try {
-          await axios.delete(`http://localhost:8080/api/rental/${selectedRentalId}`);
-          // Perform any additional cleanup or actions after deletion
+          await axios.delete(`http://localhost:8080/api/rental/id=${selectedRentalId}`);
+          navigate('/homeowner-main-page');
         } catch (error) {
           console.error(error);
         }
