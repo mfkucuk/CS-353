@@ -247,6 +247,7 @@ const TravelerRental = () => {
       try {
         const res = await axios.get(`http://localhost:8080/api/rental/id=${index}`);
         setRentalData(res.data);
+        setComments(res.data.comments);
   
         if (res.data.type == 'Room') {
           const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${index}`);
@@ -262,6 +263,22 @@ const TravelerRental = () => {
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/qanda/rental_id=${index}`)
+      .then(res => {
+        let questions = []
+        let answers = []
+        res.data.forEach((qanda) => {
+          questions.push({"question": qanda.question, "username": qanda.askName});
+          answers.push({"answer": qanda.answer, "username": qanda.answerName});
+        });
+
+        setQuestions(questions);
+        setAnswers(answers);
+      })
   }, []);
   
 
@@ -290,7 +307,20 @@ const TravelerRental = () => {
     setQuestions((prevQuestions) => [...prevQuestions, newQuestion]);
     setAnswers((prevAnswers) => [...prevAnswers, '']);
     setAnswerInputs((prevInputs) => [...prevInputs, '']);
-    setNewQuestion('');
+    
+    axios
+    .post('http://localhost:8080/api/qanda', 
+    {
+          "askId": window.localStorage.getItem('user'),
+          'answerId': null,
+          "rentalId": index,
+          "askDate": null,
+          "answerDate": null,
+          "question": newQuestion,
+          "answer": null
+        }
+      )
+    .then(setNewQuestion(''));
   };
 
   const handleAnswerInputChange = (index, event) => {
@@ -358,7 +388,11 @@ const TravelerRental = () => {
             </div>
             <div>
               <p style={contentStyle}>Location: {rentalData.location}</p>
+              {rentalData.type == 'Room' ? (
+                <p style={contentStyle}>Capacity: {rentalData.capacity}</p>
+              ) : 
               <p style={contentStyle}>Room Count: {rentalData.roomCount}</p>
+              }
               <p style={contentStyle}>Rating: {rentalData.rating}/5</p>
               <p style={contentStyle}>
                 Available dates: {rentalData.availableStart} to {rentalData.availableEnd}
@@ -389,11 +423,10 @@ const TravelerRental = () => {
               <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
               <div style={commentSectionScrollStyle}>
                 <div style={commentSectionScrollInnerStyle}>
-                  {rentalData.comments.map((comment, index) => (
+                  {comments.map((comment, index) => (
                     <div key={index} style={commentStyle}>
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                        <p style={contentStyle}>{username}</p>
                       </div>
                       {comment}
                     </div>
@@ -410,16 +443,16 @@ const TravelerRental = () => {
                     <div key={index} style={questionStyle}>
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                        <p style={contentStyle}>{username}</p>
+                        <p style={contentStyle}>{question.username}</p>
                       </div>
-                      {question}
-                      {answers[index] && (
+                      {question.question}
+                      {answers[index].answer && (
                         <div style={answerStyle}>
                           <div style={homeownerStyle}>
                             <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                            <p style={contentStyle}>{username}</p>
+                            <p style={contentStyle}>{answers[index].username}</p>
                           </div>
-                          {answers[index]}
+                          {answers[index].answer}
                         </div>
                       )}
                     </div>

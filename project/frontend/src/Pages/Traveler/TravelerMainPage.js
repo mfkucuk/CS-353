@@ -12,7 +12,6 @@ const TravelerMainPage = () => {
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(window.localStorage.getItem('user'));
         axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) // Replace this with your actual API call
             .then(response => {
                                 setUserName(response.data.fullName);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import "./HomeOwnerReview.css";
 
 
@@ -240,6 +241,8 @@ const HomeOwnerReview = () => {
   const [username, setUsername] = useState('John Doe');
 
 
+  const location = useLocation();
+  const index = new URLSearchParams(location.search).get('index');
   // ...
 
  

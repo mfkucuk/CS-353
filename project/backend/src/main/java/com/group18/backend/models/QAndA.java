@@ -13,6 +13,8 @@ public class QAndA
     private UUID askId;
     private UUID answerId;
     private UUID rentalId;
+    private String askName;
+    private String answerName;
     private LocalDateTime askDate;
     private LocalDateTime answerDate;
     private String question;
@@ -22,6 +24,8 @@ public class QAndA
         @JsonProperty("askId")UUID askId,
         @JsonProperty("answerId")UUID answerId,
         @JsonProperty("rentalId")UUID rentalId,
+        @JsonProperty("askName") String askName,
+        @JsonProperty("answerName") String answerName,
         @JsonProperty("askDate")LocalDateTime askDate,
         @JsonProperty("answerDate")LocalDateTime answerDate,
         @JsonProperty("question")String question,
@@ -31,6 +35,8 @@ public class QAndA
         this.askId = askId;
         this.answerId = answerId;
         this.rentalId = rentalId;
+        this.askName = askName;
+        this.answerName = answerName;
         this.askDate = askDate;
         this.answerDate = answerDate;
         this.question = question;

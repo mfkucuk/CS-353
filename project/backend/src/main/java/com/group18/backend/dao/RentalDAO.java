@@ -23,4 +23,5 @@ public interface RentalDAO
     Optional<RentalList> getRentalsByTravelerId(UUID travelerId);
 
     List<Rental> getAllRentals();
+    List<Rental> getAllHomeownerRentals(UUID id);
 }

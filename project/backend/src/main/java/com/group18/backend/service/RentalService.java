@@ -47,4 +47,9 @@ public class RentalService
     {
         return rentalDAO.getAllRentals();
     }
+
+    public List<Rental> getAllHomeownerRentals(UUID id) 
+    {
+        return rentalDAO.getAllHomeownerRentals(id);
+    }
 }

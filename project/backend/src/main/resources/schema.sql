@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS SystemReport (
 );
 
 CREATE TABLE IF NOT EXISTS QAndA (
+    ask_name text,
+    answer_name text,
     ask_date date,
     answer_date date,
     question text,

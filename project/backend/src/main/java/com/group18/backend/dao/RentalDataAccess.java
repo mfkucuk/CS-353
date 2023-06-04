@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
+import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class RentalDataAccess implements RentalDAO {
 
     private final JdbcTemplate jdbcTemplate;
+    private final UserDataAccess userDataAccess;
 
     @Override
     public UUID insertRental(UUID id, Rental rental) {
@@ -36,10 +38,12 @@ public class RentalDataAccess implements RentalDAO {
         final String sql = "UPDATE Rental SET rating = ?, comments = ? WHERE rental_id = ?";
 
         Rental rental = getRentalById(rentalId).orElse(null);
+        User commenterUser = userDataAccess.getUserById(rental.getTravelerId()).orElse(null);
+        
         String[] comments = rental.getComments();
         String[] newComments = new String[comments.length+1];
         System.arraycopy(comments, 0, newComments, 0, comments.length);
-        newComments[newComments.length-1] = newComment;
+        newComments[newComments.length-1] = commenterUser.getFullName() + ": " + newComment;
         
         return jdbcTemplate.update(sql, new Object[] { newRating, newComments, rentalId });
     }
@@ -180,6 +184,54 @@ public class RentalDataAccess implements RentalDAO {
             );
         });
         return allRentals;
+    }
+
+    @Override
+    public List<Rental> getAllHomeownerRentals(UUID id) {
+        final String sql = "SELECT * FROM Rental";
+        
+        List<Rental> allRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
+            String restrictions = resultSet.getString("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
+            int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
+            return new Rental(
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                comments,
+                price,
+                travelerId,
+                homeownerId
+            );
+        });
+
+        List<Rental> homeownerRentals = new ArrayList<Rental>();
+
+        for (Rental rental : allRentals) {
+            if (rental.getHomeownerId().equals(id)) {
+                homeownerRentals.add(rental);
+            }
+        }
+
+        return homeownerRentals;
     }
 
 

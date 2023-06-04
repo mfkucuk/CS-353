@@ -40,6 +40,11 @@ public class RentalController {
         return rentalService.getAllRentals();
     }
 
+    @GetMapping(path = "homeowner={id}")
+    public List<Rental> getAllHomeownerRentals(@PathVariable("id") UUID homeownerId) {
+        return rentalService.getAllHomeownerRentals(homeownerId);
+    }
+
     @GetMapping("/traveler={id}")
     public RentalList getRentalsByTravelerId(@PathVariable("id") UUID travelerId) {
         return rentalService.getRentalsByTravelerId(travelerId).orElse(null);

@@ -5,110 +5,29 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const HomeOwnerMainPage = () => {
-    const [userInfo, setUserInfo] = useState({ name: '', balance: 0 });
+    const [userName, setUserName] = useState('');
+    const [userBalance, setUserBalance] = useState(0);
     const [searchInput, setSearchInput] = useState('');
     const [rentals, setRentals] = useState([]);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get('/api/user') // Replace this with your actual API call
-            .then(response => setUserInfo(response.data))
+        axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) // Replace this with your actual API call
+            .then(response => {
+                                setUserName(response.data.fullName);
+                                setUserBalance(response.data.balance);
+                                console.log(userName);
+                            })
             .catch(error => console.error(error));
     }, []);
 
     const handleLogoClick = () => setIsSideMenuOpen(!isSideMenuOpen);
 
     useEffect(() => {
-      // Mocked API response
-      const rentalsResponse = [
-          {
-              image: '/example_rental.jpg',
-              location: 'Ankara, Turkey',
-              availableDates: '10/05/2023 - 20/05/2023',
-              price: '$50/night',
-              ratings: 4.5
-          },
-          {
-              image: '/example_rental.jpg',
-              location: 'Istanbul, Turkey',
-              availableDates: '15/06/2023 - 30/06/2023',
-              price: '$80/night',
-              ratings: 4.0
-          },
-          {
-              image: '/example_rental.jpg',
-              location: 'Izmir, Turkey',
-              availableDates: '01/07/2023 - 10/07/2023',
-              price: '$60/night',
-              ratings: 4.3
-          },
-          {
-            image: '/example_rental.jpg',
-            location: 'Ankara, Turkey',
-            availableDates: '10/05/2023 - 20/05/2023',
-            price: '$50/night',
-            ratings: 4.5
-        },
-        {
-            image: '/example_rental.jpg',
-            location: 'Istanbul, Turkey',
-            availableDates: '15/06/2023 - 30/06/2023',
-            price: '$80/night',
-            ratings: 4.0
-        },
-        {
-            image: '/example_rental.jpg',
-            location: 'Izmir, Turkey',
-            availableDates: '01/07/2023 - 10/07/2023',
-            price: '$60/night',
-            ratings: 4.3
-        },
-        {
-          image: '/example_rental.jpg',
-          location: 'Ankara, Turkey',
-          availableDates: '10/05/2023 - 20/05/2023',
-          price: '$50/night',
-          ratings: 4.5
-      },
-      {
-          image: '/example_rental.jpg',
-          location: 'Istanbul, Turkey',
-          availableDates: '15/06/2023 - 30/06/2023',
-          price: '$80/night',
-          ratings: 4.0
-      },
-      {
-          image: '/example_rental.jpg',
-          location: 'Izmir, Turkey',
-          availableDates: '01/07/2023 - 10/07/2023',
-          price: '$60/night',
-          ratings: 4.3
-      },
-      {
-        image: 'example_rental.jpg',
-        location: 'Ankara, Turkey',
-        availableDates: '10/05/2023 - 20/05/2023',
-        price: '$50/night',
-        ratings: 4.5
-    },
-    {
-        image: '/example_rental.jpg',
-        location: 'Istanbul, Turkey',
-        availableDates: '15/06/2023 - 30/06/2023',
-        price: '$80/night',
-        ratings: 4.0
-    },
-    {
-        image: '/example_rental.jpg',
-        location: 'Izmir, Turkey',
-        availableDates: '01/07/2023 - 10/07/2023',
-        price: '$60/night',
-        ratings: 4.3
-    },
-          // ...more rentals...
-      ];
-
-      setRentals(rentalsResponse);
+      
+        axios.get(`http://localhost:8080/api/rental/homeowner=${window.localStorage.getItem('user')}`)
+            .then(res => setRentals(res.data))
+            .catch();
   }, []);
 
 
@@ -330,8 +249,8 @@ const handleAddRentalClick =() => {
                 </div>
                 <div style={userInfoStyle}>
                     <div style={userDetailStyle}>
-                        <div>{`Ege Ayan`}</div>
-                        <div>{`Balance: ${userInfo.balance}`}</div>
+                        <div>{userName}</div>
+                        <div>{`Balance: ${userBalance}`}</div>
                     </div>
                     <img src="/default_pp.png" alt="Profile" style={profilePicStyle} />
                     <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} onClick={() => setIsSideMenuOpen(true)}/>
@@ -340,13 +259,13 @@ const handleAddRentalClick =() => {
             </div>
             <div style={rentalsGridStyle}>
                 {rentals.map((rental, index) => (
-                    <Link to="/homeowner-review">
+                    <Link to={`/homeowner-review?index=${rental.rentalId}`}>
                     <div key={index} style={rentalCardStyle}>
-                        <img src={rental.image} alt="Rental" style={rentalImageStyle} />
+                        <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
-                        <div style={rentalInfoStyle}>{rental.availableDates}</div>
+                        <div style={rentalInfoStyle}>{rental.availableStart}-{rental.availableEnd}</div>
                         <div style={rentalInfoStyle}>{rental.price}</div>
-                        <div style={rentalInfoStyle}>{`Ratings: ${rental.ratings}`}</div>
+                        <div style={rentalInfoStyle}>{`Ratings: ${rental.rating}`}</div>
                     </div>
                     </Link>
                 ))}
