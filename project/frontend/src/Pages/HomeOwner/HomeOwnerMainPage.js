@@ -30,6 +30,14 @@ const HomeOwnerMainPage = () => {
             .catch();
   }, []);
 
+  const dateFormat = (dateFromSQL) => {
+
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(dateFromSQL).toLocaleDateString('en-GB', options);
+    return formattedDate;
+  }
+
+  
 
   const sideMenuStyle = {
     position: 'fixed',
@@ -214,6 +222,11 @@ const rentalInfoStyle = {
 const handleAddRentalClick =() => {
         navigate('/homeowner-rental');
     };
+const handleLogout =() => {
+        window.localStorage.removeItem('user');
+        navigate('/');
+    };
+
     return (  
       <div style={wrapperStyle}>
         {isSideMenuOpen && (
@@ -227,7 +240,7 @@ const handleAddRentalClick =() => {
                         <br></br>
                         <button onClick = {handleAddRentalClick}style={sideMenuButtonStyle}>Add Rental</button>
                         <br></br>
-                        <button style={sideMenuButtonStyle}>Logout</button>
+                        <button style={sideMenuButtonStyle} onClick={handleLogout} >Logout</button>
 
                     </div>
                 )}
@@ -253,8 +266,8 @@ const handleAddRentalClick =() => {
                     <div key={index} style={rentalCardStyle}>
                         <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
-                        <div style={rentalInfoStyle}>{rental.availableStart}-{rental.availableEnd}</div>
-                        <div style={rentalInfoStyle}>{rental.price}</div>
+                        <div style={rentalInfoStyle}>{dateFormat(rental.availableStart)}-{dateFormat(rental.availableEnd)}</div>
+                        <div style={rentalInfoStyle}>{rental.price}$</div>
                         <div style={rentalInfoStyle}>{`Ratings: ${rental.rating}`}</div>
                     </div>
                     </Link>

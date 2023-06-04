@@ -28,6 +28,7 @@ const HomeOwnerRental = () => {
 
     var today = new Date().toISOString().split("T")[0];
 
+
     const openModal = () => {
         setIsOpen(true);
     }
@@ -49,21 +50,26 @@ const HomeOwnerRental = () => {
     
         try {
             console.log(window.localStorage.getItem('user'));
-            const response = await axios.post('http://localhost:8080/api/rental', {
-                "location": location,
-                "availableStart": startDate,
-                "availableEnd": endDate,
-                "restrictions": restrictions,
-                "type": rentalType,
-                "rating": 0,
-                "features": selectedFeatures,
-                "comments": [],
-                "price": price,
-                "travelerId": "",
-                "homeownerId": window.localStorage.getItem('user')
-            });
-    
-            const newRentalId = response.data;
+            if(price < 0){
+                alert("Price cannot be a negative value!")
+            }
+            else
+            {
+                const response = await axios.post('http://localhost:8080/api/rental', {
+                    "location": location,
+                    "availableStart": startDate,
+                    "availableEnd": endDate,
+                    "restrictions": restrictions,
+                    "type": rentalType,
+                    "rating": 0,
+                    "features": selectedFeatures,
+                    "comments": [],
+                    "price": price,
+                    "travelerId": "",
+                    "homeownerId": window.localStorage.getItem('user')
+                });
+
+                const newRentalId = response.data;
             setRentalId(newRentalId);
     
             console.log(newRentalId);
@@ -79,12 +85,16 @@ const HomeOwnerRental = () => {
                     "roomCount": roomCount
                 });
             }
+            }
+            
+            
+    
+            
         } catch (error) {
             console.error(error);
         }
     };
     
-
 
 
     const buttonStyle = {
@@ -198,9 +208,9 @@ const HomeOwnerRental = () => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
                         <label style={labelStyle}>Available dates:</label>
-                        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} style={inputStyle} />
+                        <input type="date" value={startDate} min={today} max={endDate} onChange={e => setStartDate(e.target.value)} style={inputStyle} />
                         <span>to</span>
-                        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} style={inputStyle} />
+                        <input type="date" value={endDate} min={startDate} onChange={e => setEndDate(e.target.value)} style={inputStyle} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
                         <label style={labelStyle}>Restrictions:</label>
