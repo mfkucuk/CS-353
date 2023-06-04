@@ -75,18 +75,22 @@ const AdminProfile = () => {
             "adminId": window.localStorage.getItem('user')
           });
           console.log(response.data);
-          var content = String(response.data);
+            var text = String(response.data);
       
-          const pdf = new jsPDF();
-          pdf.text(content, 10, 10);
-          pdf.save("system_report.pdf");
-        } catch (error) {
-          console.error('Error generating report:', error);
-        }
-      };
+            const element = document.createElement('a');
+            const file = new Blob([text], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = "System Report";
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+                    } catch (error) {
+                    console.error('Error generating report:', error);
+                    }
+                };
 
 
-    const buttonStyle = {
+                const buttonStyle = {
         backgroundColor: '#FFBD59',
         color: 'black',
         padding: '10px 20px',
