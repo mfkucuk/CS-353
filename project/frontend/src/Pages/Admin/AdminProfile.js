@@ -136,6 +136,10 @@ const AdminProfile = () => {
         fontFamily: '"Arial", sans-serif'
     }
 
+    const handleLogout =() => {
+        window.localStorage.removeItem('user');
+        navigate('/');
+    };
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
@@ -163,6 +167,8 @@ const AdminProfile = () => {
                         <button style={buttonStyle} onClick={handleChangePhone}>Change Phone Number</button>
                     </div>
                     <button style={buttonStyle} onClick = {handlePasswordClick}>Change Password</button>
+                    <p></p>
+                    <button style={buttonStyle} onClick = {handleLogout}>Logout</button>
                     <p></p>
                 </div>
                 

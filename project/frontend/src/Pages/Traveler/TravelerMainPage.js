@@ -220,6 +220,10 @@ const rentalInfoStyle = {
 const handleRentalListClick =() => {
         navigate('/traveler-listing');
     };
+const handleLogout =() => {
+      window.localStorage.removeItem('user');
+      navigate('/');
+  };
 
     const handleSearch = () => {
       console.log(searchInput);
@@ -254,7 +258,7 @@ const handleRentalListClick =() => {
                         <br></br>
                         <button onClick= {handleRentalListClick}style={sideMenuButtonStyle}>Rental List</button>
                         <br></br>
-                        <button style={sideMenuButtonStyle}>Logout</button>
+                        <button style={sideMenuButtonStyle} onClick={handleLogout} >Logout</button>
                     </div>
                 )}
                 <Modal 
