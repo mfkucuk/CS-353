@@ -24,6 +24,6 @@ public class AdminService
 
     public Optional<AdminView> getAdminByID(UUID id) 
     {
-        return adminDAO.getHomeownerById(id);
+        return adminDAO.getAdminById(id);
     }
 }

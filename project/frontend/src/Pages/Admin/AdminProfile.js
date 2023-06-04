@@ -27,14 +27,19 @@ const AdminProfile = () => {
     }, []);
 
     const handleChangeEmail = () => {
-        axios.post('/api/user/email', { email })
+        axios.put('http://localhost:8080/api/user/a/id=' + window.localStorage.getItem('user') + '/email=' + email)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     };
 
     const handleChangePhone = () => {
-        axios.post('/api/user/phone', { phone })
-            .then(response => setUserInfo(response.data))
+        axios.put('http://localhost:8080/api/user/a/id=' + window.localStorage.getItem('user') + '/phone=' + phone)
+            .then(response =>{
+                console.log("print");
+                console.log(response.data);
+                console.log("print");
+                setUserInfo(response.data)
+            } )
             .catch(error => console.error(error));
     };
 

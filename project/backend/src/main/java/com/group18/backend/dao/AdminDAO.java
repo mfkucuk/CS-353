@@ -14,5 +14,5 @@ public interface AdminDAO {
         UUID id = UUID.randomUUID();
         return insertAdmin(id, admin);
     }    
-    Optional<AdminView> getHomeownerById(UUID id);
+    Optional<AdminView> getAdminById(UUID id);
 }

@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group18.backend.models.AdminView;
 import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
-import com.group18.backend.service.HomeownerService;
-import com.group18.backend.service.TravelerService;
 import com.group18.backend.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -88,5 +87,23 @@ public class UserController
     public HomeownerView updatePasswordByIdH(@PathVariable("id") UUID id, @PathVariable("password") String password) 
     {
         return userService.updatePasswordByIdH(id, password).orElse(null);
+    }
+
+    @PutMapping(path = "/a/id={id}/email={email}")
+    public AdminView updateEmailByIdA(@PathVariable("id") UUID id, @PathVariable("email") String email) 
+    {
+        return userService.updateEmailByIdA(id, email).orElse(null);
+    }
+
+    @PutMapping(path = "/a/id={id}/phone={phone}")
+    public AdminView updatePhoneByIdA(@PathVariable("id") UUID id, @PathVariable("phone") String phone) 
+    {
+        return userService.updatePhoneByIdA(id, phone).orElse(null);
+    }
+
+    @PutMapping(path = "/a/id={id}/password={password}")
+    public AdminView updatePasswordByIdA(@PathVariable("id") UUID id, @PathVariable("password") String password) 
+    {
+        return userService.updatePasswordByIdA(id, password).orElse(null);
     }
 }

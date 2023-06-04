@@ -27,7 +27,7 @@ public class AdminDataAccess implements AdminDAO {
     }
 
     @Override
-    public Optional<AdminView> getHomeownerById(UUID id)
+    public Optional<AdminView> getAdminById(UUID id)
     {
         final String sql = "SELECT * FROM AdminView WHERE user_id = ?";
 
