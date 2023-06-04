@@ -21,7 +21,7 @@ const AdminProfile = () => {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user'))
+        axios.get('http://localhost:8080/api/admin/id=' + window.localStorage.getItem('user'))
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     }, []);
@@ -110,11 +110,11 @@ const AdminProfile = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>
                 
-                    <p style={pStyle}>Name: {userInfo.name}</p>
+                    <p style={pStyle}>Name: {userInfo.fullName}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
                     <p style={pStyle}>TCK: {userInfo.tck}</p>
                     <p style={pStyle}>Date of Birth: {userInfo.dob}</p>
-                    <p style={pStyle}>Phone No: {userInfo.phone}</p>
+                    <p style={pStyle}>Phone No: {userInfo.phoneNumber}</p>
                 </div>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
