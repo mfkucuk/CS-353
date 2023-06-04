@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import "./TravelerRental.css";
+import { useNavigate } from 'react-router-dom';
+
 
 const contentStyle = {
     fontSize: '18px',
@@ -244,6 +246,7 @@ const TravelerRental = () => {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
   const [profileImage, setProfileImage] = useState('/default_pp.png');
   const [username, setUsername] = useState('John Doe');
+  const navigate = useNavigate();
 
 
   const location = useLocation();
@@ -389,7 +392,10 @@ const TravelerRental = () => {
 
   const handleRentButton = () => {
     axios.put(`http://localhost:8080/api/rental/id=${index}/traveler=${window.localStorage.getItem('user')}`)
-      .then();
+      .then(
+        alert('Rent Successful!'),
+        navigate('/traveler-main-page')
+      );
   }
 
   const dateFormat = (dateFromSQL) => {
