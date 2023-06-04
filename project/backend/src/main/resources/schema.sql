@@ -83,7 +83,7 @@ DROP VIEW IF EXISTS FlatView;
 DROP VIEW IF EXISTS RoomView;
 
 CREATE VIEW HomeownerView AS
-SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, U.is_admin, T.written_reviews, H.received_reviews, H.reputation
+SELECT U.user_id, U.full_name, U.e_mail, U.dob, U.TCK, U.password, U.phone_number, U.is_admin, T.written_reviews, T.balance, H.received_reviews, H.reputation
 FROM Users U
 JOIN Traveler T ON U.user_id = T.user_id
 JOIN Homeowner H ON U.user_id = H.user_id;
