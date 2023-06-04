@@ -9,6 +9,10 @@ CREATE TABLE IF NOT EXISTS Users (
     is_admin boolean
 );
 
+DROP INDEX IF EXISTS idx_unique_email;
+DROP INDEX IF EXISTS idx_unique_tck;
+DROP INDEX IF EXISTS idx_unique_phone_number;
+
 CREATE UNIQUE INDEX idx_unique_email ON Users (e_mail);
 CREATE UNIQUE INDEX idx_unique_tck ON Users (TCK);
 CREATE UNIQUE INDEX idx_unique_phone_number ON Users (phone_number);
@@ -114,16 +118,3 @@ CREATE VIEW RoomView AS
 SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, R.traveler_id, R.homeowner_id, Ro.capacity
 FROM Rental R
 JOIN Room Ro ON R.rental_id = Ro.rental_id;
-
--- CREATE TRIGGER TravelerBalanceDecrease
--- AFTER UPDATE OF traveler_id ON Rental
--- UPDATE Traveler
--- SET balance = balance - price
--- WHERE user_id = NEW.traveler_id;
-
--- CREATE TRIGGER HomeownerBalanceIncrease
--- AFTER UPDATE OF traveler_id ON Rental
--- UPDATE Traveler
--- SET balance = balance + price
--- WHERE user_id = NEW.homeowner_id;
-
