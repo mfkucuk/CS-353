@@ -233,6 +233,20 @@ const answerInputContainerStyle = {
     flexDirection: 'column', 
   };
 
+  const deleteButtonStyle = {
+    backgroundColor: '#FF0000',
+    color: '#FFFFFF',
+    padding: '10px 20px',
+    border: 'none',
+    fontWeight: 'bold',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    margin: '10px 0',
+    transition: 'all 0.3s ease',
+    marginLeft: '10px',
+  };
+
 const HomeOwnerReview = () => {
   const [rentalData, setRentalData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -251,6 +265,16 @@ const HomeOwnerReview = () => {
 
   const location = useLocation();
   const i = new URLSearchParams(location.search).get('index');
+
+  const handleDeleteRental = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/api/rental/id=${i}`);
+      // Handle successful deletion, e.g., redirect to a different page
+    } catch (error) {
+      // Handle error here
+      console.error(error);
+    }
+  };
 
   // const formatDateTime = (localDateTime) => {
   //   let year = localDateTime.getFullYear();
@@ -447,6 +471,9 @@ const HomeOwnerReview = () => {
             </div>
             </div>
         </div>
+        <button style={deleteButtonStyle} onClick={handleDeleteRental}>
+        Delete Rental
+        </button>
         <div style={switchContainerStyle}>
             <span style={switchLabelStyle}>Comments</span>
             <label className="switch" style={switchButtonStyle}>
