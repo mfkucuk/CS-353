@@ -26,4 +26,9 @@ public class FlatService
     {
         return flatDAO.getFlatById(id);
     }
+
+    public int deleteFlatById(UUID id) 
+    {
+        return flatDAO.deleteFlatById(id);
+    }
 }

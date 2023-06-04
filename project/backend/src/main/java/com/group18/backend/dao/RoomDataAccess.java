@@ -68,5 +68,12 @@ public class RoomDataAccess implements RoomDAO
         }, new Object[] { id });
         return Optional.ofNullable(room);
     }
+
+    @Override
+    public int deleteRoomById(UUID id) {
+        final String sql = "DELETE FROM Room WHERE rental_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { id });
+    }
     
 }

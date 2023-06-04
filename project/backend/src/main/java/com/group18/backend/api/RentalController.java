@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group18.backend.misc.FilterBody;
 import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
 import com.group18.backend.service.RentalService;
@@ -44,6 +45,11 @@ public class RentalController {
     @GetMapping(path = "homeowner={id}")
     public List<Rental> getAllHomeownerRentals(@PathVariable("id") UUID homeownerId) {
         return rentalService.getAllHomeownerRentals(homeownerId);
+    }
+
+    @GetMapping(path = "/filter")
+    public List<Rental> getFilteredRentals(@RequestBody FilterBody filterBody) {
+        return rentalService.getFilteredRentals(filterBody);
     }
 
     @GetMapping("/traveler={id}")

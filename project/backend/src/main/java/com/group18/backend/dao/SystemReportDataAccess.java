@@ -46,17 +46,17 @@ public class SystemReportDataAccess implements SystemReportDAO
 
         content += "3-) Top 10 rental ratings\n";
         for (RentalRating rentalRating : rentalRatings) {
-            content += rentalRating.getRentalId() + ": " + rentalRating.getRating() + ", Location: " + rentalRating.getLocation();
+            content += rentalRating.getRentalId() + ": " + rentalRating.getRating() + ", Location: " + rentalRating.getLocation() + "\n";
         } 
 
         content += "4-) Top 10 most expensive rentals\n";
         for (RentalPrice rentalPrice : mostRentalPrices) {
-            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation();
+            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation() + "\n";
         }
 
         content += "5-) Top 10 least expensive rentals\n";
         for (RentalPrice rentalPrice : leastRentalPrices) {
-            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation();
+            content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation() + "\n";
         }
 
         jdbcTemplate.update(sql, new Object[] { "SYSTEM REPORT", content, systemReport.getAdminId() });

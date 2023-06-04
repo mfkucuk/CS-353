@@ -26,4 +26,9 @@ public class FlatController {
     public FlatView getFlatById(@PathVariable("id") UUID id) {
         return flatService.getFlatById(id).orElse(null);
     }
+
+    @DeleteMapping(path = "/id={id}")
+    public int deleteFlatById(@PathVariable("id") UUID id) {
+        return flatService.deleteFlatById(id);
+    }
 }

@@ -26,4 +26,9 @@ public class RoomService
     {
         return roomDAO.getRoomById(id);
     }
+
+    public int deleteRoomById(UUID id) 
+    {
+        return roomDAO.deleteRoomById(id);
+    }
 }

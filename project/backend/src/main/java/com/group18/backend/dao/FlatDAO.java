@@ -11,4 +11,6 @@ public interface FlatDAO
     int insertFlat(UUID id, Flat flat);
 
     Optional<FlatView> getFlatById(UUID id);
+
+    int deleteFlatById(UUID id);
 }

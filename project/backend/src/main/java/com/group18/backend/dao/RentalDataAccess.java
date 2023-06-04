@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.backend.misc.FilterBody;
 import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
 import com.group18.backend.models.Traveler;
@@ -253,9 +254,51 @@ public class RentalDataAccess implements RentalDAO {
     }
 
     @Override
+    public List<Rental> getFilteredRentals(FilterBody filterBody) {
+        final String sql = "SELECT * FROM Rental WHERE type = ? AND (price > ? AND price < ?) AND (available_start > ? AND available_end < ?)";
+
+        List<Rental> filteredRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
+            String restrictions = resultSet.getString("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
+            int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
+            return new Rental(
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                comments,
+                price,
+                travelerId,
+                homeownerId
+            );
+        }, new Object[] { filterBody.getRentalType(), filterBody.getMinPrice(), filterBody.getMaxPrice(), 
+                    filterBody.getStartDate(), filterBody.getEndDate() });
+
+        return filteredRentals;
+    }
+
+    @Override
     public int deleteRentalById(UUID id) {
         final String sql = "DELETE FROM Rental WHERE rental_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { id });
     }
+
 }

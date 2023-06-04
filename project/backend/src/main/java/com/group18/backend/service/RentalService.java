@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.RentalDAO;
+import com.group18.backend.misc.FilterBody;
 import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
 
@@ -51,6 +52,11 @@ public class RentalService
     public List<Rental> getAllHomeownerRentals(UUID id) 
     {
         return rentalDAO.getAllHomeownerRentals(id);
+    }
+
+    public List<Rental> getFilteredRentals(FilterBody filterBody) 
+    {
+        return rentalDAO.getFilteredRentals(filterBody);
     }
     
     public int deleteRentalById(UUID id) 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./HomeOwnerReview.css";
 
 
@@ -266,10 +267,22 @@ const HomeOwnerReview = () => {
   const location = useLocation();
   const i = new URLSearchParams(location.search).get('index');
 
+  const navigate = useNavigate();
+
   const handleDeleteRental = async () => {
     try {
+
+      if (rentalData.type == 'Room') {
+        await axios.delete(`http://localhost:8080/api/room/id=${i}`);
+      }
+      else {
+        await axios.delete(`http://localhost:8080/api/flat/id=${i}`);
+      }
+
       await axios.delete(`http://localhost:8080/api/rental/id=${i}`);
+
       // Handle successful deletion, e.g., redirect to a different page
+      navigate('/homeowner-main-page');
     } catch (error) {
       // Handle error here
       console.error(error);

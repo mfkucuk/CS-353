@@ -26,4 +26,9 @@ public class RoomController {
     public RoomView getRoomById(@PathVariable("id") UUID id) {
         return roomService.getRoomById(id).orElse(null);
     }
+
+    @DeleteMapping("/id={id}")
+    public int deleteRoomById(@PathVariable("id") UUID id) {
+        return roomService.deleteRoomById(id);
+    }
 }

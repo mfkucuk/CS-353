@@ -11,4 +11,6 @@ public interface RoomDAO
     int insertRoom(UUID id, Room room);
 
     Optional<RoomView> getRoomById(UUID id);
+
+    int deleteRoomById(UUID id);
 }

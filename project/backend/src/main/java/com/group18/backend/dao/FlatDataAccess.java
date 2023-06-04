@@ -68,4 +68,11 @@ public class FlatDataAccess implements FlatDAO
         }, new Object[] { id });
         return Optional.ofNullable(flat);
     }
+
+    @Override
+    public int deleteFlatById(UUID id) {
+        final String sql = "DELETE FROM Flat WHERE rental_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { id });
+    }
 }
