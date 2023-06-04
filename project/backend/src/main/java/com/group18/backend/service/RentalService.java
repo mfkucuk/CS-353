@@ -58,6 +58,11 @@ public class RentalService
     {
         return rentalDAO.getFilteredRentals(filterBody);
     }
+
+    public List<Rental> searchRentalsByLocation(String location) 
+    {
+        return rentalDAO.searchRentalsByLocation(location);
+    }
     
     public int deleteRentalById(UUID id) 
     {

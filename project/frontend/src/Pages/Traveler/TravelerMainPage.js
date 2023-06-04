@@ -12,11 +12,11 @@ const TravelerMainPage = () => {
     const [rentals, setRentals] = useState([]);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
-    const [filterType, setFilterType] = useState("");
-const [minPrice, setMinPrice] = useState(0);
-const [maxPrice, setMaxPrice] = useState(0);
-const [startDate, setStartDate] = useState("");
-const [endDate, setEndDate] = useState("");
+    const [filterType, setFilterType] = useState('');
+const [minPrice, setMinPrice] = useState(0.0);
+const [maxPrice, setMaxPrice] = useState(0.0);
+const [startDate, setStartDate] = useState('');
+const [endDate, setEndDate] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
     useEffect(() => {
         axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) 
@@ -221,8 +221,25 @@ const handleRentalListClick =() => {
         navigate('/traveler-listing');
     };
 
+    const handleSearch = () => {
+      console.log(searchInput);
+      axios
+        .post('http://localhost:8080/api/rental/search', searchInput)
+        .then(res => setRentals(res.data));
+    }
+
     const handleSubmitFilter =() => {
-        setModalIsOpen(false);
+      axios
+        .post('http://localhost:8080/api/rental/filter', {
+          "rentalType": filterType,
+          "minPrice": minPrice,
+          "maxPrice": maxPrice,
+          "startDate": startDate,
+          "endDate": endDate
+        })
+        .then(res => setRentals(res.data));
+
+      setModalIsOpen(false);
     }
     return (  
       <div style={wrapperStyle}>
@@ -273,8 +290,8 @@ const handleRentalListClick =() => {
     <label>
       <input 
         type="checkbox"
-        checked={filterType === "room"}
-        onChange={() => setFilterType("room")}
+        checked={filterType === "Room"}
+        onChange={() => setFilterType("Room")}
         style={{
           margin: '0 10px',
           transform: 'scale(1.5)'
@@ -285,8 +302,8 @@ const handleRentalListClick =() => {
     <label>
       <input 
         type="checkbox"
-        checked={filterType === "flat"}
-        onChange={() => setFilterType("flat")}
+        checked={filterType === "Flat"}
+        onChange={() => setFilterType("Flat")}
         style={{
           margin: '0 10px',
           transform: 'scale(1.5)'
@@ -373,7 +390,7 @@ const handleRentalListClick =() => {
                             onChange={e => setSearchInput(e.target.value)} 
                             style={searchInputStyle}
                         />
-                        <button style={buttonStyle}>Search</button>
+                        <button style={buttonStyle} onClick={handleSearch}>Search</button>
                     </div>
                 </div>
                 <div style={userInfoStyle}>

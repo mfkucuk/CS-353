@@ -47,9 +47,14 @@ public class RentalController {
         return rentalService.getAllHomeownerRentals(homeownerId);
     }
 
-    @GetMapping(path = "/filter")
+    @PostMapping(path = "filter")
     public List<Rental> getFilteredRentals(@RequestBody FilterBody filterBody) {
         return rentalService.getFilteredRentals(filterBody);
+    }
+
+    @PostMapping(path = "search")
+    public List<Rental> searchRentalsByLocation(@RequestBody String location) {
+        return rentalService.searchRentalsByLocation(location);
     }
 
     @GetMapping("/traveler={id}")

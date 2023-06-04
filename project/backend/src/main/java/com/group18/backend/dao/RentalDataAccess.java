@@ -197,7 +197,7 @@ public class RentalDataAccess implements RentalDAO {
         List<Rental> filteredRentals = new ArrayList<>();
 
         for (Rental rental : allRentals) {
-            if (rental.getTravelerId() == null && rental.getAvailableEnd().isBefore(LocalDate.now())) {
+            if (rental.getTravelerId() == null && rental.getAvailableEnd().isAfter(LocalDate.now())) {
                 filteredRentals.add(rental);
             }
         }
@@ -295,10 +295,52 @@ public class RentalDataAccess implements RentalDAO {
     }
 
     @Override
+    public List<Rental> searchRentalsByLocation(String keyword) {
+        final String sql = "SELECT * FROM Rental WHERE location LIKE ?";
+
+        String newKeyword = keyword.substring(0, keyword.length()-1);
+
+        List<Rental> searchedRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
+            String restrictions = resultSet.getString("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
+            int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
+            return new Rental(
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                comments,
+                price,
+                travelerId,
+                homeownerId
+            );
+        }, new Object[] { "%" + newKeyword + "%" });
+        return searchedRentals;
+    }
+
+    @Override
     public int deleteRentalById(UUID id) {
         final String sql = "DELETE FROM Rental WHERE rental_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { id });
     }
+
 
 }

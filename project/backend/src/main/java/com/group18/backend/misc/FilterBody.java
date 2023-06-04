@@ -10,15 +10,15 @@ import lombok.Data;
 public class FilterBody 
 {
     private String rentalType;
-    private float minPrice;
-    private float maxPrice;
+    private Float minPrice;
+    private Float maxPrice;
     private LocalDate startDate;
     private LocalDate endDate;
     
     public FilterBody(
         @JsonProperty("rentalType") String rentalType,
-        @JsonProperty("minPrice") float minPrice,
-        @JsonProperty("maxPrice") float maxPrice,
+        @JsonProperty("minPrice") Float minPrice,
+        @JsonProperty("maxPrice") Float maxPrice,
         @JsonProperty("startDate") LocalDate startDate,
         @JsonProperty("endDate") LocalDate endDate
     )
