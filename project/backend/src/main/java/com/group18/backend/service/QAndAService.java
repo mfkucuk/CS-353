@@ -25,4 +25,9 @@ public class QAndAService
     {
         return qAndADAO.getQuestionsByRentalId(rentalId);
     }
+
+    public int addAnswer(QAndA qAndA) 
+    {
+        return qAndADAO.addAnswer(qAndA);
+    }
 }

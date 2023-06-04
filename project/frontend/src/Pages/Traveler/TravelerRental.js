@@ -13,7 +13,7 @@ const contentStyle = {
     fontSize: '14px',
     color: '#ffbd59',
     fontWeight: 'bold',
-    marginLeft: '50vw',
+    marginLeft: '10vw',
   };
 
   const buttonStyle = {
@@ -280,8 +280,30 @@ const TravelerRental = () => {
         let questions = []
         let answers = []
         res.data.forEach((qanda) => {
-          questions.push({"question": qanda.question, "username": qanda.askName, "date": qanda.askDate});
-          answers.push({"answer": qanda.answer, "username": qanda.answerName, "date": qanda.answerDate});
+          questions.push(
+            {
+              "question": qanda.question, 
+              "username": qanda.askName, 
+              "date": qanda.askDate.toLocaleString(
+                'en-GB', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+          })});
+          answers.push(
+            {
+              "answer": qanda.answer, 
+              "username": qanda.answerName, 
+              "date": qanda.answerDate.toLocaleString(
+                'en-GB', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+          })});
         });
 
         setQuestions(questions);
@@ -452,7 +474,7 @@ const TravelerRental = () => {
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                         <p style={contentStyle}>{question.username}</p>
-                        <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{question.askDate}</p>
+                        <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{question.date}</p>
                       </div>
                       {question.question}
                       {answers[index].answer && (
@@ -460,7 +482,7 @@ const TravelerRental = () => {
                           <div style={homeownerStyle}>
                             <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                             <p style={contentStyle}>{answers[index].username}</p>
-                            <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{answers[index].answerDate}</p>
+                            <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{answers[index].date}</p>
                           </div>
                           {answers[index].answer}
                         </div>

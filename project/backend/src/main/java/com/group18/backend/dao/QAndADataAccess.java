@@ -74,5 +74,13 @@ public class QAndADataAccess implements QAndADAO {
         }, new Object[] { id });
         return questions;
     }
+
+    @Override
+    public int addAnswer(QAndA qAndA) {
+        final String sql = "UPDATE QAndA SET answer = ?, answer_date = ? WHERE rental_id = ? AND traveler_id = ? AND ask_date = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { qAndA.getAnswer(), qAndA.getAnswerDate(), 
+            qAndA.getRentalId(), qAndA.getAskId(), qAndA.getAskDate() });
+    }
     
 }

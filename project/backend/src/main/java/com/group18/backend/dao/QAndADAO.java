@@ -11,5 +11,5 @@ public interface QAndADAO
 
     List<QAndA> getQuestionsByRentalId(UUID rentalId);
 
-    
+    int addAnswer(QAndA qAndA);
 }
