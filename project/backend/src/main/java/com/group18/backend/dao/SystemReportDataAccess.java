@@ -131,7 +131,7 @@ public class SystemReportDataAccess implements SystemReportDAO
 
     @Override
     public List<RentalPrice> getMostExpensiveRentals() {
-        final String sql = "SELECT rentalId, location, price FROM rental ORDER BY price DESC LIMIT 10";
+        final String sql = "SELECT rental_id, location, price FROM rental ORDER BY price DESC LIMIT 10";
 
         List<RentalPrice> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("rental_id"));
@@ -148,7 +148,7 @@ public class SystemReportDataAccess implements SystemReportDAO
 
     @Override
     public List<RentalPrice> getLeastExpensiveRentals() {
-        final String sql = "SELECT rentalId, location, price FROM rental ORDER BY price ASC LIMIT 10";
+        final String sql = "SELECT rental_id, location, price FROM rental ORDER BY price ASC LIMIT 10";
 
         List<RentalPrice> objects = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("rental_id"));
