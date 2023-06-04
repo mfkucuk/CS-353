@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal'; 
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 const AdminProfile = () => {
@@ -10,6 +11,7 @@ const AdminProfile = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false); // For modal
     const [title, setTitle] = useState(''); // For modal title
     const [selectedOption, setSelectedOption] = useState(''); // For selected report option
+    const navigate = useNavigate();
     const handleOpenModal = () => {
         setModalIsOpen(true);
     };
@@ -19,7 +21,7 @@ const AdminProfile = () => {
     };
 
     useEffect(() => {
-        axios.get('/api/user')
+        axios.get('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user'))
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     }, []);
@@ -49,6 +51,10 @@ const AdminProfile = () => {
                 // handle the response
             })
             .catch(error => console.error(error));
+    };
+
+    const handlePasswordClick = () => {
+        navigate('/reset-password');
     };
 
     const buttonStyle = {
@@ -106,7 +112,7 @@ const AdminProfile = () => {
                         <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} style={inputStyle} />
                         <button style={buttonStyle} onClick={handleChangePhone}>Change Phone Number</button>
                     </div>
-                    <button style={buttonStyle}>Change Password</button>
+                    <button style={buttonStyle} onClick = {handlePasswordClick}>Change Password</button>
                     <p></p>
                     <button style={buttonStyle} onClick = {handleOpenModal}>Create System Report</button>
                 </div>

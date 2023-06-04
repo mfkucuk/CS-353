@@ -31,26 +31,32 @@ const ResetPassword = () => {
   const handleResetPassword = () => {
     if (password.length < 8) {
       setError('Password should be at least 8 characters long.');
+      setSuccess(false);
       return;
     }
 
     if (!/(?=.*[A-Z])/.test(password)) {
       setError('Password should contain at least one capital letter.');
+      setSuccess(false);
       return;
     }
 
     if (!/(?=.*\d)/.test(password)) {
       setError('Password should contain at least one number.');
+      setSuccess(false);
       return;
     }
 
     if (!/(?=.*[?.!@#$%^&*])/.test(password)) {
       setError('Password should contain at least one special character.');
+      setSuccess(false);
       return;
     }
 
     if (oldPassword !== userPassword){
       setError('Old password is wrong.')
+      setSuccess(false);
+      return;
     }
 
     if (password !== reenterPassword) {
@@ -67,6 +73,7 @@ const ResetPassword = () => {
       })
       .catch((error) => {
         setError('An error occurred while resetting the password.');
+        setSuccess(false);
         console.error(error);
       });
   };
@@ -102,7 +109,7 @@ const ResetPassword = () => {
         />
         <br />
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>Password reset successful!</p>}
+        {success && <p style={{ color: 'green'}}>Password reset successful!</p>}
         <button  style={{ backgroundColor: '#FFBD59', color: '#4B0082', border: 'none', padding: '0.5rem 1rem', borderRadius: '20px', marginTop: '10px', marginBottom: '10px'}} onClick={handleResetPassword}>Reset Password</button>
         <br/>
       </div>
