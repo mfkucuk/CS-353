@@ -1,7 +1,6 @@
 package com.group18.backend.dao;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group18.backend.misc.DataToLocalDateTime;
 import com.group18.backend.models.QAndA;
 import com.group18.backend.models.Rental;
 import com.group18.backend.models.User;
@@ -33,7 +31,7 @@ public class QAndADataAccess implements QAndADAO {
         User homeowner = userDataAccess.getUserById(rental.getHomeownerId()).orElse(null);
 
         return jdbcTemplate.update(sql, new Object[] { traveler.getFullName(), homeowner.getFullName(), 
-            LocalDateTime.now(), qAndA.getQuestion(), qAndA.getAskId(), homeowner.getUserId(), qAndA.getRentalId() });
+            LocalDate.now(), qAndA.getQuestion(), qAndA.getAskId(), homeowner.getUserId(), qAndA.getRentalId() });
     }
 
     @Override
@@ -48,14 +46,9 @@ public class QAndADataAccess implements QAndADAO {
             String askName = resultSet.getString("ask_name");
             String answerName = resultSet.getString("answer_name");
 
-            LocalDateTime askDate = DataToLocalDateTime.Convert(resultSet.getDate("ask_date"));
+            LocalDate askDate = resultSet.getDate("ask_date").toLocalDate();
 
-            Date sqlAnswerDate = resultSet.getDate("answer_date");
-            LocalDateTime answerDate = null;
-
-            if (sqlAnswerDate != null) {
-                answerDate = DataToLocalDateTime.Convert(sqlAnswerDate);
-            } 
+            LocalDate answerDate = resultSet.getDate("answer_date").toLocalDate();
 
             String question = resultSet.getString("question");
             String answer = resultSet.getString("answer");
@@ -77,10 +70,10 @@ public class QAndADataAccess implements QAndADAO {
 
     @Override
     public int addAnswer(QAndA qAndA) {
-        final String sql = "UPDATE QAndA SET answer = ?, answer_date = ? WHERE rental_id = ? AND traveler_id = ? AND ask_date = ?";
+        final String sql = "UPDATE QAndA SET answer = ?, answer_date = ? WHERE rental_id = ? AND ask_id = ? AND question = ? AND ask_date = ?";
 
-        return jdbcTemplate.update(sql, new Object[] { qAndA.getAnswer(), qAndA.getAnswerDate(), 
-            qAndA.getRentalId(), qAndA.getAskId(), qAndA.getAskDate() });
+        return jdbcTemplate.update(sql, new Object[] { qAndA.getAnswer(), LocalDate.now(), 
+            qAndA.getRentalId(), qAndA.getAskId(), qAndA.getQuestion(), qAndA.getAskDate() });
     }
     
 }

@@ -10,6 +10,8 @@ public interface TravelerDAO {
 
     int insertTraveler(UUID id, Traveler traveler);
 
+    Optional<Traveler> getTravelerByUserId(UUID userId);
+
     Optional<TravelerView> getTravelerById(UUID id);
     Optional<TravelerView> updateBalanceById(UUID id, Float balance);
 }

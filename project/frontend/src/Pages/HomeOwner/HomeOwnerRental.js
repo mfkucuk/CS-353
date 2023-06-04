@@ -57,7 +57,7 @@ const HomeOwnerRental = () => {
                 "rating": 0,
                 "features": selectedFeatures,
                 "comments": [],
-                "price": 1000.0,
+                "price": price,
                 "travelerId": "",
                 "homeownerId": window.localStorage.getItem('user')
             });

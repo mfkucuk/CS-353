@@ -1,7 +1,6 @@
 package com.group18.backend.api;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
-import com.group18.backend.service.HomeownerService;
-import com.group18.backend.service.TravelerService;
 import com.group18.backend.service.UserService;
 
 import lombok.RequiredArgsConstructor;

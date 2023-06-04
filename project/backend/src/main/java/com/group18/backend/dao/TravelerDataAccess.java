@@ -68,5 +68,22 @@ public class TravelerDataAccess implements TravelerDAO{
         return Optional.ofNullable(traveler);
     }
 
+    @Override
+    public Optional<Traveler> getTravelerByUserId(UUID userId) {
+        final String sql = "SELECT * FROM Traveler WHERE user_id = ?";
+
+        Traveler traveler = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("user_id"));
+            String writtenReviews = resultSet.getString("written_reviews");
+            Float balance = resultSet.getFloat("balance");
+            return new Traveler(
+                id,
+                writtenReviews,
+                balance
+            );
+        }, new Object[] { userId });
+        return Optional.ofNullable(traveler);
+    }
+
     
 }

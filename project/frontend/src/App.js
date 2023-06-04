@@ -6,7 +6,6 @@ import AdminProfile from './Pages/Admin/AdminProfile';
 import TravelerMainPage from './Pages/Traveler/TravelerMainPage';
 import Login from './Pages/Common/Login';
 import Register from './Pages/Common/Register';
-import ResetPasswordEmail from './Pages/Common/ResetPasswordEmail';
 import ResetPassword from './Pages/Common/ResetPassword';
 import TravelerRental from './Pages/Traveler/TravelerRental';
 import TravelerListing from './Pages/Traveler/TravelerListing';
@@ -21,7 +20,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/reset-password-email" element={<ResetPasswordEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/homeowner-profile" element={<HomeOwnerProfile />} />
         <Route path="/traveler-profile" element={<TravelerProfile />} />

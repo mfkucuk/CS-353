@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
+import com.group18.backend.models.Traveler;
 import com.group18.backend.models.User;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class RentalDataAccess implements RentalDAO {
 
     private final JdbcTemplate jdbcTemplate;
     private final UserDataAccess userDataAccess;
+    private final TravelerDataAccess travelerDataAccess;
 
     @Override
     public UUID insertRental(UUID id, Rental rental) {
@@ -51,6 +53,13 @@ public class RentalDataAccess implements RentalDAO {
     @Override
     public int updateTravelerIdByRentalId(UUID rentalId, UUID travelerId) {
         final String sql = "UPDATE Rental SET traveler_id = ? WHERE rental_id = ?";
+
+        Rental rental = getRentalById(rentalId).orElse(null);
+        Traveler traveler = travelerDataAccess.getTravelerByUserId(travelerId).orElse(null);
+        Traveler homeowner = travelerDataAccess.getTravelerByUserId(rental.getHomeownerId()).orElse(null);
+
+        travelerDataAccess.updateBalanceById(travelerId, traveler.getBalance() - rental.getPrice());
+        travelerDataAccess.updateBalanceById(homeowner.getUserId(), homeowner.getBalance() + rental.getPrice());
 
         return jdbcTemplate.update(sql, new Object[] { travelerId, rentalId });
     }
@@ -183,7 +192,16 @@ public class RentalDataAccess implements RentalDAO {
                 homeownerId
             );
         });
-        return allRentals;
+
+        List<Rental> filteredRentals = new ArrayList<>();
+
+        for (Rental rental : allRentals) {
+            if (rental.getTravelerId() == null && rental.getAvailableEnd().isBefore(LocalDate.now())) {
+                filteredRentals.add(rental);
+            }
+        }
+
+        return filteredRentals;
     }
 
     @Override
