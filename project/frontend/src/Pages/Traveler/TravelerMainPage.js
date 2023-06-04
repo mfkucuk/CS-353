@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'; // import close icon
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 const TravelerMainPage = () => {
     const [userName, setUserName] = useState('');
     const [userBalance, setUserBalance] = useState(0);
@@ -11,6 +12,12 @@ const TravelerMainPage = () => {
     const [rentals, setRentals] = useState([]);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const [filterType, setFilterType] = useState("");
+const [minPrice, setMinPrice] = useState(0);
+const [maxPrice, setMaxPrice] = useState(0);
+const [startDate, setStartDate] = useState("");
+const [endDate, setEndDate] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     useEffect(() => {
         axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) // Replace this with your actual API call
             .then(response => {
@@ -213,6 +220,10 @@ const rentalInfoStyle = {
 const handleRentalListClick =() => {
         navigate('/traveler-listing');
     };
+
+    const handleSubmitFilter =() => {
+        setModalIsOpen(false);
+    }
     return (  
       <div style={wrapperStyle}>
         {isSideMenuOpen && (
@@ -229,11 +240,131 @@ const handleRentalListClick =() => {
                         <button style={sideMenuButtonStyle}>Logout</button>
                     </div>
                 )}
+                <Modal 
+  isOpen={modalIsOpen}
+  onRequestClose={() => setModalIsOpen(false)}
+  style={{
+    overlay: {
+      zIndex: 1002,
+    },
+    content: {
+      backgroundColor: '#FFBD59',
+      color: '#4b0082',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      width: '40%',
+      height: '70%',
+      padding: '20px',
+      borderRadius: '10px',
+      outline: 'none',
+      fontSize: '1.2em',
+      lineHeight: '1.5',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  }}
+>
+  <h2>Filter</h2>
+  <div style={{marginBottom: '20px'}}>
+    <label>
+      <input 
+        type="checkbox"
+        checked={filterType === "room"}
+        onChange={() => setFilterType("room")}
+        style={{
+          margin: '0 10px',
+          transform: 'scale(1.5)'
+        }}
+      /> 
+      Room
+    </label>
+    <label>
+      <input 
+        type="checkbox"
+        checked={filterType === "flat"}
+        onChange={() => setFilterType("flat")}
+        style={{
+          margin: '0 10px',
+          transform: 'scale(1.5)'
+        }}
+      /> 
+      Flat
+    </label>
+  </div>
+  <div style={{marginBottom: '20px'}}>
+    Price Range: 
+    <input 
+      type="number" 
+      value={minPrice} 
+      onChange={e => setMinPrice(e.target.value)} 
+      style={{
+        margin: '0 10px',
+        padding: '5px',
+        borderRadius: '5px'
+      }}
+    />
+    -
+    <input 
+      type="number" 
+      value={maxPrice} 
+      onChange={e => setMaxPrice(e.target.value)} 
+      style={{
+        margin: '0 10px',
+        padding: '5px',
+        borderRadius: '5px'
+      }}
+    />
+  </div>
+  <div style={{marginBottom: '20px'}}>
+    Date Range: 
+    <input 
+      type="date" 
+      value={startDate} 
+      onChange={e => setStartDate(e.target.value)} 
+      style={{
+        margin: '0 10px',
+        padding: '5px',
+        borderRadius: '5px'
+      }}
+    />
+    -
+    <input 
+      type="date" 
+      value={endDate} 
+      onChange={e => setEndDate(e.target.value)} 
+      style={{
+        margin: '0 10px',
+        padding: '5px',
+        borderRadius: '5px'
+      }}
+    />
+  </div>
+  <button 
+    style={{
+      alignSelf: 'center', 
+      backgroundColor: '#4b0082', 
+      color: '#FFBD59', 
+      padding: '10px 20px', 
+      borderRadius: '5px',
+      border: 'none',
+      fontSize: '1em',
+      cursor: 'pointer'
+    }} onClick={handleSubmitFilter}
+  >
+    Confirm
+  </button>
+</Modal>
+
+
         <div>
             <div style={topBarStyle}>
                 <img src="/bilkent_logo.png" alt="Logo" style={logoStyle} />
                 <div style={filterSearchContainerStyle}>
-                    <button style={buttonStyle}>Filter</button>
+                    <button onClick = {() => setModalIsOpen(true)} style={buttonStyle}>Filter</button>
                     <div style={searchContainerStyle}>
                         <input 
                             type="text" 
