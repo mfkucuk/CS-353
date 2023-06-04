@@ -100,7 +100,7 @@ const rentalInfoStyle = {
         height: '250px',
         backgroundColor: '#4b0082',
         color: 'white',
-        padding: '0 20px',
+        padding: '0 10px',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -235,17 +235,7 @@ const handleAddRentalClick =() => {
             <div style={topBarStyle}>
                 <img src="/bilkent_logo.png" alt="Logo" style={logoStyle} />
                 <div style={filterSearchContainerStyle}>
-                    <button style={buttonStyle}>Filter</button>
-                    <div style={searchContainerStyle}>
-                        <input 
-                            type="text" 
-                            placeholder="Search..." 
-                            value={searchInput} 
-                            onChange={e => setSearchInput(e.target.value)} 
-                            style={searchInputStyle}
-                        />
-                        <button style={buttonStyle}>Search</button>
-                    </div>
+                    <h1 style={{ color: '#FFBD59'}}>Current Rentals</h1>
                 </div>
                 <div style={userInfoStyle}>
                     <div style={userDetailStyle}>
