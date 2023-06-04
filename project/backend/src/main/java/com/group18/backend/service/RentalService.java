@@ -23,9 +23,9 @@ public class RentalService
         return rentalDAO.insertRental(rental);
     }
 
-    public int updateRatingById(UUID id, int newRating) 
+    public int updateRatingAndCommentsById(UUID id, int newRating, String newComment) 
     {
-        return rentalDAO.updateRatingById(id, newRating);
+        return rentalDAO.updateRatingAndCommentsById(id, newRating, newComment);
     }
 
     public int updateTravelerIdByRentalId(UUID rentalId, UUID travelerId) 

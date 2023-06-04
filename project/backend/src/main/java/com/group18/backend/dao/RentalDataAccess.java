@@ -32,10 +32,16 @@ public class RentalDataAccess implements RentalDAO {
     }
 
     @Override
-    public int updateRatingById(UUID rentalId, int newRating) {
-        final String sql = "UPDATE Rental SET rating = ? WHERE rental_id = ?";
+    public int updateRatingAndCommentsById(UUID rentalId, int newRating, String newComment) {
+        final String sql = "UPDATE Rental SET rating = ?, comments = ? WHERE rental_id = ?";
 
-        return jdbcTemplate.update(sql, new Object[] { newRating, rentalId });
+        Rental rental = getRentalById(rentalId).orElse(null);
+        String[] comments = rental.getComments();
+        String[] newComments = new String[comments.length+1];
+        System.arraycopy(comments, 0, newComments, 0, comments.length);
+        newComments[newComments.length-1] = newComment;
+        
+        return jdbcTemplate.update(sql, new Object[] { newRating, newComments, rentalId });
     }
     
     @Override

@@ -45,13 +45,15 @@ public class RentalController {
         return rentalService.getRentalsByTravelerId(travelerId).orElse(null);
     }
 
-    @PutMapping(path = "/id={id}/rating={newRating}")
-    public int updateRatingById(@PathVariable("id") UUID id, @PathVariable("newRating") int newRating) {
-        return rentalService.updateRatingById(id, newRating);
+    @PutMapping(path = "/id={id}/rating={newRating}/comment={newComment}")
+    public int updateRatingById(@PathVariable("id") UUID id, @PathVariable("newRating") int newRating, @PathVariable("newComment") String newComment) {
+        return rentalService.updateRatingAndCommentsById(id, newRating, newComment);
     }
 
     @PutMapping(path = "/id={rental_id}/traveler={id}")
     public int updateTravelerIdByRentalId(@PathVariable("rental_id") UUID rentalId, @PathVariable("id") UUID travelerId) {
         return rentalService.updateTravelerIdByRentalId(rentalId, travelerId);
     }
+
+
 }

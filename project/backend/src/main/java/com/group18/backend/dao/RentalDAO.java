@@ -16,8 +16,8 @@ public interface RentalDAO
         return insertRental(id, rental);
     }
 
-    int updateRatingById(UUID rentalId, int newRating);
     int updateTravelerIdByRentalId(UUID rentalId, UUID travelerId);
+    int updateRatingAndCommentsById(UUID rentalId, int newRating, String newComment);
 
     Optional<Rental> getRentalById(UUID rentalId);
     Optional<RentalList> getRentalsByTravelerId(UUID travelerId);
