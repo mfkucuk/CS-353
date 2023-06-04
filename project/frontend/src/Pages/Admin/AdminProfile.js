@@ -64,6 +64,21 @@ const AdminProfile = () => {
         marginLeft: '10px'
     }
 
+    const buttonStyle2 = {
+        backgroundColor: '#FFBD59',
+        color: '#4b0082',
+        padding: '20px 40px',
+        border: 'none',
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '25px',
+        margin: '40px 0',
+        transition: 'all 0.3s ease',
+        marginLeft: '10px'
+        
+    }
+
     const inputStyle = {
         margin: '10px 0',
         height: '40px',
@@ -106,10 +121,10 @@ const AdminProfile = () => {
                     </div>
                     <button style={buttonStyle}>Change Password</button>
                     <p></p>
-                    <button style={buttonStyle} onClick = {handleOpenModal}>Create System Report</button>
                 </div>
+                
             </div>
-            
+            <button style={buttonStyle2} onClick = {handleOpenModal}>Create System Report</button>
 
         <Modal 
             isOpen={modalIsOpen}
