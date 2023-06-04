@@ -8,6 +8,12 @@ const ResetPassword = () => {
   const [reenterPassword, setReenterPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  
+
+  const handleReturn = () => {
+
+  } 
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user'))
         .then(response => setUserInfo(response.data))
@@ -110,7 +116,9 @@ const ResetPassword = () => {
         <br />
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green'}}>Password reset successful!</p>}
-        <button  style={{ backgroundColor: '#FFBD59', color: '#4B0082', border: 'none', padding: '0.5rem 1rem', borderRadius: '20px', marginTop: '10px', marginBottom: '10px'}} onClick={handleResetPassword}>Reset Password</button>
+        <button  style={{ backgroundColor: '#FFBD59', width: "8vw", color: '#4B0082', border: 'none', padding: '0.5rem 1rem', borderRadius: '20px', marginTop: '20px', marginBottom: '10px'}} onClick={handleResetPassword}>Reset Password</button>
+        <br/>
+        <button  style={{ backgroundColor: '#FFBD59', width: "8vw", color: '#4B0082', border: 'none', padding: '0.5rem 1rem', borderRadius: '20px', marginTop: '5px', marginBottom: '10px'}} onClick={handleReturn}>Return</button>
         <br/>
       </div>
     </div>

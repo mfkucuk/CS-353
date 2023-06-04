@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal'; 
 import { useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { saveAs } from 'file-saver';
+
+
 
 Modal.setAppElement('#root');
 const AdminProfile = () => {
@@ -62,6 +67,23 @@ const AdminProfile = () => {
         navigate('/reset-password');
     };
 
+    const generateReport = () => {
+        html2canvas(document.getElementById('report-content')).then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      
+          // Save the PDF document as a Blob
+          const pdfBlob = pdf.output('blob');
+      
+          // Use the FileSaver.js library to save the Blob as a file
+          saveAs(pdfBlob, 'system_report.pdf');
+        });
+      };
+
+
     const buttonStyle = {
         backgroundColor: '#FFBD59',
         color: 'black',
@@ -81,7 +103,7 @@ const AdminProfile = () => {
         padding: '20px 40px',
         border: 'none',
         fontWeight: 'bold',
-        borderRadius: '5px',
+        borderRadius: '60px',
         cursor: 'pointer',
         fontSize: '25px',
         margin: '40px 0',
@@ -148,7 +170,7 @@ const AdminProfile = () => {
                     bottom: 'auto', 
                     marginRight: '-50%', 
                     transform: 'translate(-50%, -50%)',
-                    backgroundColor: '#ffff00', // yellow background
+                    backgroundColor: '#FFBD59', // yellow background
                     padding: '20px',
                     borderRadius: '10px',
                     display: 'flex',
@@ -157,23 +179,8 @@ const AdminProfile = () => {
                 }
             }}
         >
-            <h2 style={{ color: '#800080' }}>Create System Report</h2> {/* purple title */}
-            <input 
-                type="text" 
-                value={title} 
-                onChange={e => setTitle(e.target.value)} 
-                placeholder="Title" 
-                style={{ width: '100%', padding: '10px', marginBottom: '20px', borderRadius: '5px' }} 
-            />
-            <div style={{ marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
-                <input type="radio" id="option1" name="reportOption" value="option1" onChange={e => setSelectedOption(e.target.value)} />
-                <label htmlFor="option1">Top 10 rentals with highest rate</label>
-            </div>
-            <div style={{ marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
-                <input type="radio" id="option2" name="reportOption" value="option2" onChange={e => setSelectedOption(e.target.value)} />
-                <label htmlFor="option2">Top 5 popular homeowners</label>
-            </div>
-            <button style={{...buttonStyle, backgroundColor: '#800080', color: '#ffff00', alignSelf: 'center' }} onClick={handleCreateReport}>Create</button>
+            <h2 style={{ color: '#4B0082' }}>System Report Generated</h2> {/* purple title */}
+            <button style={{...buttonStyle2, backgroundColor: '#4b0082', color: '#FFBD59', alignSelf: 'center' }} onClick={generateReport}>Download</button>
         </Modal>
         </div>
     );
