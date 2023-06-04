@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 
@@ -12,6 +13,7 @@ const RegisterPage = () => {
   const [tck, setTck] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   var today = new Date().toISOString().split("T")[0];
 
@@ -48,7 +50,8 @@ const RegisterPage = () => {
         
       });
 
-      alert("Registered successfully!"); 
+      alert("Registered successfully!");
+      navigate('/');
     } catch (error) {
         alert('Email, TCK and phone number must be unique!');
     }

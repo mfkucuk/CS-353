@@ -37,6 +37,13 @@ const [endDate, setEndDate] = useState('');
             .catch();
   }, []);
 
+  const dateFormat = (dateFromSQL) => {
+
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(dateFromSQL).toLocaleDateString('en-GB', options);
+    return formattedDate;
+  }
+
   const sideMenuStyle = {
     position: 'fixed',
     top: 0,
@@ -413,8 +420,8 @@ const handleLogout =() => {
                     <div key={index} style={rentalCardStyle}>
                         <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
-                        <div style={rentalInfoStyle}>{rental.availableStart}-{rental.availableEnd}</div>
-                        <div style={rentalInfoStyle}>{rental.price}</div>
+                        <div style={rentalInfoStyle}>{dateFormat(rental.availableStart)}-{dateFormat(rental.availableEnd)}</div>
+                        <div style={rentalInfoStyle}>{rental.price}$</div>
                         <div style={rentalInfoStyle}>{`Ratings: ${rental.rating}`}</div>
                     </div>
                     </Link>

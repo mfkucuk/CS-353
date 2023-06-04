@@ -1,5 +1,6 @@
 package com.group18.backend.dao;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -48,7 +49,13 @@ public class QAndADataAccess implements QAndADAO {
 
             LocalDate askDate = resultSet.getDate("ask_date").toLocalDate();
 
-            LocalDate answerDate = resultSet.getDate("answer_date").toLocalDate();
+            Date sqlAnswerDate = resultSet.getDate("answer_date");
+
+            LocalDate answerDate = null;
+            
+            if(sqlAnswerDate != null){
+                answerDate = sqlAnswerDate.toLocalDate();
+            }
 
             String question = resultSet.getString("question");
             String answer = resultSet.getString("answer");
