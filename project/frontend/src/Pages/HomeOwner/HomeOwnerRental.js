@@ -43,7 +43,7 @@ const HomeOwnerRental = () => {
     const handleDeleteRental = async () => {
         try {
           await axios.delete(`http://localhost:8080/api/rental/${selectedRentalId}`);
-          // Perform any additional cleanup or actions after deletion
+     
         } catch (error) {
           console.error(error);
         }
@@ -86,8 +86,8 @@ const HomeOwnerRental = () => {
                     "roomCount": roomCount
                 });
             }
-            setSelectedRentalId(newRentalId); // Set the selected rental ID for deletion
-            setIsOpen(true); // Open the delete confirmation modal
+            setSelectedRentalId(newRentalId); 
+            setIsOpen(true); 
         } catch (error) {
             console.error(error);
         }

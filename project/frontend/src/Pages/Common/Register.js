@@ -28,7 +28,6 @@ const RegisterPage = () => {
     }
 
     try {
-      // Make a POST request to register the user
       const response = await axios.post('http://localhost:8080/api/user', {
         // name,
         // email,
@@ -45,7 +44,7 @@ const RegisterPage = () => {
         
       });
 
-      console.log(response.data); // Handle the response data as needed
+      console.log(response.data); 
     } catch (error) {
       console.error(error);
     }

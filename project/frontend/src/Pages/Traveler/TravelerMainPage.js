@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AiOutlineClose } from 'react-icons/ai'; // import close icon
+import { AiOutlineClose } from 'react-icons/ai'; 
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ const [startDate, setStartDate] = useState("");
 const [endDate, setEndDate] = useState("");
     const [modalIsOpen, setModalIsOpen] = useState(false);
     useEffect(() => {
-        axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) // Replace this with your actual API call
+        axios.get('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') ) 
             .then(response => {
                                 setUserName(response.data.fullName);
                                 setUserBalance(response.data.balance);
@@ -75,7 +75,7 @@ const sideMenuButtonStyle = {
     gridTemplateColumns: 'repeat(3, 1fr)',
     gap: '20px',
     padding: '20px',
-    marginTop: '200px', // offset for the top bar
+    marginTop: '200px', 
 };
 
 const rentalCardStyle = {
@@ -177,13 +177,13 @@ const rentalInfoStyle = {
         width: '100px',
         height: '100px',
        
-        borderRadius: '50%', // Added for smooth edges
-        marginLeft: '30px' // Added some extra margin
+        borderRadius: '50%', 
+        marginLeft: '30px' 
     };
 
     const filterSearchContainerStyle = {
       display: 'flex',
-      justifyContent: 'center', // Add this
+      justifyContent: 'center', 
       alignItems: 'center',
       marginTop: 'auto',
       marginBottom: '20px',
@@ -207,8 +207,8 @@ const rentalInfoStyle = {
         cursor: 'pointer'
     };
     const wrapperStyle = {
-      backgroundColor: '#4b0082', // Set the background color here
-      minHeight: '100vh', // Ensures the color covers the entire height of the view
+      backgroundColor: '#4b0082', 
+      minHeight: '100vh', 
       color: 'white'
   };
   const handleSwitchClick = () => {

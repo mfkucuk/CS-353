@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Modal from 'react-modal'; // Import Modal
+import Modal from 'react-modal'; 
 import { useNavigate } from 'react-router-dom';
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root')
 const TravelerProfile = () => {
     const [userInfo, setUserInfo] = useState({});
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [modalIsOpen, setModalIsOpen] = useState(false); // New state for managing modal
-    const [paymentMethod, setPaymentMethod] = useState(''); // New state for managing selected payment method
+    const [modalIsOpen, setModalIsOpen] = useState(false); 
+    const [paymentMethod, setPaymentMethod] = useState(''); 
     const [amount, setAmount] = useState(0); 
     const navigate = useNavigate();
     useEffect(() => {
@@ -58,10 +57,7 @@ const TravelerProfile = () => {
     };
 
     const handleConfirm = () => {
-        // Here you can do something with the selected payment method
-        // For example, make an API request
-
-        // Close the modal after confirming
+        
         handleCloseModal();
     };
 
@@ -117,8 +113,8 @@ const TravelerProfile = () => {
 
     
     const selectStyle = {
-        ...inputStyle, // This will apply the same styles to the select as the input
-        appearance: 'none', // This will remove default browser styling
+        ...inputStyle, 
+        appearance: 'none', 
         background: '#fff',
         cursor: 'pointer',
     };
