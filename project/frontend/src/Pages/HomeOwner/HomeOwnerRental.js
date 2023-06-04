@@ -25,7 +25,6 @@ const HomeOwnerRental = () => {
         { name: 'Near Tourist Attractions', enabled: false },
         { name: 'Near public transport', enabled: false },
     ]);
-    const [selectedRentalId, setSelectedRentalId] = useState('');
 
 
     const openModal = () => {
@@ -40,14 +39,7 @@ const HomeOwnerRental = () => {
         setFeatureList(featureList.map((feature, i) => i === index ? { ...feature, enabled: !feature.enabled } : feature));
     }
 
-    const handleDeleteRental = async () => {
-        try {
-          await axios.delete(`http://localhost:8080/api/rental/${selectedRentalId}`);
-     
-        } catch (error) {
-          console.error(error);
-        }
-      };
+
 
     const handleConfirmRental = async () => {
         const selectedFeatures = featureList
@@ -86,13 +78,13 @@ const HomeOwnerRental = () => {
                     "roomCount": roomCount
                 });
             }
-            setSelectedRentalId(newRentalId); 
-            setIsOpen(true); 
         } catch (error) {
             console.error(error);
         }
     };
     
+
+
 
     const buttonStyle = {
         backgroundColor: '#FFBD59',
@@ -235,9 +227,8 @@ const HomeOwnerRental = () => {
                     </div>
                     <button style={buttonStyle} onClick={openModal}>Add Features</button>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
                     <button style={buttonStyle} onClick={handleConfirmRental}>Confirm Rental</button>
-                    <button style={{ ...buttonStyle, marginTop: '10px' }} onClick={handleDeleteRental}>Delete Rental</button> {/* New delete button */}
                     <img src="/example_rental.jpg" alt="Rental" style={{ width: '60%', height: 'auto', marginTop: '20px', marginLeft: '20px' }} />
                 </div>
             </div>
@@ -270,7 +261,7 @@ const HomeOwnerRental = () => {
                         </div>
                     ))}
                 </div>
-                <button style={{ ...buttonStyle, alignSelf: 'center', marginTop: '20px' }} onClick={handleDeleteRental}>Delete</button> {/* New delete confirmation button */}
+                <button style={{ ...buttonStyle, alignSelf: 'center' }} onClick={closeModal}>Confirm</button>
             </Modal>
         </div>
     );
