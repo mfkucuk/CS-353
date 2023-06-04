@@ -22,13 +22,13 @@ const TravelerProfile = () => {
     const formattedDate = new Date(userInfo.dob).toLocaleDateString('en-GB', options);
 
     const handleChangeEmail = () => {
-        axios.put('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user') + "/email=" + email)
+        axios.put('http://localhost:8080/api/user/t/id=' + window.localStorage.getItem('user') + "/email=" + email)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     };
 
     const handleChangePhone = () => {
-        axios.put('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user') + '/phone=' + phone)
+        axios.put('http://localhost:8080/api/user/t/id=' + window.localStorage.getItem('user') + '/phone=' + phone)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
     };

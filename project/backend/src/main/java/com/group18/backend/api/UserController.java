@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
 import com.group18.backend.service.HomeownerService;
@@ -53,21 +54,39 @@ public class UserController
         return userService.getAllUsers();
     }
 
-    @PutMapping(path = "/id={id}/email={email}")
-    public TravelerView updateEmailById(@PathVariable("id") UUID id, @PathVariable("email") String email) 
+    @PutMapping(path = "/t/id={id}/email={email}")
+    public TravelerView updateEmailByIdT(@PathVariable("id") UUID id, @PathVariable("email") String email) 
     {
-        return userService.updateEmailById(id, email).orElse(null);
+        return userService.updateEmailByIdT(id, email).orElse(null);
     }
 
-    @PutMapping(path = "/id={id}/phone={phone}")
-    public TravelerView updatePhoneById(@PathVariable("id") UUID id, @PathVariable("phone") String phone) 
+    @PutMapping(path = "/t/id={id}/phone={phone}")
+    public TravelerView updatePhoneByIdT(@PathVariable("id") UUID id, @PathVariable("phone") String phone) 
     {
-        return userService.updatePhoneById(id, phone).orElse(null);
+        return userService.updatePhoneByIdT(id, phone).orElse(null);
     }
 
-    @PutMapping(path = "/id={id}/password={password}")
-    public TravelerView updatePasswordById(@PathVariable("id") UUID id, @PathVariable("password") String password) 
+    @PutMapping(path = "/t/id={id}/password={password}")
+    public TravelerView updatePasswordByIdT(@PathVariable("id") UUID id, @PathVariable("password") String password) 
     {
-        return userService.updatePasswordById(id, password).orElse(null);
+        return userService.updatePasswordByIdT(id, password).orElse(null);
+    }
+
+    @PutMapping(path = "/h/id={id}/email={email}")
+    public HomeownerView updateEmailByIdH(@PathVariable("id") UUID id, @PathVariable("email") String email) 
+    {
+        return userService.updateEmailByIdH(id, email).orElse(null);
+    }
+
+    @PutMapping(path = "/h/id={id}/phone={phone}")
+    public HomeownerView updatePhoneByIdH(@PathVariable("id") UUID id, @PathVariable("phone") String phone) 
+    {
+        return userService.updatePhoneByIdH(id, phone).orElse(null);
+    }
+
+    @PutMapping(path = "/h/id={id}/password={password}")
+    public HomeownerView updatePasswordByIdH(@PathVariable("id") UUID id, @PathVariable("password") String password) 
+    {
+        return userService.updatePasswordByIdH(id, password).orElse(null);
     }
 }

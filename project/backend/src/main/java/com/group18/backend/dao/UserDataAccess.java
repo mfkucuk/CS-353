@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.group18.backend.models.Homeowner;
+import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.Traveler;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
@@ -140,7 +141,7 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
-    public Optional<TravelerView> updateEmailById(UUID id, String email)
+    public Optional<TravelerView> updateEmailByIdT(UUID id, String email)
     {
         final String sql = "UPDATE users SET e_mail = ? WHERE user_id = ?";
 
@@ -150,7 +151,7 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
-    public Optional<TravelerView> updatePhoneById(UUID id, String phone)
+    public Optional<TravelerView> updatePhoneByIdT(UUID id, String phone)
     {
         final String sql = "UPDATE users SET phone_number = ? WHERE user_id = ?";
 
@@ -160,13 +161,43 @@ public class UserDataAccess implements UserDAO {
     }
 
     @Override
-    public Optional<TravelerView> updatePasswordById(UUID id, String password)
+    public Optional<TravelerView> updatePasswordByIdT(UUID id, String password)
     {
         final String sql = "UPDATE users SET password = ? WHERE user_id = ?";
 
         jdbcTemplate.update(sql, new Object[] { password, id });
 
         return travelerDataAccess.getTravelerById(id);
+    }
+
+    @Override
+    public Optional<HomeownerView> updateEmailByIdH(UUID id, String email)
+    {
+        final String sql = "UPDATE users SET e_mail = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { email, id });
+
+        return homeownerDataAccess.getHomeownerById(id);
+    }
+
+    @Override
+    public Optional<HomeownerView> updatePhoneByIdH(UUID id, String phone)
+    {
+        final String sql = "UPDATE users SET phone_number = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { phone, id });
+
+        return homeownerDataAccess.getHomeownerById(id);
+    }
+
+    @Override
+    public Optional<HomeownerView> updatePasswordByIdH(UUID id, String password)
+    {
+        final String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { password, id });
+
+        return homeownerDataAccess.getHomeownerById(id);
     }
     
 }
