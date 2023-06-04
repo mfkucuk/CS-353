@@ -67,20 +67,22 @@ const AdminProfile = () => {
         navigate('/reset-password');
     };
 
-    const generateReport = () => {
-        html2canvas(document.getElementById('report-content')).then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
+    const generateReport = async () => {
+        try {
+          const response = await axios.post('http://localhost:8080/api/system-report', {
+            "title": null,
+            "content": null,
+            "adminId": window.localStorage.getItem('user')
+          });
+          console.log(response.data);
+          var content = String(response.data);
+      
           const pdf = new jsPDF();
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      
-          // Save the PDF document as a Blob
-          const pdfBlob = pdf.output('blob');
-      
-          // Use the FileSaver.js library to save the Blob as a file
-          saveAs(pdfBlob, 'system_report.pdf');
-        });
+          pdf.text(content, 10, 10);
+          pdf.save("system_report.pdf");
+        } catch (error) {
+          console.error('Error generating report:', error);
+        }
       };
 
 
