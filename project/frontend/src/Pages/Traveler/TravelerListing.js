@@ -23,6 +23,13 @@ const TravelerListing = () => {
   
   }, []);
 
+  const dateFormat = (dateFromSQL) => {
+
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(dateFromSQL).toLocaleDateString('en-GB', options);
+    return formattedDate;
+  }
+
   const handleReviewClick = (accommodationId) => {
     setSelectedAccommodationId(accommodationId);
     setIsOpen(true);
@@ -122,6 +129,8 @@ const TravelerListing = () => {
             {currentAccommodations.map((accommodation) => (
               <div key={accommodation.rentalId} style={cardStyle}>
               <p>{accommodation.location}</p>
+              <p>{dateFormat(accommodation.availableStart)}-{dateFormat(accommodation.availableEnd)}</p>
+              <p>{accommodation.price}$</p>
             </div>
             ))}
           </ul>
@@ -132,6 +141,8 @@ const TravelerListing = () => {
           {previousAccommodations.map(accommodation => (
         <div key={accommodation.rentalId} style={cardStyle}>
           <p>{accommodation.location}</p>
+          <p>{dateFormat(accommodation.availableStart)}-{dateFormat(accommodation.availableEnd)}</p>
+          <p>{accommodation.price}$</p>
           <button style={reviewButtonStyle} onClick={() => handleReviewClick(accommodation.rentalId)}>Review</button>
         </div>
       ))}

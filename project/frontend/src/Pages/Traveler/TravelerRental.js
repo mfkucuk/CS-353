@@ -10,10 +10,10 @@ const contentStyle = {
   };
 
   const dateStyle = {
-    fontSize: '14px',
+    fontSize: '18px',
     color: '#ffbd59',
     fontWeight: 'bold',
-    marginLeft: '10vw',
+    marginLeft: '60vw',
   };
 
   const buttonStyle = {
@@ -391,6 +391,13 @@ const TravelerRental = () => {
     axios.put(`http://localhost:8080/api/rental/id=${index}/traveler=${window.localStorage.getItem('user')}`)
       .then();
   }
+
+  const dateFormat = (dateFromSQL) => {
+
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(dateFromSQL).toLocaleDateString('en-GB', options);
+    return formattedDate;
+  }
   
   return (
       <div style={{ backgroundColor: '#4b0082', height: '100vh', overflowY: 'auto' }}>
@@ -423,7 +430,7 @@ const TravelerRental = () => {
               }
               <p style={contentStyle}>Rating: {rentalData.rating}/5</p>
               <p style={contentStyle}>
-                Available dates: {rentalData.availableStart} to {rentalData.availableEnd}
+                Available dates: {dateFormat(rentalData.availableStart)} to {dateFormat(rentalData.availableEnd)}
               </p>
               <p style={contentStyle}>Features: {rentalData.features}</p>
               <p style={contentStyle}>Restrictions: {rentalData.restrictions}</p>
@@ -472,7 +479,7 @@ const TravelerRental = () => {
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                         <p style={contentStyle}>{question.username}</p>
-                        <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{question.date}</p>
+                        <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{dateFormat(question.date)}</p>
                       </div>
                       {question.question}
                       {answers[index].answer && (
@@ -480,7 +487,7 @@ const TravelerRental = () => {
                           <div style={homeownerStyle}>
                             <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                             <p style={contentStyle}>{answers[index].username}</p>
-                            <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{answers[index].date}</p>
+                            <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{dateFormat(answers[index].date)}</p>
                           </div>
                           {answers[index].answer}
                         </div>

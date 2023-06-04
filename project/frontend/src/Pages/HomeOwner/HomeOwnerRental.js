@@ -15,15 +15,15 @@ const HomeOwnerRental = () => {
     const [price, setPrice] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
      const [featureList, setFeatureList] = useState([
-        { name: 'Wi-Fi', enabled: false },
-        { name: 'Large Room', enabled: false },
-        { name: 'Swimming Pool', enabled: false },
-        { name: 'Close to Sea', enabled: false },
-        { name: 'Air Conditioner', enabled: false },
-        { name: 'Fridge', enabled: false },
-        { name: 'Near to Restaurants', enabled: false },
-        { name: 'Near Tourist Attractions', enabled: false },
-        { name: 'Near public transport', enabled: false },
+        { name: 'Wi-Fi ', enabled: false },
+        { name: 'Large Room ', enabled: false },
+        { name: 'Swimming Pool ', enabled: false },
+        { name: 'Close to Sea ', enabled: false },
+        { name: 'Air Conditioner ', enabled: false },
+        { name: 'Fridge ', enabled: false },
+        { name: 'Near to Restaurants ', enabled: false },
+        { name: 'Near Tourist Attractions ', enabled: false },
+        { name: 'Near public transport ', enabled: false },
     ]);
 
     var today = new Date().toISOString().split("T")[0];
