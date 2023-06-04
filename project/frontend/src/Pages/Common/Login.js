@@ -64,10 +64,10 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               style={{ marginBottom: '10px', padding: '5px', borderRadius: '10px' }}
             />
-            <label style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', color: '#4b0082' }}>
+            {/* <label style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', color: '#4b0082' }}>
               <input type="checkbox" style={{ marginRight: '5px' }} />
               Remember me
-            </label>
+            </label> */}
             <button
               onClick={handleLogin}
               style={{

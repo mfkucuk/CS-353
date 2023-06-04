@@ -13,6 +13,8 @@ const HomeOwnerProfile= () => {
     const [modalIsOpen, setModalIsOpen] = useState(false); // New state for managing modal
     const [paymentMethod, setPaymentMethod] = useState(''); // New state for managing selected payment method
     const [amount, setAmount] = useState(0); // New state for managing amount to add
+    
+    
     const navigate = useNavigate();
     useEffect(() => {
         axios.get('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user'))
