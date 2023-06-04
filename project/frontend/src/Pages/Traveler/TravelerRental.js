@@ -8,6 +8,14 @@ const contentStyle = {
     color: '#ffbd59',
     fontWeight: 'bold',
   };
+
+  const dateStyle = {
+    fontSize: '14px',
+    color: '#ffbd59',
+    fontWeight: 'bold',
+    marginLeft: '50vw',
+  };
+
   const buttonStyle = {
     backgroundColor: '#FFBD59',
     color: '#4B0082',
@@ -272,8 +280,8 @@ const TravelerRental = () => {
         let questions = []
         let answers = []
         res.data.forEach((qanda) => {
-          questions.push({"question": qanda.question, "username": qanda.askName});
-          answers.push({"answer": qanda.answer, "username": qanda.answerName});
+          questions.push({"question": qanda.question, "username": qanda.askName, "date": qanda.askDate});
+          answers.push({"answer": qanda.answer, "username": qanda.answerName, "date": qanda.answerDate});
         });
 
         setQuestions(questions);
@@ -444,6 +452,7 @@ const TravelerRental = () => {
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                         <p style={contentStyle}>{question.username}</p>
+                        <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{question.askDate}</p>
                       </div>
                       {question.question}
                       {answers[index].answer && (
@@ -451,6 +460,7 @@ const TravelerRental = () => {
                           <div style={homeownerStyle}>
                             <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
                             <p style={contentStyle}>{answers[index].username}</p>
+                            <p style={dateStyle} placeholder='hh:mm dd/MM/yyyy'>{answers[index].answerDate}</p>
                           </div>
                           {answers[index].answer}
                         </div>

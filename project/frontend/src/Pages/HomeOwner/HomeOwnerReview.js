@@ -9,6 +9,13 @@ const contentStyle = {
     color: '#ffbd59',
     fontWeight: 'bold',
   };
+
+  const dateStyle = {
+    fontSize: '14px',
+    color: '#ffbd59',
+    fontWeight: 'bold',
+    marginLeft: '50vw',
+  };
   const buttonStyle = {
     backgroundColor: '#FFBD59',
     color: '#4B0082',
