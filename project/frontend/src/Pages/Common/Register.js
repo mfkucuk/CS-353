@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles.css';
+
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -10,6 +12,8 @@ const RegisterPage = () => {
   const [tck, setTck] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  var today = new Date().toISOString().split("T")[0];
 
   const handleRegister = async () => {
     if (!name || !email || !dob || !password || !phoneNumber || !tck || !confirmPassword) {
@@ -44,9 +48,9 @@ const RegisterPage = () => {
         
       });
 
-      console.log(response.data); 
+      alert("Registered successfully!"); 
     } catch (error) {
-      console.error(error);
+        alert('Email, TCK and phone number must be unique!');
     }
   };
 
@@ -69,18 +73,18 @@ const RegisterPage = () => {
         </div>
         <div style={{ paddingLeft: '20px' }}>
           <div>
-            <input type="date" placeholder="Date of Birth" value={dob} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setDob(e.target.value)} />
+            <input type="date" id="date" max={today} placeholder="Date of Birth" value={dob} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setDob(e.target.value)} />
           </div>
           <div>
             <input type="password" placeholder="Password" value={password} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>
-            <input type="text" placeholder="Phone Number" value={phoneNumber} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setPhoneNumber(e.target.value)} />
+            <input type="number" placeholder="Phone Number" value={phoneNumber} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setPhoneNumber(e.target.value)} />
           </div>
         </div>
         <div style={{ paddingLeft: '20px' }}>
           <div>
-            <input type="text" placeholder="TCK" value={tck} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setTck(e.target.value)} />
+            <input type="number" placeholder="TCK" value={tck} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setTck(e.target.value)} />
           </div>
           <div>
             <input type="password" placeholder="Confirm Password" value={confirmPassword} style={{ borderRadius: '20px', width: '300px', height: '40px' }} onChange={(e) => setConfirmPassword(e.target.value)} />

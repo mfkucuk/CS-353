@@ -396,7 +396,7 @@ const handleRentalListClick =() => {
                 <div style={userInfoStyle}>
                     <div style={userDetailStyle}>
                         <div>{userName}</div>
-                        <div>{`Balance: ${userBalance}`}</div>
+                        <div>{`Balance: ${userBalance}`}$</div>
                     </div>
                     <img src="/default_pp.png" alt="Profile" style={profilePicStyle} />
                     <img src="/side_menu.png" alt="Menu" style={menuButtonStyle} onClick={() => setIsSideMenuOpen(true)}/>

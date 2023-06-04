@@ -17,6 +17,10 @@ const AdminProfile = () => {
     const [title, setTitle] = useState('');
     const [selectedOption, setSelectedOption] = useState(''); 
     const navigate = useNavigate();
+
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(userInfo.dob).toLocaleDateString('en-GB', options);
+
     const handleOpenModal = () => {
         setModalIsOpen(true);
     };
@@ -75,18 +79,22 @@ const AdminProfile = () => {
             "adminId": window.localStorage.getItem('user')
           });
           console.log(response.data);
-          var content = String(response.data);
+            var text = String(response.data);
       
-          const pdf = new jsPDF();
-          pdf.text(content, 10, 10);
-          pdf.save("system_report.pdf");
-        } catch (error) {
-          console.error('Error generating report:', error);
-        }
-      };
+            const element = document.createElement('a');
+            const file = new Blob([text], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = "System Report";
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+                    } catch (error) {
+                    console.error('Error generating report:', error);
+                    }
+                };
 
 
-    const buttonStyle = {
+                const buttonStyle = {
         backgroundColor: '#FFBD59',
         color: 'black',
         padding: '10px 20px',
@@ -142,7 +150,7 @@ const AdminProfile = () => {
                     <p style={pStyle}>Name: {userInfo.fullName}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
                     <p style={pStyle}>TCK: {userInfo.tck}</p>
-                    <p style={pStyle}>Date of Birth: {userInfo.dob}</p>
+                    <p style={pStyle}>Date of Birth: {formattedDate}</p>
                     <p style={pStyle}>Phone No: {userInfo.phoneNumber}</p>
                 </div>
                 <div>

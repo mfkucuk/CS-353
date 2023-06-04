@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -8,10 +9,16 @@ const ResetPassword = () => {
   const [reenterPassword, setReenterPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  
+  const navigate = useNavigate();
+
 
   const handleReturn = () => {
-
+      if(userInfo.admin){
+          navigate("/admin-profile")
+      }
+      else{
+        navigate("/traveler-main-page")
+      }
   } 
 
   useEffect(() => {

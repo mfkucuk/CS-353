@@ -1,13 +1,18 @@
 CREATE TABLE IF NOT EXISTS Users (
     user_id uuid PRIMARY KEY,
     full_name text NOT NULL,
-    e_mail text NOT NULL,
+    e_mail text NOT NULL UNIQUE,
     dob date,
     TCK text,
     password text NOT NULL,
     phone_number text NOT NULL,
     is_admin boolean
 );
+
+CREATE UNIQUE INDEX idx_unique_email ON Users (e_mail);
+CREATE UNIQUE INDEX idx_unique_tck ON Users (TCK);
+CREATE UNIQUE INDEX idx_unique_phone_number ON Users (phone_number);
+
 
 CREATE TABLE IF NOT EXISTS Traveler (
     user_id uuid,

@@ -26,6 +26,7 @@ const HomeOwnerRental = () => {
         { name: 'Near public transport', enabled: false },
     ]);
 
+    var today = new Date().toISOString().split("T")[0];
 
     const openModal = () => {
         setIsOpen(true);
