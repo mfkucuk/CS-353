@@ -49,7 +49,7 @@ public class FlatDataAccess implements FlatDAO
                 travelerId = UUID.fromString(travelerIdString);
             }
             UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
-            int roomCount = resultSet.getInt("roomCount");
+            int roomCount = resultSet.getInt("room_count");
             return new FlatView(
                 rentalId,
                 location,

@@ -248,7 +248,7 @@ const TravelerRental = () => {
         const res = await axios.get(`http://localhost:8080/api/rental/id=${index}`);
         setRentalData(res.data);
   
-        if (res.data.type === 'Room') {
+        if (res.data.type == 'Room') {
           const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${index}`);
           setRentalData(res1.data);
         } else {
@@ -389,7 +389,7 @@ const TravelerRental = () => {
               <h2 style={{ textAlign: 'center', color: '#ffbd59' }}>Comments</h2>
               <div style={commentSectionScrollStyle}>
                 <div style={commentSectionScrollInnerStyle}>
-                  {comments.map((comment, index) => (
+                  {rentalData.comments.map((comment, index) => (
                     <div key={index} style={commentStyle}>
                       <div style={homeownerStyle}>
                         <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
