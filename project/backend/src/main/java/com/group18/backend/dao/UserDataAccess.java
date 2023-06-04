@@ -92,7 +92,7 @@ public class UserDataAccess implements UserDAO {
     public Optional<User> getUserByEmail(String e_mail) {   
         final String sql = "SELECT * FROM users WHERE e_mail = ?";
 
-        User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+        List<User> users = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
             String fullName = resultSet.getString("full_name");
             String userEmail = resultSet.getString("e_mail");
@@ -112,7 +112,13 @@ public class UserDataAccess implements UserDAO {
                 isAdmin
             );
         }, new Object[] { e_mail });
-        return Optional.ofNullable(user);
+
+        if (users.size() == 1) {
+            return Optional.ofNullable(users.get(0));
+        }
+        else {
+            return Optional.ofNullable(null);
+        }
     }
 
     @Override

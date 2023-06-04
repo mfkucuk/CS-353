@@ -8,14 +8,14 @@ const LoginPage = () => {
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
-    // Perform login logic
+
     axios
       .post('http://localhost:8080/api/login', {
         "email": email,
         "password": password
       })
       .then(async (response) => {
-        // Handle successful login
+  
         if (response.data.successful) {
           console.log('Login successful!');
           window.localStorage.setItem("user", response.data.userId);
@@ -41,7 +41,6 @@ const LoginPage = () => {
       });
   };
 
-  // Rest of your component remains unchanged...
   return (
     <div style={{ backgroundColor: '#4b0082', minHeight: '100vh', paddingTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>

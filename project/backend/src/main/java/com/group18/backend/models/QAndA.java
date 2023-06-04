@@ -1,6 +1,6 @@
 package com.group18.backend.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +15,8 @@ public class QAndA
     private UUID rentalId;
     private String askName;
     private String answerName;
-    private LocalDateTime askDate;
-    private LocalDateTime answerDate;
+    private LocalDate askDate;
+    private LocalDate answerDate;
     private String question;
     private String answer;
 
@@ -26,8 +26,8 @@ public class QAndA
         @JsonProperty("rentalId")UUID rentalId,
         @JsonProperty("askName") String askName,
         @JsonProperty("answerName") String answerName,
-        @JsonProperty("askDate")LocalDateTime askDate,
-        @JsonProperty("answerDate")LocalDateTime answerDate,
+        @JsonProperty("askDate")LocalDate askDate,
+        @JsonProperty("answerDate")LocalDate answerDate,
         @JsonProperty("question")String question,
         @JsonProperty("answer")String answer
     )

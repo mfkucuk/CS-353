@@ -52,4 +52,9 @@ public class RentalService
     {
         return rentalDAO.getAllHomeownerRentals(id);
     }
+    
+    public int deleteRentalById(UUID id) 
+    {
+        return rentalDAO.deleteRentalById(id);
+    }
 }

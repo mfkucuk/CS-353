@@ -107,13 +107,13 @@ const answerInputContainerStyle = {
   };
 
   const answerStyle = {
-    marginLeft: '20px', // Indent the answer
+    marginLeft: '20px', 
     marginBottom: '10px',
     marginTop: '15px',
     padding: '10px',
     border: '1px solid #FFBD59',
     borderRadius: '5px',
-    wordWrap: 'break-word', // Break long words into multiple lines
+    wordWrap: 'break-word', 
   };
   
 
@@ -131,13 +131,13 @@ const answerInputContainerStyle = {
     padding: '10px',
     border: '1px solid #FFBD59',
     borderRadius: '5px',
-    wordWrap: 'break-word', // Break long words into multiple lines
+    wordWrap: 'break-word',
   };
   
   const questionInputContainerStyle = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end', // Align items to the right
+    justifyContent: 'flex-end', 
     marginTop: '20px',
   };
   
@@ -184,13 +184,13 @@ const answerInputContainerStyle = {
     padding: '10px',
     border: '1px solid #FFBD59',
     borderRadius: '5px',
-    wordWrap: 'break-word', // Break long words into multiple lines
+    wordWrap: 'break-word', 
   };
 
   const commentInputContainerStyle = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end', // Align items to the right
+    justifyContent: 'flex-end', 
     marginTop: '20px',
   };
 
@@ -212,7 +212,7 @@ const answerInputContainerStyle = {
     borderRadius: '5px',
     cursor: 'pointer',
     fontSize: '16px',
-    alignSelf: 'flex-start', // Align button to the top
+    alignSelf: 'flex-start', 
   };
 
   const commentSectionScrollStyle = {
@@ -220,17 +220,17 @@ const answerInputContainerStyle = {
     overflowY: 'auto',
     scrollbarWidth: 'thin',
     scrollbarColor: '#4B0082 #FFBD59',
-    // Add the following CSS properties for the track and thumb styles
+
     scrollbarTrackColor: '#ffbd59',
     scrollbarThumbColor: '#4b0082',
   };
   
   const commentSectionScrollInnerStyle = {
-    // Add the following CSS property for the scrollbar pseudo-element styles
+   
     scrollbarWidth: 'thin',
     scrollbarColor: '#4B0082 #FFBD59',
-    display: 'flex', // Add display flex
-    flexDirection: 'column', // Arrange comments in a column
+    display: 'flex', 
+    flexDirection: 'column', 
   };
 
 const HomeOwnerReview = () => {
@@ -244,13 +244,13 @@ const HomeOwnerReview = () => {
   const [answers, setAnswers] = useState([]);
   const [answerInputs, setAnswerInputs] = useState([]);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
-  const [travelerId, setTravelerId] = useState('');
+  const [qandas, setQandas] = useState([]);
   const [profileImage, setProfileImage] = useState('/default_pp.png');
   const [username, setUsername] = useState('John Doe');
 
 
   const location = useLocation();
-  const index = new URLSearchParams(location.search).get('index');
+  const i = new URLSearchParams(location.search).get('index');
 
   // const formatDateTime = (localDateTime) => {
   //   let year = localDateTime.getFullYear();
@@ -269,15 +269,15 @@ const HomeOwnerReview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/rental/id=${index}`);
+        const res = await axios.get(`http://localhost:8080/api/rental/id=${i}`);
         setRentalData(res.data);
         setComments(res.data.comments);
   
         if (res.data.type == 'Room') {
-          const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${index}`);
+          const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${i}`);
           setRentalData(res1.data);
         } else {
-          const res2 = await axios.get(`http://localhost:8080/api/flat/get/id=${index}`);
+          const res2 = await axios.get(`http://localhost:8080/api/flat/get/id=${i}`);
           setRentalData(res2.data);
         }
       } catch (error) {
@@ -291,7 +291,7 @@ const HomeOwnerReview = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/qanda/rental_id=${index}`)
+      .get(`http://localhost:8080/api/qanda/rental_id=${i}`)
       .then(res => {
         let questions = []
         let answers = []
@@ -310,6 +310,7 @@ const HomeOwnerReview = () => {
 
         setQuestions(questions);
         setAnswers(answers);
+        setQandas(res.data);
       })
   }, []);
 
@@ -375,11 +376,23 @@ const HomeOwnerReview = () => {
       setSelectedQuestionIndex(null);
     }
 
+    console.log(i)
+    console.log(answer);
+    console.log(qandas[index]);
+
     axios
       .put('http://localhost:8080/api/qanda', {
-        "askId": travelerId,
+        "askId": qandas[index].askId,
         "answerId": window.localStorage.getItem('user'),
+        "rentalId": i,
+        "askName": null,
+        "answerName": null,
+        "askDate": null,
+        "answerDate": null,
+        "question": qandas[index].question,
+        "answer": answer
       })
+      .then();
   };
 
   const handleOpenAnswerWindow = (index) => {
@@ -471,9 +484,9 @@ const HomeOwnerReview = () => {
                   <div key={index} style={questionStyle}>
                     <div style={homeownerStyle}>
                       <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                      <p style={contentStyle}>{username}</p>
+                      <p style={contentStyle}>{question.username}</p>
                     </div>
-                    {question}
+                    {question.question}
                     {selectedQuestionIndex === index && (
                       <div style={answerInputContainerStyle}>
                         <input
@@ -488,18 +501,18 @@ const HomeOwnerReview = () => {
                         </button>
                       </div>
                     )}
-                    {!selectedQuestionIndex && !answers[index] && (
+                    {!selectedQuestionIndex && !answers[index].answer && (
                       <button style={buttonStyle} onClick={() => handleOpenAnswerWindow(index)}>
                         Answer
                       </button>
                     )}
-                    {answers[index] && (
+                    {answers[index].answer && (
                       <div style={answerStyle}>
                         <div style={homeownerStyle}>
                           <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                          <p style={contentStyle}>{username}</p>
+                          <p style={contentStyle}>{answers[index].username}</p>
                         </div>
-                        {answers[index]}
+                        {answers[index].answer}
                       </div>
                     )}
                   </div>

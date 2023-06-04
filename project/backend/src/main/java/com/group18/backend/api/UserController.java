@@ -1,7 +1,6 @@
 package com.group18.backend.api;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.CrossOrigin;

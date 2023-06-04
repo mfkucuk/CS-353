@@ -13,9 +13,9 @@ const AdminProfile = () => {
     const [userInfo, setUserInfo] = useState({});
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [modalIsOpen, setModalIsOpen] = useState(false); // For modal
-    const [title, setTitle] = useState(''); // For modal title
-    const [selectedOption, setSelectedOption] = useState(''); // For selected report option
+    const [modalIsOpen, setModalIsOpen] = useState(false); 
+    const [title, setTitle] = useState('');
+    const [selectedOption, setSelectedOption] = useState(''); 
     const navigate = useNavigate();
     const handleOpenModal = () => {
         setModalIsOpen(true);

@@ -119,8 +119,8 @@ const HomeOwnerProfile= () => {
 
     
     const selectStyle = {
-        ...inputStyle, // This will apply the same styles to the select as the input
-        appearance: 'none', // This will remove default browser styling
+        ...inputStyle, 
+        appearance: 'none', 
         background: '#fff',
         cursor: 'pointer',
     };

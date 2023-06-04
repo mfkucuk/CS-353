@@ -36,7 +36,7 @@ const TravelerListing = () => {
 
   const handleSubmitReview = () => {
     console.log('Submitted review:', reviewText, 'Rating:', rating);
-    // Here you can send the review to the server.
+
     axios
     .put(`http://localhost:8080/api/rental/id=${selectedAccommodationId}/rating=${rating}/comment=${reviewText}`)
     .then();

@@ -22,7 +22,7 @@ public class SystemReportDataAccess implements SystemReportDAO
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insertSystemReport(UUID id, SystemReport systemReport) 
+    public String insertSystemReport(SystemReport systemReport) 
     {
         final String sql = "INSERT INTO SystemReport VALUES(?, ?, ?)";
 
@@ -59,7 +59,8 @@ public class SystemReportDataAccess implements SystemReportDAO
             content += rentalPrice.getRentalId() + ": " + rentalPrice.getPrice() + ", Location: " + rentalPrice.getLocation();
         }
 
-        return jdbcTemplate.update(sql, new Object[] { systemReport.getTitle(), content, systemReport.getAdminId() });
+        jdbcTemplate.update(sql, new Object[] { "SYSTEM REPORT", content, systemReport.getAdminId() });
+        return content;
     }
 
     @Override

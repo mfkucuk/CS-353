@@ -24,4 +24,6 @@ public interface RentalDAO
 
     List<Rental> getAllRentals();
     List<Rental> getAllHomeownerRentals(UUID id);
+
+    int deleteRentalById(UUID id);
 }
