@@ -133,7 +133,8 @@ const HomeOwnerProfile= () => {
     const handlePasswordClick = () => {
         navigate('/reset-password');
     };
-
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(userInfo.dob).toLocaleDateString('en-GB', options);
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
@@ -152,7 +153,7 @@ const HomeOwnerProfile= () => {
                     <p style={pStyle}>Name: {userInfo.fullName}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
                     <p style={pStyle}>TCK: {userInfo.tck}</p>
-                    <p style={pStyle}>Date of Birth: {userInfo.dob}</p>
+                    <p style={pStyle}>Date of Birth: {formattedDate}</p>
                     <p style={pStyle}>Phone No: {userInfo.phoneNumber}</p>
                 </div>
                 <div>

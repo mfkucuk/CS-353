@@ -244,32 +244,74 @@ const HomeOwnerReview = () => {
   const [answers, setAnswers] = useState([]);
   const [answerInputs, setAnswerInputs] = useState([]);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [travelerId, setTravelerId] = useState('');
   const [profileImage, setProfileImage] = useState('/default_pp.png');
   const [username, setUsername] = useState('John Doe');
 
 
   const location = useLocation();
   const index = new URLSearchParams(location.search).get('index');
+
+  // const formatDateTime = (localDateTime) => {
+  //   let year = localDateTime.getFullYear();
+  //   let month = String(localDateTime.getMonth() + 1).padStart(2, '0');
+  //   let day = String(localDateTime.getDate()).padStart(2, '0');
+  //   let hours = String(localDateTime.getHours()).padStart(2, '0');
+  //   let minutes = String(localDateTime.getMinutes()).padStart(2, '0');
+  
+  //   const formattedDateTime = `${hours}:${minutes} ${day}/${month}/${year}`;
+  
+  //   return formattedDateTime;
+  // };
   // ...
 
  
-  /*useEffect(() => {
-      const fetchRentalData = async () => {
-          try {
-              const response = await axios.get('https://your-api-url.com/endpoint');
-              setRentalData(response.data);
-              setIsLoading(false);
-          } catch (error) {
-              console.error(error);
-          }
-      }
-
-      fetchRentalData();
-  }, []); 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/api/rental/id=${index}`);
+        setRentalData(res.data);
+        setComments(res.data.comments);
   
-  if (isLoading) {
-      return <div>Loading...</div>
-  }*/
+        if (res.data.type == 'Room') {
+          const res1 = await axios.get(`http://localhost:8080/api/room/get/id=${index}`);
+          setRentalData(res1.data);
+        } else {
+          const res2 = await axios.get(`http://localhost:8080/api/flat/get/id=${index}`);
+          setRentalData(res2.data);
+        }
+      } catch (error) {
+        // Handle error here
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/qanda/rental_id=${index}`)
+      .then(res => {
+        let questions = []
+        let answers = []
+        res.data.forEach((qanda) => {
+          questions.push(
+            {
+              "question": qanda.question, 
+              "username": qanda.askName, 
+              "date": qanda.askDate});
+          answers.push(
+            {
+              "answer": qanda.answer, 
+              "username": qanda.answerName, 
+              "date": qanda.answerDate});
+        });
+
+        setQuestions(questions);
+        setAnswers(answers);
+      })
+  }, []);
 
   const switchSliderBeforeStyle = {
     content: "''",
@@ -330,8 +372,14 @@ const HomeOwnerReview = () => {
         updatedInputs[index] = '';
         return updatedInputs;
       });
-      setSelectedQuestionIndex(null); // Close the mini window after submitting the answer
+      setSelectedQuestionIndex(null);
     }
+
+    axios
+      .put('http://localhost:8080/api/qanda', {
+        "askId": travelerId,
+        "answerId": window.localStorage.getItem('user'),
+      })
   };
 
   const handleOpenAnswerWindow = (index) => {

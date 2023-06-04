@@ -249,6 +249,18 @@ const TravelerRental = () => {
   const location = useLocation();
   const index = new URLSearchParams(location.search).get('index');
 
+  // const formatDateTime = (localDateTime) => {
+  //   const year = localDateTime.getFullYear();
+  //   const month = String(localDateTime.getMonth() + 1).padStart(2, '0');
+  //   const day = String(localDateTime.getDate()).padStart(2, '0');
+  //   const hours = String(localDateTime.getHours()).padStart(2, '0');
+  //   const minutes = String(localDateTime.getMinutes()).padStart(2, '0');
+  
+  //   const formattedDateTime = `${hours}:${minutes} ${day}/${month}/${year}`;
+  
+  //   return formattedDateTime;
+  // };
+
  
   useEffect(() => {
     const fetchData = async () => {
@@ -284,26 +296,12 @@ const TravelerRental = () => {
             {
               "question": qanda.question, 
               "username": qanda.askName, 
-              "date": qanda.askDate.toLocaleString(
-                'en-GB', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-          })});
+              "date": qanda.askDate});
           answers.push(
             {
               "answer": qanda.answer, 
               "username": qanda.answerName, 
-              "date": qanda.answerDate.toLocaleString(
-                'en-GB', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-          })});
+              "date": qanda.answerDate});
         });
 
         setQuestions(questions);
