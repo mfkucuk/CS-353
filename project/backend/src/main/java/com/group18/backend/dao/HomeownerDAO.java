@@ -11,4 +11,6 @@ public interface HomeownerDAO {
     int insertHomeowner(UUID id, Homeowner homeowner);
     Optional<HomeownerView> getHomeownerById(UUID id);
     Optional<HomeownerView> updateBalanceById(UUID id, Float balance);
+
+    int increaseReputation(UUID id, Float newRep);
 }

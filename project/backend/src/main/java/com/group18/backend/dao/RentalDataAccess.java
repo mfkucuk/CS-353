@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.group18.backend.misc.FilterBody;
 import com.group18.backend.misc.RentalList;
+import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.Rental;
 import com.group18.backend.models.Traveler;
 import com.group18.backend.models.User;
@@ -25,6 +26,7 @@ public class RentalDataAccess implements RentalDAO {
     private final JdbcTemplate jdbcTemplate;
     private final UserDataAccess userDataAccess;
     private final TravelerDataAccess travelerDataAccess;
+    private final HomeownerDataAccess homeownerDataAccess;
 
     @Override
     public UUID insertRental(UUID id, Rental rental) {
@@ -42,6 +44,11 @@ public class RentalDataAccess implements RentalDAO {
 
         Rental rental = getRentalById(rentalId).orElse(null);
         User commenterUser = userDataAccess.getUserById(rental.getTravelerId()).orElse(null);
+        HomeownerView homeowner = homeownerDataAccess.getHomeownerById(rental.getHomeownerId()).orElse(null);
+
+        // Increase homeowner reputation
+        homeownerDataAccess.increaseReputation(rental.getHomeownerId(), homeowner.getReputation() + newRating);
+
         
         String[] comments = rental.getComments();
         String[] newComments = new String[comments.length+1];

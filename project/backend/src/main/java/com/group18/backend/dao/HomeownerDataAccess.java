@@ -72,5 +72,12 @@ public class HomeownerDataAccess implements HomeownerDAO {
         
         return Optional.ofNullable(homeowner);
     }
+
+    @Override
+    public int increaseReputation(UUID id, Float newRep) {
+        final String sql = "UPDATE Homeowner SET reputation = ? WHERE user_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { newRep, id });
+    }
     
 }
