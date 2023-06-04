@@ -12,38 +12,15 @@ const TravelerListing = () => {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
   useEffect(() => {
-    const mockData = [
-      { id: 1, name: 'Accommodation 1' },
-      { id: 2, name: 'Accommodation 2' },
-      { id: 3, name: 'Accommodation 3' },
-    ];
-    setPreviousAccommodations(mockData);
-
-    const mockData2 = [
-      { id: 1, name: 'Accommodation 1' },
-      { id: 2, name: 'Accommodation 2' },
-      { id: 3, name: 'Accommodation 3' },
-    ];
-    setCurrentAccommodations(mockData2);
-    // Fetch current accommodations
     axios
-      .get("/api/currentAccommodations")
-      .then((response) => {
-        setCurrentAccommodations(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching current accommodations:", error);
-      });
+      .get(`http://localhost:8080/api/rental/traveler=${window.localStorage.getItem('user')}`)
+      .then(res => {
+        setCurrentAccommodations(res.data.currentAccomodations);
+        setPreviousAccommodations(res.data.previousAccomodations);
+      })  
 
-    // Fetch previous accommodations
-    axios
-      .get("/api/previousAccommodations")
-      .then((response) => {
-        setPreviousAccommodations(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching previous accommodations:", error);
-      });
+      console.log(previousAccommodations);
+  
   }, []);
 
   const handleReviewClick = (accommodationId) => {
@@ -139,8 +116,8 @@ const TravelerListing = () => {
           <h2 style={{ color: "#4b0082" }}>Current Accommodations</h2>
           <ul>
             {currentAccommodations.map((accommodation) => (
-              <div key={accommodation.id} style={cardStyle}>
-              <p>{accommodation.name}</p>
+              <div key={accommodation.rentalId} style={cardStyle}>
+              <p>{accommodation.location}</p>
             </div>
             ))}
           </ul>
@@ -149,9 +126,9 @@ const TravelerListing = () => {
           <h2 style={{ color: "#4b0082" }}>Previous Accommodations</h2>
           
           {previousAccommodations.map(accommodation => (
-        <div key={accommodation.id} style={cardStyle}>
-          <p>{accommodation.name}</p>
-          <button style={reviewButtonStyle} onClick={() => handleReviewClick(accommodation.id)}>Review</button>
+        <div key={accommodation.rentalId} style={cardStyle}>
+          <p>{accommodation.location}</p>
+          <button style={reviewButtonStyle} onClick={() => handleReviewClick(accommodation.rentalId)}>Review</button>
         </div>
       ))}
         

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
 import com.group18.backend.service.RentalService;
 
@@ -39,8 +40,18 @@ public class RentalController {
         return rentalService.getAllRentals();
     }
 
+    @GetMapping("/traveler={id}")
+    public RentalList getRentalsByTravelerId(@PathVariable("id") UUID travelerId) {
+        return rentalService.getRentalsByTravelerId(travelerId).orElse(null);
+    }
+
     @PutMapping(path = "/id={id}/rating={newRating}")
     public int updateRatingById(@PathVariable("id") UUID id, @PathVariable("newRating") int newRating) {
         return rentalService.updateRatingById(id, newRating);
+    }
+
+    @PutMapping(path = "/id={rental_id}/traveler={id}")
+    public int updateTravelerIdByRentalId(@PathVariable("rental_id") UUID rentalId, @PathVariable("id") UUID travelerId) {
+        return rentalService.updateTravelerIdByRentalId(rentalId, travelerId);
     }
 }

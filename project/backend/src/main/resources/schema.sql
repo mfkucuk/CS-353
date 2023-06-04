@@ -107,3 +107,16 @@ CREATE VIEW RoomView AS
 SELECT R.rental_id, R.location, R.available_start, R.available_end, R.restrictions, R.type, R.rating, R.features, R.comments, R.price, R.traveler_id, R.homeowner_id, Ro.capacity
 FROM Rental R
 JOIN Room Ro ON R.rental_id = Ro.rental_id;
+
+-- CREATE TRIGGER TravelerBalanceDecrease
+-- AFTER UPDATE OF traveler_id ON Rental
+-- UPDATE Traveler
+-- SET balance = balance - price
+-- WHERE user_id = NEW.traveler_id;
+
+-- CREATE TRIGGER HomeownerBalanceIncrease
+-- AFTER UPDATE OF traveler_id ON Rental
+-- UPDATE Traveler
+-- SET balance = balance + price
+-- WHERE user_id = NEW.homeowner_id;
+

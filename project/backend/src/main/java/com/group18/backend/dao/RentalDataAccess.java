@@ -1,6 +1,7 @@
 package com.group18.backend.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.backend.misc.RentalList;
 import com.group18.backend.models.Rental;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,13 @@ public class RentalDataAccess implements RentalDAO {
         final String sql = "UPDATE Rental SET rating = ? WHERE rental_id = ?";
 
         return jdbcTemplate.update(sql, new Object[] { newRating, rentalId });
+    }
+    
+    @Override
+    public int updateTravelerIdByRentalId(UUID rentalId, UUID travelerId) {
+        final String sql = "UPDATE Rental SET traveler_id = ? WHERE rental_id = ?";
+
+        return jdbcTemplate.update(sql, new Object[] { travelerId, rentalId });
     }
 
     @Override
@@ -74,11 +83,64 @@ public class RentalDataAccess implements RentalDAO {
         }, new Object[] { id });
         return Optional.ofNullable(rental);
     }
+    
+    @Override
+    public Optional<RentalList> getRentalsByTravelerId(UUID id) {
+        final String sql = "SELECT * FROM Rental WHERE traveler_id = ?";
+
+        List<Rental> rentals = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
+            String location = resultSet.getString("location");
+            LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
+            LocalDate availableEnd = resultSet.getDate("available_end").toLocalDate();
+            String restrictions = resultSet.getString("restrictions");
+            String type = resultSet.getString("type");
+            int rating = resultSet.getInt("rating");
+            String[] features = (String[]) resultSet.getArray("features").getArray();
+            String[] comments = (String[]) resultSet.getArray("comments").getArray();
+            int price = resultSet.getInt("price");
+            String travelerIdString = resultSet.getString("traveler_id");
+            UUID travelerId = null;
+            if (travelerIdString != null) {
+                travelerId = UUID.fromString(travelerIdString);
+            }
+            UUID homeownerId = UUID.fromString(resultSet.getString("homeowner_id"));
+            return new Rental(
+                rentalId,
+                location,
+                availableStart,
+                availableEnd,
+                restrictions,
+                type,
+                rating,
+                features,
+                comments,
+                price,
+                travelerId,
+                homeownerId
+            );
+        }, new Object[] { id });
+
+        List<Rental> previousAccomadations = new ArrayList<Rental>();
+        List<Rental> currentAccomodations = new ArrayList<Rental>();
+
+        for (Rental rental : rentals) {
+            if (rental.getAvailableEnd().isBefore(LocalDate.now())) {
+                previousAccomadations.add(rental);
+            }
+            else {
+                currentAccomodations.add(rental);
+            }
+        }
+
+        RentalList rentalList = new RentalList(previousAccomadations, currentAccomodations);
+        return Optional.ofNullable(rentalList);
+    }
 
     @Override
     public List<Rental> getAllRentals() {
         final String sql = "SELECT * FROM Rental";
-
+        
         List<Rental> allRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
             String location = resultSet.getString("location");
@@ -113,5 +175,7 @@ public class RentalDataAccess implements RentalDAO {
         });
         return allRentals;
     }
+
+
     
 }
