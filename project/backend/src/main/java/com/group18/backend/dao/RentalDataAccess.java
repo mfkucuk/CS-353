@@ -252,6 +252,10 @@ public class RentalDataAccess implements RentalDAO {
         return homeownerRentals;
     }
 
+    @Override
+    public int deleteRentalById(UUID id) {
+        final String sql = "DELETE FROM Rental WHERE rental_id = ?";
 
-    
+        return jdbcTemplate.update(sql, new Object[] { id });
+    }
 }

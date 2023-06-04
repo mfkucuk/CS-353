@@ -23,8 +23,8 @@ public class SystemReportController
 
     private final SystemReportService systemReportService;
 
-    @PostMapping()
-    public int insertSystemReport(@RequestBody SystemReport systemReport) 
+    @PostMapping
+    public String insertSystemReport(@RequestBody SystemReport systemReport) 
     {
         return systemReportService.insertSystemReport(systemReport);
     }

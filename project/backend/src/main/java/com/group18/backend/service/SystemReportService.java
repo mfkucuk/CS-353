@@ -15,7 +15,7 @@ public class SystemReportService
 {
     private final SystemReportDAO systemReportDAO;
 
-    public int insertSystemReport(SystemReport systemReport) 
+    public String insertSystemReport(SystemReport systemReport) 
     {
         return systemReportDAO.insertSystemReport(systemReport);
     }
