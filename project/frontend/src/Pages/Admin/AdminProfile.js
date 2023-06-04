@@ -83,10 +83,8 @@ const AdminProfile = () => {
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
                 <img src="/bilkent_logo.png" alt="Logo" style={{margin:50, width: 250, height: 100 }} />
             </div>
-            <h1 style={{color: '#FFBD59'}}>ADMIN</h1>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                <img src={"/default_pp.png"} alt="Profile" style={{ width: 100, height: 100, borderRadius: '50%' }} />
-                <button style={buttonStyle}>Change Profile Picture</button>
+                <img src={"/default_pp.png"} alt="Profile" style={{ width: 100, height: 100, borderRadius: '50%', marginBottom:'40px' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>
