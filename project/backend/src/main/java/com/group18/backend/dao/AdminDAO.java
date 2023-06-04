@@ -1,8 +1,10 @@
 package com.group18.backend.dao;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import com.group18.backend.models.Admin;
+import com.group18.backend.models.AdminView;
 
 public interface AdminDAO {
 
@@ -12,4 +14,5 @@ public interface AdminDAO {
         UUID id = UUID.randomUUID();
         return insertAdmin(id, admin);
     }    
+    Optional<AdminView> getAdminById(UUID id);
 }

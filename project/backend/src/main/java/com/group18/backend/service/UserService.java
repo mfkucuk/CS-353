@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.group18.backend.dao.UserDAO;
+import com.group18.backend.models.AdminView;
 import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.TravelerView;
 import com.group18.backend.models.User;
@@ -67,5 +68,20 @@ public class UserService
     public Optional<HomeownerView> updatePasswordByIdH(UUID id, String phone)
     {
         return userDAO.updatePasswordByIdH(id, phone);
+    }
+
+    public Optional<AdminView> updateEmailByIdA(UUID id, String email)
+    {
+        return userDAO.updateEmailByIdA(id, email);
+    }
+
+    public Optional<AdminView> updatePhoneByIdA(UUID id, String password)
+    {
+        return userDAO.updatePhoneByIdA(id, password);
+    }
+
+    public Optional<AdminView> updatePasswordByIdA(UUID id, String phone)
+    {
+        return userDAO.updatePasswordByIdA(id, phone);
     }
 }

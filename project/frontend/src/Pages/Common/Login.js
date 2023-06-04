@@ -10,19 +10,28 @@ const LoginPage = () => {
   const handleLogin = () => {
     // Perform login logic
     axios
-      .post('http://localhost:8080/api/login', 
-      {   
-        "email": email, 
+      .post('http://localhost:8080/api/login', {
+        "email": email,
         "password": password
       })
-      .then((response) => {
+      .then(async (response) => {
         // Handle successful login
         if (response.data.successful) {
           console.log('Login successful!');
           window.localStorage.setItem("user", response.data.userId);
-          navigate('/traveler-main-page'); // Navigate to TravelerMainPage
-        }
-        else {
+          try {
+            const userResponse = await axios.get('http://localhost:8080/api/user/id=' + window.localStorage.getItem('user'));
+            const isAdmin = Boolean(userResponse.data.admin);
+  
+            if (isAdmin) {
+              navigate('/admin-profile');
+            } else {
+              navigate('/traveler-main-page');
+            }
+          } catch (error) {
+            console.error('Error retrieving user data:', error);
+          }
+        } else {
           console.log('Login failed!');
         }
       })

@@ -34,7 +34,7 @@ const HomeOwnerProfile= () => {
 
     const handleAddBalance = () => {
         let x = userInfo.balance + parseFloat(amount);
-        axios.put('http://localhost:8080/api/homeowner/id=' + window.localStorage.getItem('user') + "/balance=" + x)
+        axios.put('http://localhost:8080/api/traveler/id=' + window.localStorage.getItem('user') + "/balance=" + x)
             .then(response => setUserInfo(response.data))
             .catch(error => console.error(error));
         handleCloseModal();
@@ -133,28 +133,27 @@ const HomeOwnerProfile= () => {
     const handlePasswordClick = () => {
         navigate('/reset-password');
     };
-
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = new Date(userInfo.dob).toLocaleDateString('en-GB', options);
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
                 <img src="/bilkent_logo.png" alt="Logo" style={{margin:50, width: 250, height: 100 }} />
             </div>
-            <h1 style={{color: '#FFBD59'}}>HOMEOWNER</h1>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                 <img src={"/default_pp.png"} alt="Profile" style={{ width: 100, height: 100, borderRadius: '50%' }} />
-                <button style={buttonStyle}>Change Profile Picture</button>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <p style={pStyle}>Balance: {userInfo.balance}</p>
+                        <p style={pStyle}>Balance: {userInfo.balance}$</p>
                         <img src="/add_icon.png" alt="Add Balance" style={{cursor: 'pointer', width: 30, height:30 , marginLeft: '10px'}} onClick={handleOpenModal} />
                     </div>
                     <p style={pStyle}>Reputation: {userInfo.reputation}</p>
                     <p style={pStyle}>Name: {userInfo.fullName}</p>
                     <p style={pStyle}>E-mail: {userInfo.email}</p>
                     <p style={pStyle}>TCK: {userInfo.tck}</p>
-                    <p style={pStyle}>Date of Birth: {userInfo.dob}</p>
+                    <p style={pStyle}>Date of Birth: {formattedDate}</p>
                     <p style={pStyle}>Phone No: {userInfo.phoneNumber}</p>
                 </div>
                 <div>
@@ -186,7 +185,7 @@ const HomeOwnerProfile= () => {
         </select>
     </label>
 
-    <input type="number" placeholder="Enter the amount" onChange={handleAmountChange} style={inputStyle} />
+    <input type="number" placeholder="Enter the amount" onChange={handleAmountChange} min="0" style={inputStyle} />
 
 </div>
 {paymentMethod === 'creditCard' && (

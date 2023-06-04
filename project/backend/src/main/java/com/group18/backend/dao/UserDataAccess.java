@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.group18.backend.models.AdminView;
 import com.group18.backend.models.Homeowner;
 import com.group18.backend.models.HomeownerView;
 import com.group18.backend.models.Traveler;
@@ -24,6 +25,7 @@ public class UserDataAccess implements UserDAO {
     private final JdbcTemplate jdbcTemplate;
     private final TravelerDataAccess travelerDataAccess;
     private final HomeownerDataAccess homeownerDataAccess;
+    private final AdminDataAccess adminDataAccess;
 
     @Override
     public int insertUser(UUID id, User user) {
@@ -204,6 +206,36 @@ public class UserDataAccess implements UserDAO {
         jdbcTemplate.update(sql, new Object[] { password, id });
 
         return homeownerDataAccess.getHomeownerById(id);
+    }
+
+    @Override
+    public Optional<AdminView> updateEmailByIdA(UUID id, String email)
+    {
+        final String sql = "UPDATE users SET e_mail = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { email, id });
+
+        return adminDataAccess.getAdminById(id);
+    }
+
+    @Override
+    public Optional<AdminView> updatePhoneByIdA(UUID id, String phone)
+    {
+        final String sql = "UPDATE users SET phone_number = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { phone, id });
+
+        return adminDataAccess.getAdminById(id);
+    }
+
+    @Override
+    public Optional<AdminView> updatePasswordByIdA(UUID id, String password)
+    {
+        final String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, new Object[] { password, id });
+
+        return adminDataAccess.getAdminById(id);
     }
     
 }

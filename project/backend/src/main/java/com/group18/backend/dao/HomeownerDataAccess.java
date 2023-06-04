@@ -28,7 +28,7 @@ public class HomeownerDataAccess implements HomeownerDAO {
 
     @Override
     public Optional<HomeownerView> getHomeownerById(UUID id) {
-        final String sql = "SELECT * FROM TravelerView WHERE user_id = ?";
+        final String sql = "SELECT * FROM HomeownerView WHERE user_id = ?";
 
         HomeownerView homeownerView = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("user_id"));
