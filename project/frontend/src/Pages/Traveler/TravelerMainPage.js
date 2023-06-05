@@ -232,6 +232,13 @@ const handleLogout =() => {
       navigate('/');
   };
 
+  const sourceDetermine = (isFlat) => {
+    if(isFlat === "Flat"){
+        return "/example_rental.jpg"
+    }else{
+        return "/room.jpg"
+    }
+  }
     const handleSearch = () => {
       console.log(searchInput);
       axios
@@ -418,7 +425,7 @@ const handleLogout =() => {
                 {rentals.map((rental, index) => (
                     <Link to={`/traveler-rental?index=${rental.rentalId}`}>
                     <div key={index} style={rentalCardStyle}>
-                        <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
+                        <img src={sourceDetermine(rental.type)} alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
                         <div style={rentalInfoStyle}>{dateFormat(rental.availableStart)}-{dateFormat(rental.availableEnd)}</div>
                         <div style={rentalInfoStyle}>{rental.price}$</div>

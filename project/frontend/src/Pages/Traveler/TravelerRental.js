@@ -391,6 +391,14 @@ const TravelerRental = () => {
     });
   };
 
+  const sourceDetermine = (isFlat) => {
+    if(isFlat === "Flat"){
+        return "/example_rental.jpg"
+    }else{
+        return "/room.jpg"
+    }
+  }
+
   const handleRentButton = () => {
     axios.put(`http://localhost:8080/api/rental/id=${index}/traveler=${window.localStorage.getItem('user')}`)
       .then(
@@ -426,7 +434,7 @@ const TravelerRental = () => {
           <h1 style={{ color: '#FFBD59', marginTop: '100px' }}>Rental in {rentalData.location}</h1>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: 20 }}>
             <div>
-              <img src="/example_rental.jpg" alt="Rental" style={imageStyle} />
+              <img src={sourceDetermine(rentalData.type)} alt="Rental" style={imageStyle} />
             </div>
             <div>
               <p style={contentStyle}>Location: {rentalData.location}</p>

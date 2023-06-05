@@ -37,8 +37,13 @@ const HomeOwnerMainPage = () => {
     return formattedDate;
   }
 
-  
-
+  const sourceDetermine = (isFlat) => {
+    if(isFlat === "Flat"){
+        return "/example_rental.jpg"
+    }else{
+        return "/room.jpg"
+    }
+  }
   const sideMenuStyle = {
     position: 'fixed',
     top: 0,
@@ -264,7 +269,7 @@ const handleLogout =() => {
                 {rentals.map((rental, index) => (
                     <Link to={`/homeowner-review?index=${rental.rentalId}`}>
                     <div key={index} style={rentalCardStyle}>
-                        <img src="/example_rental.jpg" alt="Rental" style={rentalImageStyle} />
+                        <img src={sourceDetermine = rental.type} alt="Rental" style={rentalImageStyle} />
                         <div style={rentalInfoStyle}>{rental.location}</div>
                         <div style={rentalInfoStyle}>{dateFormat(rental.availableStart)}-{dateFormat(rental.availableEnd)}</div>
                         <div style={rentalInfoStyle}>{rental.price}$</div>

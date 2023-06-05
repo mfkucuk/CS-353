@@ -180,6 +180,14 @@ const HomeOwnerRental = () => {
         transform: rentalType == 'Room' ? 'translateX(0)' : 'translateX(26px)',
       };
 
+      const sourceDetermine = (isFlat) => {
+        if(isFlat === "Flat"){
+            return "/example_rental.jpg"
+        }else{
+            return "/room.jpg"
+        }
+      }
+
     return (
         <div style={{ backgroundColor: '#4b0082', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
             <div style={{ position: 'absolute', top: 0, left: 0 }}>
@@ -244,7 +252,7 @@ const HomeOwnerRental = () => {
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
                     <button style={buttonStyle} onClick={handleConfirmRental}>Confirm Rental</button>
-                    <img src="/example_rental.jpg" alt="Rental" style={{ width: '60%', height: 'auto', marginTop: '20px', marginLeft: '20px' }} />
+                    <img src={sourceDetermine(rentalType)} alt="Rental" style={{ width: '60%', height: 'auto', marginTop: '20px', marginLeft: '20px' }} />
                 </div>
             </div>
             <Modal
