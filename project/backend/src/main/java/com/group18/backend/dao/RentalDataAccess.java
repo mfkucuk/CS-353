@@ -47,7 +47,7 @@ public class RentalDataAccess implements RentalDAO {
         HomeownerView homeowner = homeownerDataAccess.getHomeownerById(rental.getHomeownerId()).orElse(null);
 
         // Increase homeowner reputation
-        homeownerDataAccess.increaseReputation(rental.getHomeownerId(), homeowner.getReputation() + newRating);
+        homeownerDataAccess.increaseReputation(rental.getHomeownerId(), homeowner.getReputation() + newRating); 
 
         
         String[] comments = rental.getComments();
@@ -264,7 +264,7 @@ public class RentalDataAccess implements RentalDAO {
     public List<Rental> getFilteredRentals(FilterBody filterBody) {
         final String sql = "SELECT * FROM Rental WHERE type = ? AND (price > ? AND price < ?) AND (available_start > ? AND available_end < ?)";
 
-        List<Rental> filteredRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
+        List<Rental> allRentals = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID rentalId = UUID.fromString(resultSet.getString("rental_id"));
             String location = resultSet.getString("location");
             LocalDate availableStart = resultSet.getDate("available_start").toLocalDate();
@@ -297,6 +297,14 @@ public class RentalDataAccess implements RentalDAO {
             );
         }, new Object[] { filterBody.getRentalType(), filterBody.getMinPrice(), filterBody.getMaxPrice(), 
                     filterBody.getStartDate(), filterBody.getEndDate() });
+
+        List<Rental> filteredRentals = new ArrayList<>();
+
+        for (Rental rental : allRentals) {
+            if (rental.getTravelerId() == null && rental.getAvailableEnd().isAfter(LocalDate.now())) {
+                filteredRentals.add(rental);
+            }
+        }
 
         return filteredRentals;
     }
