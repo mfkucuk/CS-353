@@ -506,9 +506,8 @@ const HomeOwnerReview = () => {
                   <div key={index} style={commentStyle}>
                     <div style={homeownerStyle}>
                       <img src="/default_pp.png" alt="User" style={homeownerImageStyle} />
-                      <p style={contentStyle}>{username}</p>
+                      <p>{comment}</p>
                     </div>
-                    {comment}
                   </div>
                 ))}
               </div>

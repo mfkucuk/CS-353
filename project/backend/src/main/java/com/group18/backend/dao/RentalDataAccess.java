@@ -357,8 +357,6 @@ public class RentalDataAccess implements RentalDAO {
         }
 
         return filteredRentals;
-
-        return searchedRentals;
     }
 
     @Override

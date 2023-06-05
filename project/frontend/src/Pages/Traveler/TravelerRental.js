@@ -352,6 +352,7 @@ const TravelerRental = () => {
         }
       )
     .then(setNewQuestion(''));
+    window.location.reload(true);
   };
 
   const handleAnswerInputChange = (index, event) => {

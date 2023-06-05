@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 Modal.setAppElement('#root')
 const HomeOwnerRental = () => {
     const [rentalType, setRentalType] = useState('Room');
@@ -14,6 +15,7 @@ const HomeOwnerRental = () => {
     const [rentalId, setRentalId] = useState('');
     const [price, setPrice] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
      const [featureList, setFeatureList] = useState([
         { name: 'Wi-Fi ', enabled: false },
         { name: 'Large Room ', enabled: false },
@@ -85,7 +87,9 @@ const HomeOwnerRental = () => {
                     "roomCount": roomCount
                 });
             }
-            }
+            alert("Add rental successful!");
+            navigate("/homeowner-main-page")
+        }
             
             
     
