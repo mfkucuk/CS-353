@@ -60,7 +60,7 @@ const ResetPassword = () => {
       return;
     }
 
-    if (!/(?=.*[?.!@#$%^&*])/.test(password)) {
+    if (!/(?=.*[?!@#$%^&*])/.test(password)) {
       setError('Password should contain at least one special character.');
       setSuccess(false);
       return;
