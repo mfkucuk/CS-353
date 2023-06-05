@@ -347,6 +347,17 @@ public class RentalDataAccess implements RentalDAO {
                 homeownerId
             );
         }, new Object[] { "%" + newKeyword + "%" });
+
+        List<Rental> filteredRentals = new ArrayList<>();
+
+        for (Rental rental : searchedRentals) {
+            if (rental.getTravelerId() == null && rental.getAvailableEnd().isAfter(LocalDate.now())) {
+                filteredRentals.add(rental);
+            }
+        }
+
+        return filteredRentals;
+
         return searchedRentals;
     }
 
